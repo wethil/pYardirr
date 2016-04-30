@@ -27,17 +27,44 @@ LocationSchema = new SimpleSchema({
 });
 
 
+
+ActSchema = new SimpleSchema({
+    "type":{
+        type: String,
+        allowedValues: ["Paws", "Like"]
+    },
+    "acts":{
+        type: Array,
+    },
+    "acts.$":{
+        type: Object,
+    },
+    "acts.$.id":{
+        type: String,
+    },
+     "acts.$.username":{
+        type: String,
+    },
+      "acts.$.name":{
+        type: String,
+    }
+});
+
+
 Yells.attachSchema(
     new SimpleSchema({
     loc: {
       type: LocationSchema
     },
-    content: {
+    mYell: {
       type: String
     },
     createdAt: {
       type: Date,
       denyUpdate: true
+    },
+    act : {
+      type : ActSchema
     }
   })
 );

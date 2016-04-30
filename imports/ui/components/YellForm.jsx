@@ -5,10 +5,19 @@ import YellWrapper from './YellWrapper'
 
 
 class YellForm extends Component {
-    getlocation (){
-     
+    
+    setLikes(e) {
+        e.preventDefault();
+        Session.set('username',this.refs.username.value.trim())
+        Session.set('id',this.refs.id.value.trim())
+        Session.set('name',this.refs.name.value.trim())
+       
+      
+       
     }
-    handleClick(e) {
+    
+    
+    getlocation(e) {
        e.preventDefault();
       if (navigator.geolocation) {
        navigator.geolocation.getCurrentPosition(function(position) {
@@ -27,10 +36,14 @@ class YellForm extends Component {
          var yell = this.refs.mYell.value.trim();
          var lat = Session.get('lat')
          var long = Session.get('lon')
+         var username = 'wehil'
+         var name = 'fatih'
+         var id = '123'
+         
          
         //lat long
        
-        Meteor.call('addYell', yell,lat,long, error => { 
+        Meteor.call('addYell', yell,lat,long,username,name,id, error => { 
             if (error) { 
                 console.log('error', error); 
             } 
@@ -46,7 +59,9 @@ class YellForm extends Component {
     render() {
         return (
             <div>
-            <button onClick={this.handleClick} >sdfd </button>
+            <button onClick={this.getlocation} > location </button>
+           
+                  
                    <form className="commentForm" onSubmit={this.addYell.bind(this)} > 
                         <input
                             type="text"
