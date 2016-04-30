@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import YellWrapper from './YellWrapper'
 
+
 class YellForm extends Component {
     getlocation (){
      
@@ -14,10 +15,10 @@ class YellForm extends Component {
         Session.set('lat', position.coords.latitude);
         Session.set('lon', position.coords.longitude);
         console.log(' latitude ' + position.coords.latitude); 
-         console.log(' longtitude ' + position.coords.latitude); 
+         console.log(' longtitude ' + position.coords.longitude); 
     });
     } else {   
-       console.log('error on loc');
+       console.log('error on location');
     }
         
 }

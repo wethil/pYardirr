@@ -19,6 +19,6 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 aldeed:collection2
 meteortoys:allthings
-ultimatejs:tracker-react
+ultimatejs:tracker-react@=1.0.0
 ostrio:meteor-root
 session

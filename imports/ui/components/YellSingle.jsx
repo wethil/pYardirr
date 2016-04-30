@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+
 class YellSingle extends Component {
     render() {
         return (
