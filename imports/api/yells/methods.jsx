@@ -1,12 +1,12 @@
 import Yells from './yells.js'
 
 Meteor.methods({ 
-    addYell: function(yell,lat,long,username,name,id) { 
+    addYell: function(yell,long,lat,username,name,id) { 
         Yells.insert({
             mYell : yell,
             loc: {
                 type: "Point",
-                coordinates : [lat,long]              
+                coordinates : [long,lat]              
             },        
             createdAt : new Date,
             act: {

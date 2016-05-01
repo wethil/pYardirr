@@ -22,7 +22,7 @@ class YellForm extends Component {
       if (navigator.geolocation) {
        navigator.geolocation.getCurrentPosition(function(position) {
         Session.set('lat', position.coords.latitude);
-        Session.set('lon', position.coords.longitude);
+        Session.set('long', position.coords.longitude);
         console.log(' latitude ' + position.coords.latitude); 
          console.log(' longtitude ' + position.coords.longitude); 
     });
@@ -35,15 +35,15 @@ class YellForm extends Component {
         event.preventDefault();
          var yell = this.refs.mYell.value.trim();
          var lat = Session.get('lat')
-         var long = Session.get('lon')
+         var long = Session.get('long')
          var username = 'wehil'
          var name = 'fatih'
          var id = '123'
          
          
-        //lat long
+        //long lat
        
-        Meteor.call('addYell', yell,lat,long,username,name,id, error => { 
+        Meteor.call('addYell', yell,long,lat,username,name,id, error => { 
             if (error) { 
                 console.log('error', error); 
             } 

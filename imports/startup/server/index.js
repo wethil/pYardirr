@@ -7,5 +7,6 @@ Api= new Restivus({
 })
 
 Meteor.startup(function() {
-
+//for index
+// Yells._ensureIndex({ "loc.coordinates": "2dsphere" })
 });
