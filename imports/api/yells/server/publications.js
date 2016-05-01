@@ -27,21 +27,16 @@ Api.addRoute('yells/new', { authRequired: false }, {
 });
 
 
-Api.addRoute('yell?lat=&lng=&maxdis=&mindis=', { authRequired: false }, {
+Api.addRoute('yell?lat=&lng=&max=', { authRequired: false }, {
   get: function () {
     console.log(this.request);
     var urlLat = this.queryParams.lat
     var urlLng = this.queryParams.lng
-    var urlMaxDis = this.queryParams.maxdis;
-    var urlMinDis = this.queryParams.mindis;
-
+    var urlMaxDis = this.queryParams.max;
     lat = Number(urlLat)
     lng = Number(urlLng)
     maxdis = Number(urlMaxDis)
-    mindis = Number(urlMinDis)
     console.log(lng + ' ' + lat);
-    
-
     return Yells.find({
       "loc.coordinates": {
         $near: {
@@ -50,13 +45,34 @@ Api.addRoute('yell?lat=&lng=&maxdis=&mindis=', { authRequired: false }, {
             type: "Point",
             coordinates: [lng, lat]
               },
-          $minDistance: mindis,
           $maxDistance: maxdis
-
         }
       }
     }).fetch()
-
  }
+});
 
+Api.addRoute('yell?lat=&lng=', { authRequired: false }, {
+  get: function () {
+    console.log(this.request);
+    var urlLat = this.queryParams.lat
+    var urlLng = this.queryParams.lng
+    var urlMaxDis = this.queryParams.max;
+    lat = Number(urlLat)
+    lng = Number(urlLng)
+    maxdis = Number(urlMaxDis)
+    console.log(lng + ' ' + lat);
+    return Yells.find({
+      "loc.coordinates": {
+        $near: {
+          $geometry: 
+             {
+            type: "Point",
+            coordinates: [lng, lat]
+              },
+       
+        }
+      }
+    }).fetch()
+ }
 });

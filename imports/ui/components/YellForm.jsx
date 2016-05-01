@@ -6,31 +6,41 @@ import YellWrapper from './YellWrapper'
 
 class YellForm extends Component {
     
-    setLikes(e) {
-        e.preventDefault();
-        Session.set('username',this.refs.username.value.trim())
-        Session.set('id',this.refs.id.value.trim())
-        Session.set('name',this.refs.name.value.trim())
-       
-      
-       
-    }
-    
+  
     
     getlocation(e) {
-       e.preventDefault();
-      if (navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition(function(position) {
-        Session.set('lat', position.coords.latitude);
-        Session.set('long', position.coords.longitude);
-        console.log(' latitude ' + position.coords.latitude); 
-         console.log(' longtitude ' + position.coords.longitude); 
-    });
-    } else {   
-       console.log('error on location');
+        e.preventDefault();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                Session.set('lat', position.coords.latitude);
+                Session.set('long', position.coords.longitude);
+                console.log(' latitude ' + position.coords.latitude);
+                console.log(' longtitude ' + position.coords.longitude);
+                var url = "http://api.opencagedata.com/geocode/v1/json?query="
+                var loc = position.coords.longitude + '%' + position.coords.latitude
+                var key ="4c430f89af5ec4a0c11aea7adf55438e"
+                HTTP.call('GET', url+loc+'&pretty=1&key='+key, {}, function (error, response) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(response);
+                        /*
+                         This will return the HTTP response object that looks something like this:
+                         {
+                           content: "String of content...",
+                           data: Array[100], <-- Our actual data lives here. 
+                           headers: {  Object containing HTTP response headers }
+                           statusCode: 200
+                         }
+                        */
+                    }
+                });
+            });
+        } else {
+            console.log('error on location');
+        }
+
     }
-        
-}
     addYell(event) {
         event.preventDefault();
          var yell = this.refs.mYell.value.trim();
