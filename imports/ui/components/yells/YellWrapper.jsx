@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
-import '../../startup/both.js'
+import '../../../startup/both.js'
 import { Meteor } from 'meteor/meteor';
 import YellSingle from './YellSingle.jsx'
 
