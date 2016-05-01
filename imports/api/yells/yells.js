@@ -51,21 +51,34 @@ ActSchema = new SimpleSchema({
 });
 
 
+
+
 Yells.attachSchema(
     new SimpleSchema({
     loc: {
-      type: LocationSchema
+      type: LocationSchema,
+      optional: true
     },
     mYell: {
-      type: String
+      type: String,
+      defaultValue : "I am boored"
     },
     createdAt: {
       type: Date,
       denyUpdate: true
     },
     act : {
-      type : ActSchema
-    }
+      type : ActSchema,
+      optional: true
+    },
+    rating : {
+        type : Number,
+        defaultValue : 0
+    },
+    belongedGroup : {
+        type : String,
+        optional: true
+    } 
   })
 );
 
