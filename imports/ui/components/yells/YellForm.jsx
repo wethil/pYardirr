@@ -46,14 +46,10 @@ class YellForm extends Component {
          var yell = this.refs.mYell.value.trim();
          var lat = Session.get('lat')
          var long = Session.get('long')
-         var username = 'wehil'
-         var name = 'fatih'
-         var id = '123'
-         
-         
+                  
         //long lat
        
-        Meteor.call('addYell', yell,long,lat,username,name,id, error => { 
+        Meteor.call('addYell', yell,long,lat, error => { 
             if (error) { 
                 console.log('error', error); 
             } 
@@ -72,7 +68,7 @@ class YellForm extends Component {
             <button onClick={this.getlocation} > location </button>
            
                   
-                   <form className="commentForm" onSubmit={this.addYell.bind(this)} > 
+                   <form className="yellForm" onSubmit={this.addYell.bind(this)} > 
                         <input
                             type="text"
                             ref="mYell"

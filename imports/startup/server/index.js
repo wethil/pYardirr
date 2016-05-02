@@ -1,6 +1,6 @@
 import '../both.js';
 import  '../../api/yells/server/publications.js'
-
+import  '../../api/groups/server/publications.js'
 Api= new Restivus({
   useDefaultAuth : true,
   prettyJSon:true

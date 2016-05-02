@@ -31,10 +31,12 @@ Yells.attachSchema(
     },
     owner : {
          type : String,
+         defaultValue : "yellfi"
     },
      owner_username: {
          type : String,
-    },
+         defaultValue : "yellfi"
+    }
     
   })
 );

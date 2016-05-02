@@ -1,11 +1,9 @@
-import { Meteor } from 'meteor/meteor';
-import Yells from './yells.js'
-
+import Groups from './groups.js'
 
 Meteor.methods({ 
-    addYell: function(yell,long,lat) { 
-        Yells.insert({
-            mYell : yell,
+    addGroup: function(gName,long,lat) { 
+        Groups.insert({
+            gName : gName,
             loc: {
                 type: "Point",
                 coordinates : [long,lat]              
