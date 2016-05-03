@@ -1,5 +1,27 @@
-import React from 'react';
 
-export const Hello = ( { params, location } ) => (
-  <h3>Howdy, { params.name }! You like { location.query.food }.</h3>
-);
+import React, {Component} from 'react';
+
+class Hello extends Component {
+  
+    componentDidMount() {
+  
+     
+      name= this.props.params.name
+    
+    console.log(name);
+  }
+
+  
+  render() {
+    return (
+      <div>
+        hello {name}
+      </div>
+    );
+  }
+}
+
+export default Hello;
+
+
+

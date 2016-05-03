@@ -17,7 +17,7 @@ Meteor.startup(()=> {
                <Route path="/hello/:name" component = {Hello} />
             </Route>
             <Route path="*" component={NotFound} />
-        </Router>,
+        </Router>, 
         document.getElementById( 'react-root' ) 
     )
 });

@@ -65,6 +65,16 @@ class YellForm extends Component {
     render() {
         return (
             <div>
+            !!!!!! Kanki ben api yi yeniledikçe yazcam alta ordan bakarsın. Bi de development branch açacağım ordan devam ederim
+            her kod değiştirip kaydettiğimde serveri resetliyor kesintiye uğramayalım. <br/>
+            ayrıca new yell request yaparsan lokasyon belirtmen zorunlu. ctrl+m yap, konsol açılcak ordan takip edebilirsin db nin durumunu.
+            <ul>
+            <li>/apiyells/new json request olacak. ctrl-m yapınca gelen konsolda json örneği var </li>
+            <li>/api/yell?lat=&lng=&max=</li>
+            <li>/api/yell?lat=&lng=</li>
+            <li>/api/yell?lat=&lng=&max=</li>
+            </ul>
+            
             <button onClick={this.getlocation} > location </button>
            
                   
