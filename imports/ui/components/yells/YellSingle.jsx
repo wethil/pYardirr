@@ -5,7 +5,7 @@ class YellSingle extends Component {
     render() {
         return (
            <li>
-            {this.props.yells.mYell} 
+            {this.props.yells.content} 
            
         </li>
         );

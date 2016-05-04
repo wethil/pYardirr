@@ -26,8 +26,8 @@ Api.addRoute('yells/new', { authRequired: false }, {
 
 });
 
-
-Api.addRoute('yell?lat=&lng=&max=', { authRequired: false }, {
+ ///api/yell/fetch?lat=&lng=&max=
+Api.addRoute('yell/fetch?lat=&lng=&max=', { authRequired: false }, {
   get: function () {
     console.log(this.request);
     var urlLat = this.queryParams.lat
@@ -52,15 +52,13 @@ Api.addRoute('yell?lat=&lng=&max=', { authRequired: false }, {
  }
 });
 
-Api.addRoute('yell?lat=&lng=', { authRequired: false }, {
+Api.addRoute('yell/fetch?lat=&lng=', { authRequired: false }, {
   get: function () {
     console.log(this.request);
     var urlLat = this.queryParams.lat
     var urlLng = this.queryParams.lng
-    var urlMaxDis = this.queryParams.max;
     lat = Number(urlLat)
     lng = Number(urlLng)
-    maxdis = Number(urlMaxDis)
     console.log(lng + ' ' + lat);
     return Yells.find({
       "loc.coordinates": {

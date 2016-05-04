@@ -1,4 +1,5 @@
 import Groups from './groups.js'
+import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({ 
     addGroup: function(gName,long,lat) { 

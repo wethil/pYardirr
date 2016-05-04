@@ -9,11 +9,11 @@ Yells.attachSchema(
       type: LocationSchema,
       optional: true
     },
-    mYell: {
+    content: {
       type: String,
       defaultValue : "I am boored"
     },
-    createdAt: {
+    created_at: {
       type: Date,
       denyUpdate: true
     },
