@@ -5,7 +5,7 @@ import { App } from '../../ui/layouts/app.jsx';
 import Index from '../../ui/components/index.jsx';
 import  YellForm  from '../../ui/components/yells/YellForm.jsx';
 import { NotFound } from '../../ui/components/NotFound.jsx';
-import { Hello } from '../../ui/components/hello.jsx';
+import { YellContainer } from '../../ui/containers/YellContainer.jsx';
 
 Meteor.startup(()=> {
     render (
@@ -14,7 +14,7 @@ Meteor.startup(()=> {
             <IndexRoute component={ Index } />
              <Route path="one" component={YellForm} />
            
-               <Route path="/hello/:name" component = {Hello} />
+               <Route path="yells/:id" component = {YellContainer} />
             </Route>
             <Route path="*" component={NotFound} />
         </Router>, 

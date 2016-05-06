@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Yells } from '../../api/yells/yells.js';
 import { createContainer } from 'meteor/react-meteor-data';
-import YellsPage from '../pages/YellsPage.jsx';
+import YellPage from '../pages/YellPage.jsx';
 
 export default createContainer(({ params: { id } }) => {
-  const yellsHandle = Meteor.subscribe('comments.inYells', id);
+  const yellsHandle = Meteor.subscribe('comments.inYell', id);
   const loading = !yellsHandle.ready();
   const yell = Yells.findOne(id);
   const yellExists = !loading && !!yells;
