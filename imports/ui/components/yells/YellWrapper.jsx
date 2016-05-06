@@ -10,7 +10,8 @@ class YellWrapper extends  TrackerReact(React.Component) {
         super();
         this.state = {
           subscription: {
-            yells: Meteor.subscribe('yells')
+            yells: Meteor.subscribe('yells'),
+            comments: Meteor.subscribe('comments')
           }
         }
     }

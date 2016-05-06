@@ -1,27 +1,22 @@
+import React from 'react'
+const Hello = React.createClass({
+      componentDidMount() {
+    // from the path `/inbox/messages/:id`
+    const name = this.props.params.name
 
-import React, {Component} from 'react';
+    fetchMessage(id, function (err, message) {
+      this.setState({ message: message })
+    })
+  },
 
-class Hello extends Component {
-  
-    componentDidMount() {
-  
-     
-      name= this.props.params.name
-    
-    console.log(name);
-  }
-
-  
   render() {
     return (
       <div>
-        hello {name}
+        <h2>Inbox</h2>
+        {this.state.params.name }
       </div>
-    );
+    )
   }
-}
+})
 
 export default Hello;
-
-
-
