@@ -46,6 +46,8 @@ class YellForm extends Component {
          var yell = this.refs.mYell.value.trim();
          var lat = Session.get('lat')
          var long = Session.get('long')
+
+        
                   
         //long lat
        
@@ -88,7 +90,7 @@ class YellForm extends Component {
                 <YellWrapper />
            </div> 
         );
-    }
+    }  
 }
 
 export default YellForm;

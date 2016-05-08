@@ -10,7 +10,17 @@ Meteor.methods({
                 type: "Point",
                 coordinates : [long,lat]              
             },        
-            created_at : new Date
+            created_at : new Date()
+        }) 
+    } 
+});
+
+Meteor.methods({ 
+    addGrYell: function(yell,belongedGroup) { 
+        Yells.insert({
+            content : yell,
+            belongedGroup  : belongedGroup,                 
+            created_at : new Date()
         }) 
     } 
 });

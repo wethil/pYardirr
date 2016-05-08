@@ -6,15 +6,16 @@ import Index from '../../ui/components/index.jsx';
 import  YellForm  from '../../ui/components/yells/YellForm.jsx';
 import { NotFound } from '../../ui/components/NotFound.jsx';
 import { YellPage } from '../../ui/pages/YellPage.jsx';
+import {GroupPage} from '../../ui/pages/GroupPage.jsx'
 //import YellContainer  from '../../ui/containers/YellContainer.jsx'
 Meteor.startup(()=> {
     render (
         <Router history={browserHistory} >
             <Route path="/" component={App} >
-            <IndexRoute component={ Index } />
-             <Route path="one" component={YellForm} />
-           
-               <Route path="yells/:id" component = {YellPage} />
+                <IndexRoute component={ Index } />
+                 <Route path="one" component={YellForm} />
+                <Route path="yells/:id" component = {YellPage} />
+                <Route path="groups/:grId" component = {GroupPage} />
             </Route>
             <Route path="*" component={NotFound} />
         </Router>, 
