@@ -24,5 +24,4 @@ ostrio:meteor-root
 session
 nimble:restivus
 http
-react-meteor-data
 reywood:publish-composite

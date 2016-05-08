@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 
-
 class CommentSingle extends Component {
-    render() {
-        return (
-           <li>
-            {this.props.comments.content} 
-           
-        </li>
-        );
-    }
+  render() {
+    return (
+    	<div> 
+	       <li>
+	        
+	            {this.props.comments.content} 
+	           
+	        </li>
+      </div>
+    );
+  }
 }
 
 export default CommentSingle;
