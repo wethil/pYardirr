@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-
+import { Link } from 'react-router';
 
 class YellSingle extends Component {
     render() {
         return (
            <li>
-            {this.props.yells.content} 
-           
+		           <Link to={`/yells/${this.props.yells._id}`}>
+		            {this.props.yells.content} 
+		           </Link>
         </li>
         );
     }
