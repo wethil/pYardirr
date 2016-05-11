@@ -11,8 +11,12 @@ export default class CommentsForm extends Component {
 		Meteor.call('addComment',comment_content,yell_id, error => {
 			if (error) {
 				console.log('error', error)
+			} else {
+				Meteor.call('incCommentQuan', yell_id, function (error, result) {});
+				console.log('comment added');
 			}
-			console.log('comment added');
+
+			
 			this.refs.comment.value=""
 		})
 	}

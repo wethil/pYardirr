@@ -6,7 +6,8 @@ class YellSingle extends Component {
         return (
            <li>
 		           <Link to={`/yells/${this.props.yells._id}`}>
-		            {this.props.yells.content} 
+		            {this.props.yells.content}  --> rating :
+		            {this.props.yells.rating}
 		           </Link>
         </li>
         );

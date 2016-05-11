@@ -8,6 +8,7 @@ Meteor.methods({
 			yell_id: yell_id,
 			created_at : new Date()
 		})
+		
 	}
 })
 

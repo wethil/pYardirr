@@ -3,6 +3,7 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import YellHeader from '../components/yells/YellHeader.jsx'
 import CommentSingle from '../components/comments/CommentSingle.jsx'
 import CommentsForm from '../components/comments/CommentsForm.jsx'
+import {YellButtons} from '../components/buttons/YellButtons.jsx'
 export class YellPage extends TrackerReact(Component) {
    
      componentWillMount  () {
@@ -36,6 +37,9 @@ export class YellPage extends TrackerReact(Component) {
           <div>
                   yell : {yell_id} <hr/>
                   yell content : {this.getThisYell().content} <br/>
+                  comment quantity : {this.getThisYell().comment_quantity}
+                  comment rating : {this.getThisYell().rating} <br/>
+                  <YellButtons oID={this.getThisYell()._id} />
 
                   <CommentsForm yell_id={yell_id} />
 

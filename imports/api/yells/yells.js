@@ -25,9 +25,9 @@ Yells.attachSchema(
         type : Number,
         defaultValue : 0
     },
-    belongedGroup : {
-        type : String,
-        optional: true
+    comment_quantity : {
+       type : Number,
+        defaultValue : 0
     },
     owner : {
          type : String,

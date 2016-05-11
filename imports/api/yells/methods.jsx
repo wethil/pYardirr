@@ -15,12 +15,20 @@ Meteor.methods({
     } 
 });
 
-Meteor.methods({ 
-    addGrYell: function(yell,belongedGroup) { 
-        Yells.insert({
-            content : yell,
-            belongedGroup  : belongedGroup,                 
-            created_at : new Date()
-        }) 
+Meteor.methods({
+    incCommentQuan : function (id) {
+        Yells.update({_id:id},{$inc:{ comment_quantity:1 }})
     } 
-});
+})
+
+Meteor.methods({
+    pawYell : function (id) {
+        Yells.update({_id:id},{$inc:{ rating:1 }})
+    } 
+})
+
+Meteor.methods({
+    likeYell : function (id) {
+        Yells.update({_id:id},{$inc:{ rating:1 }})
+    } 
+})

@@ -67,15 +67,19 @@ class YellForm extends Component {
     render() {
         return (
             <div>
-            !!!!!! Kanki ben api yi yeniledikçe yazcam alta ordan bakarsın. Bi de development branch açacağım ordan devam ederim
-            her kod değiştirip kaydettiğimde serveri resetliyor kesintiye uğramayalım. <br/>
-            ayrıca new yell request yaparsan lokasyon belirtmen zorunlu. ctrl+m yap, konsol açılcak ordan takip edebilirsin db nin durumunu.
+             Artık her linkten yell'in kendi sayfasına gidilebiliyor. Her yelin yanında kaç tane comment in olduğu yazıyor. tıkladığında sayfadaki düğmelerin hepsi 
+             şimdilik bir rating puanı veriyor tıkladığın objeye.
+              Ayrıca her yell documentine comment_quantity diye bir field tanımladım her comment attığında bir artıyor. değiştirdiğim apileri de ekledim.
+
             <ul>
+            <li>!! normal çekersen yeniden eskiye göre, sonuna &mod=trend eklersen ratingi en yüksekten düşük olana göre çekiyor.</li>
             <li>/apiyells/new json request olacak. ctrl-m yapınca gelen konsolda json örneği var </li>
             <li>/api/yell?lat=&lng=&max=</li>
             <li>/api/yell?lat=&lng=</li>
             <li>/api/yell?lat=&lng=&max=</li>
             </ul>
+
+            
             
             <button className="ui button" onClick={this.getlocation} > location </button>
            
