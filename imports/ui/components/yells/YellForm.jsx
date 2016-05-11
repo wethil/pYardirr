@@ -77,7 +77,7 @@ class YellForm extends Component {
             <li>/api/yell?lat=&lng=&max=</li>
             </ul>
             
-            <button onClick={this.getlocation} > location </button>
+            <button className="ui button" onClick={this.getlocation} > location </button>
            
                   
                    <form className="yellForm" onSubmit={this.addYell.bind(this)} > 

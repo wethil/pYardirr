@@ -10,3 +10,15 @@ Meteor.methods({
 		})
 	}
 })
+
+Meteor.methods({
+	pawComment : function (id) {
+		Comments.update({_id:id},{$inc:{ rating:1 }})
+	} 
+})
+
+Meteor.methods({
+	likeComment : function (id) {
+		Comments.update({_id:id},{$inc:{ rating:1 }})
+	} 
+})
