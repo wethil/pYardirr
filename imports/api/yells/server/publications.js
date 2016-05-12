@@ -11,14 +11,15 @@ Api.addRoute('yells/new', { authRequired: false }, {
   post: function () {
     // POST api/yells
     console.log(this.request);
-    var mYell = this.bodyParams.mYell;
+    var content = this.bodyParams.content;
     var location = this.bodyParams.loc;
-    var createdAt = this.bodyParams.createdAt;
+   
     var data = {
-      mYell: mYell,
+      content: content,
       loc: location,
-      createdAt: createdAt
+      created_at: new Date()
     }
+
 
     Yells.insert(data);
     return "oki doki"
