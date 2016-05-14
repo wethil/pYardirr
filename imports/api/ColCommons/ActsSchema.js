@@ -4,18 +4,19 @@ export default ActSchema = new SimpleSchema({
         allowedValues: ["Paws", "Like"]
     },
     "acts":{
-        type: Array,
+        type: Array
     },
     "acts.$":{
-        type: Object,
+        type: Object
     },
     "acts.$.id":{
-        type: String,
+        type: String
     },
      "acts.$.username":{
-        type: String,
+        type: String
+
     },
       "acts.$.name":{
-        type: String,
+        type: String
     }
 });

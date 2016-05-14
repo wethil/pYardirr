@@ -17,10 +17,6 @@ Yells.attachSchema(
       type: Date,
       denyUpdate: true
     },
-    act : {
-      type : ActSchema,
-      optional: true
-    },
     rating : {
         type : Number,
         defaultValue : 0
@@ -36,6 +32,19 @@ Yells.attachSchema(
      owner_username: {
          type : String,
          defaultValue : "yellfi"
+    },
+     
+     "acts.$.id":{
+        type: String
+    },
+    "acts.$.genre":{
+        type: String
+    },
+     "acts.$.username":{
+        type: String
+    },
+      "acts.$.name":{
+        type: String
     }
     
   })

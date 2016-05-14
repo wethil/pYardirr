@@ -14,8 +14,8 @@ Meteor.startup(()=> {
             <Route path="/" component={App} >
                 <IndexRoute component={ Index } />
                  <Route path="one" component={YellForm} />
-                <Route path="yells/:id" component = {YellPage} />
-                <Route path="groups/:grId" component = {GroupPage} />
+                <Route path="yells/:yellID" component = {YellPage} />
+                <Route path="groups/:gr_id" component = {GroupPage} />
             </Route>
             <Route path="*" component={NotFound} />
         </Router>, 
