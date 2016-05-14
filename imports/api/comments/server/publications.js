@@ -15,12 +15,13 @@ Meteor.publishComposite('comments.inYell', function(yell_id) {
         find: function() {
             // Find comments for this yell. Note arguments for callback function
             // being used in query.
-            return Comments.find({ yell_id: yell_id });
+            return Yells.find({_id:yell_id})
+            
         },
         children: [
            {
              find: function() {
-              return Yells.find({_id:yell_id})
+              return Comments.find({ yell_id: yell_id });
             }
            }
         ]
