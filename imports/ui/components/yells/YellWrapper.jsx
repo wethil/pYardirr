@@ -6,43 +6,6 @@ import { Meteor } from 'meteor/meteor';
 import {YellSingle} from './YellSingle.jsx'
 
 
-/*
-class YellWrapper extends  TrackerReact(React.Component) { 
-   constructor() {
-        super();
-        this.state = {
-          subscription: {
-            yells: Meteor.subscribe('yells'),
-            comments: Meteor.subscribe('comments')
-          }
-        }
-    }
-    
-     getYells() {
-        return Yells.find({}).fetch(); //fetch must be called to trigger reactivity
-    }
-
-    componentWillUnmount () {
-      this.state.yells.stop()
-    }
- 
-    render() {
-
-        return (
-          <ul className="YellList" >
-                {this.getYells().map((yell)=> {
-                    return <YellSingle key={yell._id} yells={yell}  />   
-                })}
-          </ul>
-        );
-    }
-}
-
-export default YellWrapper;
-
-
-*/
-
 
 const composer = (props,onData) =>{
   const subscription = Meteor.subscribe('yells')
