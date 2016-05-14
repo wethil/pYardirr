@@ -22,18 +22,18 @@ Meteor.methods({
 })
 
 Meteor.methods({
-    actYell : function (id) {
+    actYell : function (id,user_id,genre,username,name) {
        
-            var paw = 
+            var act = 
                 { 
-                "id" : 'exid', 
-                 "genre" : 'Paw', 
-                "username" : 'exuser',
-                 "name" : 'exname'
+                "id" : user_id, 
+                 "genre" : genre, 
+                "username" : username,
+                 "name" : name
                    }
             
         
-        Yells.update({_id:id}, {$push : {acts : paw }})
+        Yells.update({_id:id}, {$push : {acts : act }})
 
     } 
 })
@@ -45,7 +45,14 @@ Meteor.methods({
 })
 
 Meteor.methods({
-    pawRateYell : function (id) {
+    PawRateYell : function (id) {
+        Yells.update({_id:id},{$inc:{ rating:1 }})
+
+    } 
+})
+
+Meteor.methods({
+    LikeRateYell : function (id) {
         Yells.update({_id:id},{$inc:{ rating:1 }})
 
     } 

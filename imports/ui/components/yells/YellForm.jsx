@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import { Meteor } from 'meteor/meteor';
-import YellWrapper from './YellWrapper'
+import {YellWrapper} from './YellWrapper'
 
 
 class YellForm extends Component {

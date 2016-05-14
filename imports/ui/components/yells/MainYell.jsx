@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import YellButtons from '../buttons/YellButtons.jsx'
 
 const renderIfData = (thisYell) => {
+	let id = thisYell._id
+	console.log(id)
 	if (thisYell) {
 		return ( 
 			<div className="className">
 				 <h1> yell : {thisYell.content}</h1>
-				 <button className="ui button">but</button>
+				 rating : {thisYell.rating}
+				 <YellButtons id={id} />
 		 </div>
 		  )
 	} else {
@@ -15,61 +19,5 @@ const renderIfData = (thisYell) => {
 
 export const MainYell = ({thisYell}) => (
 	<div> {renderIfData(thisYell)} </div>
-	)
+	);
 
-
-/**
-export class MainYell extends Component {
-	componentWillMount () {
-		content: this.props.yell_content
-	}
-	render() {
-		return (
-			<div> id: {content} </div>
-		);
-	}
-}
-
-
-
-
-export  class MainYells extends TrackerReact(Component) {
-componentWillMount () {
-	yell_id = this.props.yell_id
-}
-
-
- componentWillUnmount (){
- 	console.log('unmount')
- }
-
-  getThisYell() {
-    return Yells.findOne({_id:yell_id})
-  }
-
-  getComments () {
-    return Comments.find({yell_id :yell_id}).fetch();
-  }
-
-	render() {
-
-		subscription = Meteor.subscribe('comments.inYell', this.props.yell_id);
-			if (subscription.ready()) {
-
-				return (
-						<div className="className">
-							yell : {yell_id}
-							yell content : {this.getThisYell().content} <br/>
-							comment quantity : {this.getThisYell().comment_quantity}
-							comment rating : {this.getThisYell().rating} <br/>
-						</div>
-					);
-			} else {
-				return ( 
-						<div className="className">unreadt</div>
-					);  
-			}
-	}
-}
-
-**/

@@ -2,33 +2,42 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
-export class YellButtons extends TrackerReact(Component) {
+export default class YellButtons extends TrackerReact(Component) {
+	componentWillMount () {
+		id = this.props.id
+		user =  user = Meteor.user()
+		user_id = user._id
+		username = user.username
+		name = user.profile.firstName + ' ' + user.profile.lastName
+	}
+
 	Like(e){
 		e.preventDefault()
 	   	
-		 id = this.props.oID 
-		 type = 'Like' 
-		 user = Meteor.user()
-		 user_id = user._id
-		 username = user.username
-		 name = user.profile.firstName + ' ' + user.profile.lastName
+	
+		 genre = 'Like' 
+		
 
 		console.log('like ' + id + user_id + username + name )
 		
-		Meteor.call('actYell', id, error => {
+		Meteor.call('actYell', id,user_id,genre,username,name, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }
+		 Meteor.call('LikeRateYell',id)
 		});
 	}
 
 	Paw(e){
 		e.preventDefault()
-		 id = this.props.oID
-		 	Meteor.call('actYell', id, error => {
+		genre = 'Paw'
+
+
+		 	Meteor.call('actYell',id,user_id,genre,username,name, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }
+		 Meteor.call('PawRateYell',id)
 		});
  
 		console.log( 'paw ' + id)
