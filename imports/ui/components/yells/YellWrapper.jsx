@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+
 import { composeWithTracker } from 'react-komposer'
 import Yells  from'../../../api/yells/yells.js'
 import { Meteor } from 'meteor/meteor';

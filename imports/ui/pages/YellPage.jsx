@@ -9,8 +9,10 @@ const composer = (props,onData) => {
 	const subscription = Meteor.subscribe('comments.inYell',props.params.yellID)
 	if (subscription.ready()) {
 		const thisYell = Yells.findOne({_id :yell_id})
+		const thisComments = Comments.find({yell_id : yell_id}).fetch()
+		
 
-		onData(null,{thisYell})
+		onData(null,{thisYell,thisComments})
 	}
 }
 

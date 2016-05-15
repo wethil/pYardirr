@@ -1,22 +1,19 @@
 import React, {Component} from 'react';
 import {CommentButtons} from '../buttons/CommentButtons.jsx'
 
-class CommentSingle extends Component {
 
-
-
-
-  render() {
-    return (
-    	<div> 
-	       <li>
-	        
-	            {this.props.comments.content}  <CommentButtons oID={this.props.comments._id} /> {this.props.comments.rating}
-	           
-	        </li>
-      </div>
-    );
+const renderIfData = ( comments ) => {
+  if ( comments && comments.length > 0 ) {
+    return comments.map( ( comment ) => {
+      return  ( <li key={ comment._id } > { comment.content } 
+        rating : {comment.rating} <CommentButtons oID={comment._id} /> </li> ) ;
+    });
+  } else {
+    return ( <p>No list items yet!</p> ) ;
   }
-}
+};
 
-export default CommentSingle;
+export const CommentSingle = ( { comments } ) => (
+  <ul>{ renderIfData( comments ) }</ul>
+);
+
