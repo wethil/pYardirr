@@ -125,3 +125,13 @@ Api.addRoute('yell/fetch?lat=&lng=$mod=trend', { authRequired: false }, {
     },{sort : {rating:-1}}).fetch()
  }
 });
+
+
+
+Api.addRoute('comments/fetch?yell=', { authRequired: false }, {
+  get: function () {
+    console.log(this.request);
+    var yell = this.queryParams.yell
+    return Comments.find({yell_id:yell}).fetch()
+ }
+});
