@@ -17,7 +17,7 @@ Api.addRoute('signin',{autRequired:false},{
 	}
 		//http call for login
 	
-   response= HTTP.call( 'POST', 'http://192.168.1.4:3000/api/login', {
+   response= HTTP.call( 'POST', 'http://192.168.1.4:4000/api/login', {
 				  data: {
 				   [key] : value,
 				   password :  this.bodyParams.password
@@ -27,7 +27,9 @@ Api.addRoute('signin',{autRequired:false},{
 	if (response.data.data.userId) {
 		 user = Meteor.users.findOne({"_id" : response.data.data.userId }); 
 		    console.log(user._id + ' ' + user.username  )
-		  
+		   delete user.services
+		   delete user.emails
+		   delete user.profile
 		    user.authToken = response.data.data.authToken
 		    res = user
 		} else {
@@ -40,7 +42,7 @@ Api.addRoute('signin',{autRequired:false},{
 	}
 })
 
-
+//make it more validate
 
 Api.addRoute('check',{authRequired:true},{
 	get : function () {
