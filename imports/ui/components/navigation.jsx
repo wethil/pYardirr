@@ -8,8 +8,8 @@ export const Navigation = () => (
    <IndexLink className="item" to="/" activeclassName="active item">
    Index
    </IndexLink>
-    <Link to="/one" className="item">
-      Messages
+    <Link to="/doc" className="item">
+      Documentation
     </Link>
     <Link to="/two" className="item">
       Friends
