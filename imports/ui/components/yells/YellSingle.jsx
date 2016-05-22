@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
+import PubSub from 'pubsub-js'
 
 
 const renderIfData = ( yells ) => {
@@ -8,6 +9,9 @@ const renderIfData = ( yells ) => {
     yell=  Session.get('yell');
     $('.active_card').removeClass('active_card');
       $('#'+yell).addClass('active_card');
+      lat = Session.get('lat');
+      lng = Session.get('lng');
+      console.log(`lat from alerto = ${lat} lng= ${lng}`)
   }
 
   if ( yells && yells.length > 0 ) {
@@ -22,7 +26,7 @@ const renderIfData = ( yells ) => {
          </div>
             
           <div className="description">
-             { yell.content }  
+             { yell.content }   lat = {yell.loc.coordinates[0]} long = {yell.loc.coordinates[1]}
           </div>      
         </div>
        <div className="extra content">
@@ -30,7 +34,19 @@ const renderIfData = ( yells ) => {
                   <i className="heart outline like icon"></i>
                   17 likes
                </span>
-           3 <i className="comment icon"></i> Reply <button className="ui button" onClick={ () => { Session.set('yell', yell._id); alerto()} } >b</button>
+           3 <i className="comment icon"></i> Reply 
+           <button className="ui button" 
+              onClick={ 
+                      () => { 
+                      Session.set('yell', yell._id) 
+                       PubSub.publish( 'location', [yell.loc.coordinates[0],yell.loc.coordinates[1]] );
+                      Session.set('lat',yell.loc.coordinates[0])
+                      Session.set('lng',yell.loc.coordinates[1])
+                      alerto();
+
+                    }}>
+                b
+            </button>
              <div className="ui custom popup top left transition hidden">
   I'm not on the same level as the button, but i can still be found.
 </div>

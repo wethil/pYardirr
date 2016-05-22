@@ -9,12 +9,16 @@ import { MainPageComments } from './comments/MainPageComments/MainPageComments.j
 
 
 
-
 class Index extends Component {
+componentWillMount() {
+    
 
+   Session.set('lat', 35);
+      Session.set('lng', 35);
+}
 
     render() {
-      
+
         return (
         <div className="ui main container">	
            <div className="ui stackable three column grid">

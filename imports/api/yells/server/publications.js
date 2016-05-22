@@ -44,7 +44,7 @@ Api.addRoute('yell/fetch?lat=&lng=&max=', { authRequired: false }, {
           $geometry: 
              {
             type: "Point",
-            coordinates: [lng, lat]
+            coordinates: [lat, lng]
               },
           $maxDistance: maxdis
         }
@@ -67,7 +67,7 @@ Api.addRoute('yell/fetch?lat=&lng=', { authRequired: false }, {
           $geometry: 
              {
             type: "Point",
-            coordinates: [lng, lat]
+            coordinates: [lat, lng]
               },
        
         }
@@ -94,7 +94,7 @@ Api.addRoute('yell/fetch?lat=&lng=&max=$mod=trend', { authRequired: false }, {
           $geometry: 
              {
             type: "Point",
-            coordinates: [lng, lat]
+            coordinates: [lat, lng]
               },
           $maxDistance: maxdis
         }
@@ -117,7 +117,7 @@ Api.addRoute('yell/fetch?lat=&lng=$mod=trend', { authRequired: false }, {
           $geometry: 
              {
             type: "Point",
-            coordinates: [lng, lat]
+            coordinates: [lat, lng]
               },
        
         }
