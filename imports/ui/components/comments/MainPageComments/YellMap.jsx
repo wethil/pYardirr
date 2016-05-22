@@ -25,19 +25,33 @@ export  const YellMap  = React.createClass({
 	},
 	
 	render() {
+		  var rows = [];
 		center = this.state.center
 		lat = this.state.lat
 		lng = this.state.lng
+	 this.props.comments.forEach(function(comment) {
+      rows.push(<div className="place" key={comment._id} lat={comment.loc.coordinates[0]} lng={comment.loc.coordinates[1]}>Comment</div>);
+      
+    });
 		return (
 			 <div style={{width: '100%', height: 250}} >
 			 			 <GoogleMap  bootstrapURLKeys={{
 												    key: 'AIzaSyBMIojtxSm1FTXsbv_DzEqjWSCtqPpnnjo',
 												    language: 'en'  }} 
-									center={center} zoom={11}  >
-							 <div className="place" lat={lat} lng={lng}>MyPlace</div>      
+									center={center} zoom={13}  >
+								<div className="place" lat={lat} lng={lng}>Yeelllll</div>	
+							{rows}     
 			      </GoogleMap>
 			      <input className="className" type='text' readOnly value={this.state.yell} ></input>
 			 </div>
 		);
 	}
 })
+
+
+//35.116167, 33.933192
+
+//35.119013, 33.930188
+
+//35.117632, 33.928123
+

@@ -32,6 +32,10 @@ Comments.attachSchema(
      owner_username: {
          type : String,
          defaultValue : "yellfi"
+    },
+     loc: {
+      type: LocationSchema,
+      optional: true
     }
     
   })

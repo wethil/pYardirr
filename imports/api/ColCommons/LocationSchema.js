@@ -13,9 +13,9 @@ export default LocationSchema = new SimpleSchema({
         decimal: true,
         custom: function(){
             if(!(-90 <= this.value[0] <= 90))
-                return "lonOutOfRange" ;
-            if(!(-180 <= this.value[1] <= 180))
                 return "latOutOfRange" ;
+            if(!(-180 <= this.value[1] <= 180))
+                return "lonOutOfRange" ;
         }
 
     },

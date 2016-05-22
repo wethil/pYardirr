@@ -3,20 +3,13 @@ import { Meteor } from 'meteor/meteor';
 import YellForm from './yells/YellForm.jsx'
 import UserCard from './accounts/UserCard.jsx'
 import {YellWrapper} from './yells/YellWrapper.jsx'
-import { MainPageComments } from './comments/MainPageComments/MainPageComments.jsx'
+import { MapComposer } from './composers/MapComposer.jsx'
 
 
 
 
 
 class Index extends Component {
-componentWillMount() {
-    
-
-   Session.set('lat', 35);
-      Session.set('lng', 35);
-}
-
     render() {
 
         return (
@@ -24,7 +17,7 @@ componentWillMount() {
            <div className="ui stackable three column grid">
            	<div className="three wide column"> <UserCard /> <YellForm /> </div>
            	<div className="nine wide column"> <YellWrapper /> </div>
-            <div  className="four wide column animated fadeIn "  >   <MainPageComments />  </div>
+            <div  className="four wide column animated fadeIn "  >   <MapComposer />  </div>
            </div>
          </div>  
         );

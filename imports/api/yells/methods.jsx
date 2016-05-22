@@ -3,7 +3,7 @@ import Yells from './yells.js'
 
 
 Meteor.methods({ 
-    addYell: function(yell,long,lat) { 
+    addYell: function(yell,lat,long) { 
         Yells.insert({
             content : yell,
             loc: {

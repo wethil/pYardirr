@@ -46,7 +46,7 @@ const renderIfData = ( yells ) => {
 
                     }}>
                 b
-            </button>
+            </button> <Link to={`/yells/${yell._id}`}>{yell._id}</Link>
              <div className="ui custom popup top left transition hidden">
   I'm not on the same level as the button, but i can still be found.
 </div>

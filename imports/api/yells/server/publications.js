@@ -19,10 +19,8 @@ Api.addRoute('yells/new', { authRequired: false }, {
       loc: location,
       created_at: new Date()
     }
-
-
-    Yells.insert(data);
-    return "oki doki"
+    
+    return Yells.insert(data);
   }
 
 });

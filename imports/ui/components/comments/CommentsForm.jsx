@@ -7,8 +7,12 @@ export default class CommentsForm extends Component {
 		event.preventDefault();
 		console.log(yell_id)
 		 yell_id =  this.props.yell_id
+		 lat = Session.get('lat');
+		 long =Session.get('long');
+		 console.log(`lat ${lat} and ${long}`)
+
 		 comment_content = this.refs.comment.value.trim();
-		Meteor.call('addComment',comment_content,yell_id, error => {
+		Meteor.call('addComment',comment_content,yell_id,lat,long, error => {
 			if (error) {
 				console.log('error', error)
 			} else {

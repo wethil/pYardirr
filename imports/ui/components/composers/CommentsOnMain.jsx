@@ -11,8 +11,7 @@ const composer = (props,onData) => {
 	if (subscription.ready()) {
 		
 		const thisComments = Comments.find({yell_id : yell_id}).fetch()
-		
-
+	
 		onData(null,{thisComments})
 	}
 }
