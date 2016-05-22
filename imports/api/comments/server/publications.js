@@ -27,3 +27,7 @@ Meteor.publishComposite('comments.inYell', function(yell_id) {
         ]
     }
 });
+
+Meteor.publish('thisYellComments',function(yell_id) {
+  return Comments.find({yell_id:yell_id})
+})

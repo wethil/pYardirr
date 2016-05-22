@@ -51,7 +51,7 @@ class YellForm extends Component {
                   
         //long lat
        
-        Meteor.call('addYell', yell,long,lat, error => { 
+        Meteor.call('addYell', yell,lat,long, error => { 
             if (error) { 
                 console.log('error', error); 
             } 
@@ -81,7 +81,6 @@ class YellForm extends Component {
                             placeholder="yell something!"
                         />
                 </form>
-                <YellWrapper />
            </div> 
         );
     }  

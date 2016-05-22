@@ -33,6 +33,10 @@ Yells.attachSchema(
          type : String,
          defaultValue : "yellfi"
     },
+    like_quantity : {
+        type : Number,
+        defaultValue : 0
+    },
      
      "acts.$.id":{
         type: String

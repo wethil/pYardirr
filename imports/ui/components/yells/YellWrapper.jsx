@@ -8,6 +8,7 @@ import {YellSingle} from './YellSingle.jsx'
 
 
 const composer = (props,onData) =>{
+	
   const subscription = Meteor.subscribe('yells')
   if (subscription.ready()) {
     const yells = Yells.find().fetch()

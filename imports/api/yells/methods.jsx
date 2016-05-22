@@ -8,7 +8,7 @@ Meteor.methods({
             content : yell,
             loc: {
                 type: "Point",
-                coordinates : [long,lat]              
+                coordinates : [lat,long]              
             },        
             created_at : new Date()
         }) 

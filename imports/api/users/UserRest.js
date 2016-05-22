@@ -42,7 +42,7 @@ Api.addRoute('signin',{autRequired:false},{
 	}
 })
 
-//make it more validate
+// TO DO :make it more validate
 
 Api.addRoute('check',{authRequired:true},{
 	get : function () {

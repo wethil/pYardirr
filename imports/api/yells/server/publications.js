@@ -38,7 +38,7 @@ Api.addRoute('yell/fetch?lat=&lng=&max=', { authRequired: false }, {
     lng = Number(urlLng)
     maxdis = Number(urlMaxDis)
     console.log(lng + ' ' + lat);
-    return Yells.find({
+    return  yells = Yells.find({
       "loc.coordinates": {
         $near: {
           $geometry: 
