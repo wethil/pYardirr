@@ -3,9 +3,10 @@ import Yells from './yells.js'
 
 
 Meteor.methods({ 
-    addYell: function(yell,lat,long) { 
+    addYell: function(yell,lat,long,user) { 
         Yells.insert({
             content : yell,
+            owner:user,
             loc: {
                 type: "Point",
                 coordinates : [lat,long]              

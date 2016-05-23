@@ -11,7 +11,7 @@ export  const YellMap  = React.createClass({
          this.setState({center:data})
           this.setState({lat:data[0]})
           this.setState({lng:data [1]})
-        this.setState({yell:data [1]})
+        
 
     });
 },
@@ -19,8 +19,8 @@ export  const YellMap  = React.createClass({
 		return	{
 				center : [39.479989,-88.175418],
 				lat : 39.479989,
-				lng : -88.175418,
-				yell : 'data'		
+				lng : -88.175418
+						
 		};
 	},
 	
@@ -42,7 +42,7 @@ export  const YellMap  = React.createClass({
 								<div className="place" lat={lat} lng={lng}>Yeelllll</div>	
 							{rows}     
 			      </GoogleMap>
-			      <input className="className" type='text' readOnly value={this.state.yell} ></input>
+			     
 			 </div>
 		);
 	}

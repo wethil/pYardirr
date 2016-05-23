@@ -46,12 +46,13 @@ class YellForm extends Component {
          var yell = this.refs.mYell.value.trim();
          var lat = Session.get('lat')
          var long = Session.get('long')
+         var user = Meteor.userId();
 
         
                   
         //long lat
        
-        Meteor.call('addYell', yell,lat,long, error => { 
+        Meteor.call('addYell', yell,lat,long,user, error => { 
             if (error) { 
                 console.log('error', error); 
             } 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import PubSub from 'pubsub-js'
-
+import { Meteor } from 'meteor/meteor';
 
 const renderIfData = ( yells ) => {
 
@@ -12,17 +12,20 @@ const renderIfData = ( yells ) => {
       lat = Session.get('lat');
       lng = Session.get('lng');
       console.log(`lat from alerto = ${lat} lng= ${lng}`)
+      console.log('users')
+      console.log(user)
   }
 
-  if ( yells && yells.length > 0 ) {
+     if ( yells && yells.length > 0 ) {
     return yells.map( ( yell ) => {
+      user = Meteor.users.findOne({_id:yell.owner})
 
       return (
   <div key={ yell._id } id={yell._id} className="ui fluid card"   >
         <div className="content">
-         <img className="left rounded floated mini ui image" src="http://semantic-ui.com/images/avatar/large/stevie.jpg" /> 
+         <img className="left rounded floated mini ui image" src={user.profile.profile_pic} /> 
          <div className="header">
-          {yell.owner_username}
+          {user.username}
          </div>
             
           <div className="description">

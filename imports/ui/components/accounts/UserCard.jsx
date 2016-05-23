@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 
-export default class UserCard extends Component {
-	render() {
-		return (
-			
-		<div className="ui fluid card">
+
+
+const renderIfData = ( user ) => {
+  if ( user  ) {
+  				
+
+    return (
+     <div className="ui fluid card">
 		  <div className="ui  image">
-		    <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg"/>
+		    <img src={user.profile.profile_pic}/>
 		  </div>
 		  <div className="content">
-		    <a className="header">Kristy</a>
+		    <a className="header">{user.username}</a>
 		    <div className="meta">
 		      <span className="date">Joined in 2013</span>
 		    </div>
@@ -24,8 +28,14 @@ export default class UserCard extends Component {
 		    </a>
 		  </div>
 		</div>
-		);
-	}
-}
-		
-	
+     ) ;
+  
+
+  } else {
+    return ( <p>No users</p> ) ;
+  }
+};
+
+export const UserCard = ( { user } ) => (
+  <div>{ renderIfData( user ) }</div>
+);

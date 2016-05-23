@@ -3,6 +3,11 @@ import LocationSchema from '../ColCommons/LocationSchema.js'
 
 Yells = new Mongo.Collection('yells'); 
 
+
+
+
+
+
 Yells.attachSchema(
     new SimpleSchema({
     loc: {

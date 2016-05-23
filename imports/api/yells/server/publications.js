@@ -1,9 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import '../yells.js'
 import Api from '../../rest.js'
+
+Meteor.publish("users", function () {
+  return Meteor.users.find();
+});
+
+
 Meteor.publish("yells", function () {
   return Yells.find();
 });
+
 
 
 Api.addRoute('yells/new', { authRequired: false }, {

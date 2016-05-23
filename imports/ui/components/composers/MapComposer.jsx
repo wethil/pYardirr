@@ -6,7 +6,7 @@ import Comments from '../../../api/comments/comments.js'
 
 const composer = (props,onData) => {
 	 yell_id = Session.get('yell');
-	 console.log('y_id on map composer ' + yell_id)
+	 
 	const subscription = Meteor.subscribe('thisYellComments',yell_id)
 	if (subscription.ready()) {
 		
