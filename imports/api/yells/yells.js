@@ -46,13 +46,7 @@ Yells.attachSchema(
      "acts.$.id":{
         type: String
     },
-    "acts.$.genre":{
-        type: String
-    },
-     "acts.$.username":{
-        type: String
-    },
-      "acts.$.name":{
+    "acts.$.type":{
         type: String
     }
     

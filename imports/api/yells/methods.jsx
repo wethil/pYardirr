@@ -23,18 +23,17 @@ Meteor.methods({
 })
 
 Meteor.methods({
-    actYell : function (id,user_id,genre,username,name) {
+    actYell : function (yell,user_id,type) {
        
             var act = 
                 { 
                 "id" : user_id, 
-                 "genre" : genre, 
-                "username" : username,
-                 "name" : name
+                 "type" : type 
+                
                    }
             
         
-        Yells.update({_id:id}, {$push : {acts : act }})
+        Yells.update({_id:yell}, {$push : {acts : act }})
 
     } 
 })

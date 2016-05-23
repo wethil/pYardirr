@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import PubSub from 'pubsub-js'
 import { Meteor } from 'meteor/meteor';
+import {YellButtons} from '../buttons/YellButtons.jsx'
 
 const renderIfData = ( yells ) => {
 
@@ -11,9 +12,7 @@ const renderIfData = ( yells ) => {
       $('#'+yell).addClass('active_card');
       lat = Session.get('lat');
       lng = Session.get('lng');
-      console.log(`lat from alerto = ${lat} lng= ${lng}`)
-      console.log('users')
-      console.log(user)
+   
   }
 
      if ( yells && yells.length > 0 ) {
@@ -34,7 +33,7 @@ const renderIfData = ( yells ) => {
         </div>
        <div className="extra content">
                <span className="right floated">
-                  <i className="heart outline like icon"></i>
+                  <YellButtons yell={yell._id}  />
                   17 likes
                </span>
            3 <i className="comment icon"></i> Reply 
@@ -50,9 +49,7 @@ const renderIfData = ( yells ) => {
                     }}>
                 b
             </button> <Link to={`/yells/${yell._id}`}>{yell._id}</Link>
-             <div className="ui custom popup top left transition hidden">
-  I'm not on the same level as the button, but i can still be found.
-</div>
+          
     </div> 
    </div>       );
     });

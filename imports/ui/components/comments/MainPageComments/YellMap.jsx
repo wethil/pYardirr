@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
 import PubSub from 'pubsub-js'
 export  const YellMap  = React.createClass({
+	getInitialState () {
+		return	{
+				center : [39.479989,-88.175418],
+				lat : 39.479989,
+				lng : -88.175418
+						
+		};
+	},
+	
+
 	componentWillMount() {
     
- token = PubSub.subscribe( 'location',  ( msg, data) =>{
+ PubSub.subscribe( 'location',  ( msg, data) =>{
         console.log(msg)
         console.log(data)
         
@@ -15,14 +25,6 @@ export  const YellMap  = React.createClass({
 
     });
 },
-	getInitialState () {
-		return	{
-				center : [39.479989,-88.175418],
-				lat : 39.479989,
-				lng : -88.175418
-						
-		};
-	},
 	
 	render() {
 		  var rows = [];

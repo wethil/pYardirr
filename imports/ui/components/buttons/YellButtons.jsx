@@ -1,53 +1,83 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
-export default class YellButtons extends TrackerReact(Component) {
+
+const renderIfData = ( yell ) => {
+	const Like = (e) => {
+		e.preventDefault()
+		user_id = Meteor.userId();	
+		 type = 'Like' 
+		console.log(` like yell = ${yell} user= ${user_id} `)
+		Meteor.call('actYell', yell,user_id,type, error => {
+		 if (error) {
+		 	console.log('error',error)
+		 }
+		 Meteor.call('LikeRateYell',yell)
+		});
+
+	}
+  
+  if ( yell ) {
+   return ( 
+			 	<i className="heart outline like icon" onClick={Like} > </i> 
+			  ) ;
+  } else {
+    return ( <p>No yell</p> ) ;
+  }
+};
+
+export const YellButtons = ( { yell } ) => (
+  <div>{ renderIfData( yell ) }</div>
+);
+
+/*
+export default class YellButtons extends Component {
 	componentWillMount () {
-		id = this.props.id
-		user =  user = Meteor.user()
-		user_id = user._id
-		username = user.username
-		name = user.profile.firstName + ' ' + user.profile.lastName
+		yell_id = this.props.yell
+
+		user_id =Meteor.userId();
+	
 	}
 
 	Like(e){
 		e.preventDefault()
 	   	
 	
-		 genre = 'Like' 
-		
+		 type = 'Like' 
+		console.log(this.props.yell)
 
-		console.log('like ' + id + user_id + username + name )
+		console.log(` like yell = ${yell_id} user= ${user_id} `)
 		
-		Meteor.call('actYell', id,user_id,genre,username,name, error => {
+		Meteor.call('actYell', yell_id,user_id,type, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }
-		 Meteor.call('LikeRateYell',id)
+		 Meteor.call('LikeRateYell',yell_id)
 		});
 	}
 
 	Paw(e){
 		e.preventDefault()
-		genre = 'Paw'
+		type = 'Paw'
 
 
-		 	Meteor.call('actYell',id,user_id,genre,username,name, error => {
+		 	Meteor.call('actYell',yell_id,user_id,type, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }
-		 Meteor.call('PawRateYell',id)
+		 Meteor.call('PawRateYell',yell_id)
 		});
  
-		console.log( 'paw ' + id)
+		console.log( 'paw ' + yell_id)
 	}
 	render() {
 		return (
-			<div className="ui icon buttons">
-			 	<button className="ui button" onClick={this.Like} > <i className="heart icon"></i> </button>
-			 	<button className="ui button" onClick={this.Paw} ><i className="star icon"></i></button>
+			<div>
+			 	<i className="heart outline like icon" onClick={this.Like} > </i> 
+			 	
 			 </div>	
 		);
 	}
 }
+
+*/

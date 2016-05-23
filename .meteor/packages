@@ -27,3 +27,5 @@ http
 reywood:publish-composite
 semantic:ui-css
 accounts-password
+natestrauser:animate-css
+dburles:collection-helpers
