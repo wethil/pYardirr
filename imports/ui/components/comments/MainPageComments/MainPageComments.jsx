@@ -20,7 +20,7 @@ const renderIfData = ( CommentsLoc ) => {
 };
 
 export const MainPageComments = ( { CommentsLoc } ) => (
-  <ul>{ renderIfData( CommentsLoc ) }</ul>
+  <div>{ renderIfData( CommentsLoc ) }</div>
 );
 
 

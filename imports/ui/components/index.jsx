@@ -21,15 +21,15 @@ class Index extends TrackerReact(Component) {
       componentWillUnmount() {
         this.state.subscription.users.stop();
     }
-
+//<YellForm /> in three wide column
     render() {
  
         return (
         <div className="ui main container">	
            <div className="ui stackable three column grid">
-           	<div className="three wide column"> <UserCardComposer /> <YellForm /> </div>
-           	<div className="nine wide column"> <YellWrapper /> </div>
-            <div  className="four wide column animated fadeIn "  >   <MapComposer />  </div>
+           	<div className="three wide column"> <UserCardComposer />  </div>
+           	<div className="seven wide column"> <YellWrapper /> </div>
+            <div  className="six wide column animated fadeIn "  >   <MapComposer />  </div>
            </div>
          </div>  
         );

@@ -1,4 +1,7 @@
 /* CSS declarations go here */
+  body {
+    background: #E6E7EA !important;
+  }
   .main.container {
     margin-top: 5em;
   }
@@ -10,7 +13,7 @@
   .stuck {
     position: fixed !important ;
     max-height: 100%;
-    width: 250px;
+    width: 280px;
     background-color: #eee;
     overflow-y: auto;
 }
@@ -19,4 +22,16 @@
 }
 .not-stuck {
     margin-left: 200px;
+}
+.ui.inverted.menu {
+    
+    background: #435384 !important;
+    
+}
+
+.melek {
+   max-height: 100%;
+    width: 170px;
+  overflow-y: auto;
+  position: fixed !important ;
 }

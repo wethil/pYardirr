@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import YellForm from '../yells/YellForm.jsx'
 
 
 
@@ -18,7 +19,7 @@ const renderIfData = ( user ) => {
 		      <span className="date">Joined in 2013</span>
 		    </div>
 		    <div className="description">
-		      Kristy is an art 
+		      Melek is a developer 
 		    </div>
 		  </div>
 		  <div className="extra content">
@@ -37,5 +38,5 @@ const renderIfData = ( user ) => {
 };
 
 export const UserCard = ( { user } ) => (
-  <div>{ renderIfData( user ) }</div>
+  <div className="melek" >{ renderIfData( user ) }<YellForm /></div>
 );
