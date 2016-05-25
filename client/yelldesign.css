@@ -1,0 +1,203 @@
+.yellcolumn > h2 {
+  color: #9298A4;
+  font-weight: 400;
+  letter-spacing: -1px;
+  margin: 140px auto 80px;
+  padding: ;
+  text-align: center;
+}
+.yellcolumn > h2:first-child {
+  margin: 40px auto 80px;
+}
+.yellcolumn > .box {
+  background: #FFF;
+  border-radius: 4px;
+  box-shadow: 0 0 50px 5px rgba(0,0,0,.25);
+  height: auto;
+  margin: 0px auto 17px;
+  max-width: 500px;
+  overflow: hidden;
+  padding: 20px 0 0;
+  position: relative;
+}
+.yellcolumn > .box > [class*="box-"] {
+  margin: 0 auto;
+  padding: 0 30px;
+ 
+}
+.yellcolumn > .box > [class*="box-"] img {
+  display: block;
+  width: 100%;
+}
+.yellcolumn > .box > .box-header {
+  margin: 0 auto;
+  padding: 0 30px 10px;
+  width: initial;
+}
+.yellcolumn > .box > .box-header > h3 {
+  font-size: 14px;
+  font-weight: 700;
+  height: 45px;
+  margin: 5px auto;
+  overflow: hidden;
+  padding: 8px 0 0;
+  position: relative;
+}
+.yellcolumn > .box > .box-header > h3 > a {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.yellcolumn > .box > .box-header > h3 > span {
+  color: #9197A3;
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  margin-top: 0px;
+}
+.yellcolumn > .box > .box-header > h3 > span .fa {
+  font-size: 15px;
+  margin-left: 5px;
+}
+.yellcolumn > .box > .box-header > span {
+
+  background: #F4F4F4;
+  border-radius: 3px;
+  color: #BCBFC6;
+  cursor: pointer;
+  font-size: 24px;
+  height: 18px;
+  line-height: 18px;
+  margin: 5px auto 0;
+  padding: 3px 4px;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+.yellcolumn > .box > .box-header > span:hover {
+  color: #888;
+
+}
+.yellcolumn > .box > .box-header > span > i {
+  height: 18px;
+  line-height: 18px;
+}
+.yellcolumn > .box > .box-header img {
+  border-radius: 100px;
+  float: left;
+  height: 40px;
+  margin: -5px 10px 0 0;
+  object-fit: cover;
+  width: 40px;
+}
+.yellcolumn > .box > .box-content {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.yellcolumn > .box > .box-content > .content {
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+
+
+
+.yellcolumn > .box > .box-buttons {
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.yellcolumn > .box > .box-buttons *,*::before,*::after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.yellcolumn > .box > .box-buttons > .row {
+ 
+
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.yellcolumn > .box > .box-buttons > .row > button:last-child {
+  border: 0;
+}
+.yellcolumn > .box > .box-buttons > .row > button {
+  background: #FFF;
+  border: 0;
+
+  color: #9197A3;
+  font-size: 20px;
+  float: left;
+  height: 30px;
+
+  margin: 0;
+  *outline: 1px #08F;
+  padding: 0;
+  width: 33.33333333333%;
+}
+.yellcolumn > .box > .box-buttons > .row > button:hover {
+  background: #F5F5F5;
+  color: #7D8696;
+}
+.yellcolumn > .box > .box-buttons > .row > button:focus {
+  background: #F0F2F2;
+  color: #6C7588;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.2);
+  outline-color: #08F;
+}
+
+.yellcolumn > .box.update,
+.yellcolumn > .box.text {
+  border: 1px solid #E0E1E4;
+  box-shadow: none;
+  padding: 5px 0 0;
+}
+.yellcolumn > .box.update > .box-header,
+.yellcolumn > .box.text > .box-header {
+  padding: 0 20px;
+}
+.yellcolumn > .box.update > .box-header > span,
+.yellcolumn > .box.text > .box-header > span{
+  background: transparent;
+  color: #9298A4;
+  font-size: 25px;
+    margin-top: 14px
+}
+.yellcolumn > .box.update > .box-content > .content > p,
+.yellcolumn > .box.text > .box-content > .content > p {
+ 
+  color: #151313;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 0px 22px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.yellcolumn > .box.text > .box-buttons > .row > button {
+  font-size: 13px;
+}
+.yellcolumn > .box.text > .box-buttons > .row > button > span {
+  font-size: 12px;
+}
+
+
+.commentPad {
+padding: 10px 23px;
+
+
+}
+
+.fa-map-marker{
+  margin-right: 15px !important;
+}
+
