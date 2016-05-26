@@ -175,8 +175,8 @@
 .yellcolumn > .box.update > .box-content > .content > p,
 .yellcolumn > .box.text > .box-content > .content > p {
  
-  color: #151313;
-  font-size: 14px;
+  color: #382C2C;
+  font-size: 16px;
   line-height: 22px;
   padding: 0px 22px;
     margin-top: 0px !important;
@@ -200,4 +200,31 @@ padding: 10px 23px;
 .fa-map-marker{
   margin-right: 15px !important;
 }
+.avatar  > img {
+  width: 30px !important ;
+  height: 30px !important ;
 
+}
+
+.ui.comments .comment .text {    
+    font-size: 0.9em !important;
+    line-height: 0.9 !important;
+}
+
+.hidden{
+  display:none
+}
+
+
+.card-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+}
+
+
+.card-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22) !important;
+}
+
+.comment_ta{
+      font-size: 0.8em !important ;
+}

@@ -3,13 +3,17 @@ import { Link } from 'react-router';
 import PubSub from 'pubsub-js'
 import { Meteor } from 'meteor/meteor';
 import {YellButtons} from '../buttons/YellButtons.jsx'
+import {CommentsOnMain} from '../composers/CommentsOnMain.jsx'
+import {CommentsForm} from '../comments/CommentsForm.jsx'
+
 
 const renderIfData = ( yells ) => {
 
   const alerto = (e)=> {
     yell=  Session.get('yell');
-    $('.active_card').removeClass('active_card');
-      $('#'+yell).addClass('active_card');
+    $("." + yell).removeClass("hidden");
+     $('.card-5').removeClass('card-5');
+     $('#'+yell).addClass('card-5');
       lat = Session.get('lat');
       lng = Session.get('lng');
    
@@ -18,16 +22,22 @@ const renderIfData = ( yells ) => {
      if ( yells && yells.length > 0 ) {
     return yells.map( ( yell ) => {
       user = Meteor.users.findOne({_id:yell.owner})
-
+      var hiddenComments = ` animated fadeIn hidden  commentPad ${yell._id}`
       return (
  //Column Starting
-  <div className="yellcolumn" key={ yell._id } id={yell._id} >    
-    <div className="box text"  >
+
+    <div className="box text"  key={ yell._id } id={yell._id} >
         <div className="box-header">
           <h3><a href=""><img src={user.profile.profile_pic} alt="" />{user.username}</a>
             <span>March 21,18:45pm</span>
           </h3>
-          <span><i className="fa fa-map-marker"></i><i className="fa fa-angle-down"></i></span>
+          <span>
+              <i className="fa fa-map-marker" onClick={()=>{
+                 PubSub.publish( 'location', [yell.loc.coordinates[0],yell.loc.coordinates[1]] );
+              }} >
+              </i>
+             <Link to={`/yells/${yell._id}`}><i className="fa fa-angle-down"></i></Link>
+         </span>
           <div className="window"></div>
         </div>
         <div className="box-content">
@@ -39,12 +49,26 @@ const renderIfData = ( yells ) => {
         <div className="box-buttons">
         <div className="row">
             <button><span className="fa fa-thumbs-up"></span>11 </button>
-            <button> <span className="fa fa-comment"></span> 7 </button>
+            <button  className="comments" onClick={ 
+                      () => { 
+                      Session.set('yell', yell._id) 
+                       PubSub.publish( 'location', [yell.loc.coordinates[0],yell.loc.coordinates[1]] );
+                      Session.set('lat',yell.loc.coordinates[0])
+                      Session.set('lng',yell.loc.coordinates[1])
+                      alerto();
+
+                    }} > <span className="fa fa-comment"></span> 7 </button>
             <button><span className="fa fa-paw"></span> 3 </button>
           </div>
         </div>
+         <div className={hiddenComments}> 
+            <CommentsOnMain yellId={yell._id} />
+            <CommentsForm yell_id={yell._id} />
+         </div>
+           
    </div>
-  </div> 
+ 
+ 
   
 
   //Column ending
@@ -65,9 +89,9 @@ const renderIfData = ( yells ) => {
 export const YellSingle = ( { yells } ) => (
 
 
-<div>
+<div className="yellcolumn" >
      { renderIfData( yells ) }  
-</div>  
+</div> 
 );
 
 
