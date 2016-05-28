@@ -23,37 +23,21 @@ Meteor.methods({
 })
 
 Meteor.methods({
-    actYell : function (yell,user_id,type) {
-       
-            var act = 
-                { 
-                "id" : user_id, 
-                 "type" : type 
-                
-                   }
+    pawYell : function (yell,user_id) {
     
-       if (type="paw") {
      Meteor.users.update({ _id:user_id },{ $push: { 'profile.paws': yell }})
-      } else 
-         Yells.update({_id:yell}, {$push : {acts : act }})
-
-    } 
+     Yells.update({_id:yell}, {$push : {paws : user_id }})
+      
+ } 
 })
 
 Meteor.methods({
-    delActYell : function (yell,user_id,type) {
-       
-            var act = 
-                { 
-                "id" : user_id, 
-                 "type" : type 
-                
-                   }
+   unPawYell : function (yell,user_id) {
+  
     
-       if (type="paw") {
      Meteor.users.update({ _id:user_id },{ $pull: { 'profile.paws': yell }})
-      } else 
-         Yells.update({_id:yell}, {$pull : {acts : act }})
+
+         Yells.update({_id:yell}, {$pull : {paws : user_id }})
 
     } 
 })
@@ -69,6 +53,13 @@ Meteor.methods({
 Meteor.methods({
     PawRateYell : function (id) {
         Yells.update({_id:id},{$inc:{ rating:1 }})
+
+    } 
+})
+
+Meteor.methods({
+    PawUnRateYell : function (id) {
+        Yells.update({_id:id},{$inc:{ rating:-1 }})
 
     } 
 })

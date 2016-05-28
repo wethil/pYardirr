@@ -8,7 +8,7 @@ const renderIfData = ( yell,pawed ) => {
 		user_id = Meteor.userId();	
 		 type = 'paw' 
 		console.log(` paw yell = ${yell} user= ${user_id} `)
-		Meteor.call('actYell', yell,user_id,type, error => {
+		Meteor.call('pawYell', yell,user_id, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }

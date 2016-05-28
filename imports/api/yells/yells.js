@@ -43,13 +43,10 @@ Yells.attachSchema(
         defaultValue : 0
     },
      
-     "acts.$.id":{
-        type: String
-    },
-    "acts.$.type":{
-        type: String
+     paws:{
+        type: [String],
+        optional:true
     }
-    
   })
 );
 

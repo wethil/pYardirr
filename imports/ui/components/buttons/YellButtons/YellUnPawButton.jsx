@@ -8,11 +8,11 @@ const renderIfData = ( yell,pawed ) => {
 		user_id = Meteor.userId();	
 		 type = 'paw' 
 		console.log(` paw yell = ${yell} user= ${user_id} `)
-		Meteor.call('delActYell', yell,user_id,type, error => {
+		Meteor.call('unPawYell', yell,user_id, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }
-		 Meteor.call('PawRateYell',yell)
+		 Meteor.call('PawUnRateYell',yell)
 		});
 
 	}
