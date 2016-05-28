@@ -6,6 +6,9 @@ Meteor.publish("users", function () {
   return Meteor.users.find();
 });
 
+Meteor.publish("thisUserPaws", function(user_id) {
+  return Yells.find({'acts.type':'paw','acts.id':user_id});
+})
 
 Meteor.publish("yells", function () {
   return Yells.find();
@@ -57,6 +60,51 @@ Api.addRoute('yell/fetch?lat=&lng=&max=', { authRequired: false }, {
     }, {sort : {created_at:-1}}).fetch()
  }
 });
+
+
+
+Api.addRoute('paws/fetch?userId=', { authRequired: false }, {
+  get: function () {
+    console.log(this.request);
+    var user_id = this.queryParams.userId
+    user_paws=Meteor.users.findOne({_id:user_id}).profile.paws
+    console.log(user_paws)
+    res = []  
+    user_paws.forEach(function (yell_id) {
+      yell=Yells.findOne({_id:yell_id})
+      yell.owner_username =  Meteor.users.findOne({_id:yell.owner}).username
+      yell.owner_profile_pic = Meteor.users.findOne({_id:yell.owner}).profile.profile_pic
+      res.push(yell)
+    });
+
+ return res
+ }
+});
+
+
+  //Convert yell act Schema to just one array!!
+
+Api.addRoute('paws/fetch?yellId=', { authRequired: false }, {
+  get: function () {
+    console.log(this.request);
+    var user_id = this.queryParams.yellId
+    pawed_users=Meteor
+    console.log(user_paws)
+    res = []  
+    user_paws.forEach(function (yell_id) {
+      yell=Yells.findOne({_id:yell_id})
+      yell.owner_username =  Meteor.users.findOne({_id:yell.owner}).username
+      yell.owner_profile_pic = Meteor.users.findOne({_id:yell.owner}).profile.profile_pic
+      res.push(yell)
+    });
+
+ return res
+ }
+});
+
+
+
+
 
 Api.addRoute('yell/fetch?lat=&lng=', { authRequired: false }, {
   get: function () {

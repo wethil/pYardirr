@@ -2,33 +2,51 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 
 
-const renderIfData = ( yell ) => {
-	const Like = (e) => {
+const renderIfData = ( yell,pawed ) => {
+	const paw = (e) => {
 		e.preventDefault()
 		user_id = Meteor.userId();	
-		 type = 'Like' 
-		console.log(` like yell = ${yell} user= ${user_id} `)
+		 type = 'paw' 
+		console.log(` paw yell = ${yell} user= ${user_id} `)
 		Meteor.call('actYell', yell,user_id,type, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }
-		 Meteor.call('LikeRateYell',yell)
+		 Meteor.call('PawRateYell',yell)
 		});
 
 	}
+
+
   
   if ( yell ) {
    return ( 
-			 	<i className="heart outline like icon" onClick={Like} > </i> 
+   	 <button onClick={paw} ><span className="fa fa-paw"></span> 3 </button>
 			  ) ;
   } else {
     return ( <p>No yell</p> ) ;
   }
 };
 
-export const YellButtons = ( { yell } ) => (
+export const YellPawButton = ( { yell } ) => (
   <div>{ renderIfData( yell ) }</div>
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 export default class YellButtons extends Component {

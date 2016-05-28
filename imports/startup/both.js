@@ -16,3 +16,5 @@ Comments.helpers({
     return Yells.findOne({_id:this.yell_id})
   }
 })
+
+

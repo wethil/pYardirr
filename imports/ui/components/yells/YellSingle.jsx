@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import PubSub from 'pubsub-js'
 import { Meteor } from 'meteor/meteor';
-import {YellButtons} from '../buttons/YellButtons.jsx'
+import {YellPawButton} from '../buttons/YellButtons/YellPawButton.jsx'
+import {YellUnPawButton} from '../buttons/YellButtons/YellUnPawButton.jsx'
 import {CommentsOnMain} from '../composers/CommentsOnMain.jsx'
 import {CommentsForm} from '../comments/CommentsForm.jsx'
 
@@ -21,7 +22,21 @@ const renderIfData = ( yells ) => {
 
      if ( yells && yells.length > 0 ) {
     return yells.map( ( yell ) => {
+
       user = Meteor.users.findOne({_id:yell.owner})
+      currentUser = Meteor.users.findOne({_id:Meteor.userId()});
+      console.log(currentUser)
+      console.log(currentUser.profile.paws)
+   
+      if (currentUser.profile.paws.indexOf(yell._id)>=0) {
+        pawed = <YellUnPawButton yell={yell._id} />
+      } else {
+        pawed = <YellPawButton yell={yell._id} /> 
+      }
+     
+
+      console.log(`user ${yell._id} paw ${pawed} in `)
+   
       var hiddenComments = ` animated fadeIn hidden  commentPad ${yell._id}`
       return (
  //Column Starting
@@ -55,10 +70,11 @@ const renderIfData = ( yells ) => {
                        PubSub.publish( 'location', [yell.loc.coordinates[0],yell.loc.coordinates[1]] );
                       Session.set('lat',yell.loc.coordinates[0])
                       Session.set('lng',yell.loc.coordinates[1])
+                     
                       alerto();
 
                     }} > <span className="fa fa-comment"></span> 7 </button>
-            <button><span className="fa fa-paw"></span> 3 </button>
+               {pawed}
           </div>
         </div>
          <div className={hiddenComments}> 

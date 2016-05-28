@@ -44,8 +44,8 @@ class YellForm extends Component {
     addYell(event) {
         event.preventDefault();
          var yell = this.refs.mYell.value.trim();
-         var lat = Session.get('lat')
-         var long = Session.get('long')
+         var lat = 39.480974; // Session.get('lat')
+         var long =  -88.175493 // Session.get('long')
          var user = Meteor.userId();
 
         

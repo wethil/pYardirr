@@ -4,6 +4,9 @@ import { Navigation } from '../components/navigation.jsx';
 export const App = ({children}) => (
     <div>
         <Navigation />
-        {children}
+        <div className=" ui main container">
+
+      	  {children}
+       </div> 
     </div>
 )

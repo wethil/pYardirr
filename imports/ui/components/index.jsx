@@ -25,13 +25,13 @@ class Index extends TrackerReact(Component) {
     render() {
  
         return (
-        <div className="ui main container">	
+     
            <div className="ui stackable three column grid">
            	<div className="three wide column"> <UserCardComposer />  </div>
            	<div className="seven wide column"> <YellWrapper /> </div>
             <div  className="six wide column animated fadeIn "  >   <MapComposer />  </div>
            </div>
-         </div>  
+        
         );
     }
 }

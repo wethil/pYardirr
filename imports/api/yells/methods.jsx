@@ -31,12 +31,34 @@ Meteor.methods({
                  "type" : type 
                 
                    }
-            
-        
-        Yells.update({_id:yell}, {$push : {acts : act }})
+    
+       if (type="paw") {
+     Meteor.users.update({ _id:user_id },{ $push: { 'profile.paws': yell }})
+      } else 
+         Yells.update({_id:yell}, {$push : {acts : act }})
 
     } 
 })
+
+Meteor.methods({
+    delActYell : function (yell,user_id,type) {
+       
+            var act = 
+                { 
+                "id" : user_id, 
+                 "type" : type 
+                
+                   }
+    
+       if (type="paw") {
+     Meteor.users.update({ _id:user_id },{ $pull: { 'profile.paws': yell }})
+      } else 
+         Yells.update({_id:yell}, {$pull : {acts : act }})
+
+    } 
+})
+
+
 
 Meteor.methods({
     likeYell : function (id) {

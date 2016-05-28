@@ -11,8 +11,8 @@ export const Navigation = () => (
     <Link to="/doc" className="item">
       Documentation
     </Link>
-    <Link to="/two" className="item">
-      Friends
+    <Link to="/paws" className="item">
+      Paws
     </Link>
     <div className="right menu">
     	<UserMenu />

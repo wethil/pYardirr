@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {YellButtons} from '../buttons/YellButtons.jsx'
+
 import {CommentSingle} from '../comments/CommentSingle.jsx'
 import CommentsForm from '../comments/CommentsForm.jsx'
 const renderIfData = (thisYell,thisComments) => {
@@ -11,7 +11,7 @@ const renderIfData = (thisYell,thisComments) => {
 			<div className="className">
 				 <h1> yell : {thisYell.content}</h1>
 				 rating : {thisYell.rating}
-				 <YellButtons yell={id} />
+			
 				 <CommentsForm  yell_id={id} />
 				 <CommentSingle comments={thisComments} />
 		 </div>

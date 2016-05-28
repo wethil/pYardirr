@@ -15,7 +15,8 @@ export default class RegisterForm extends Component {
                 profile: {
                     firstName: 'Fatih',
                     lastName: 'Dogru',
-                    profile_pic : 'http://semantic-ui.com/images/avatar/large/stevie.jpg'
+                    profile_pic : 'http://semantic-ui.com/images/avatar/large/stevie.jpg',
+                    paws : []
                     
 
                 },
