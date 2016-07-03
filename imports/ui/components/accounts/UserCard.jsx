@@ -5,6 +5,7 @@ import YellForm from '../yells/YellForm.jsx'
 
 
 const renderIfData = ( user ) => {
+	console.log(user)
   if ( user  ) {
   				
 

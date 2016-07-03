@@ -5,12 +5,12 @@ import Comments from '../../../api/comments/comments.js'
 
 
 const composer = (props,onData) => {
-	 yellId=props.yellId
+	 yell_id=props.yell_id
 	//console.log('y_id = ' + yellId)
-	const subscription = Meteor.subscribe('thisYellComments',yellId)
+	const subscription = Meteor.subscribe('thisYellComments',yell_id)
 	if (subscription.ready()) {
 		
-		const thisComments = Comments.find({yell_id : yellId}).fetch()
+		const thisComments = Comments.find({yell_id : yell_id}).fetch()
 	
 		onData(null,{thisComments})
 	}

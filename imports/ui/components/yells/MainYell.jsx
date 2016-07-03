@@ -5,15 +5,22 @@ import CommentsForm from '../comments/CommentsForm.jsx'
 const renderIfData = (thisYell,thisComments) => {
 	 id = thisYell._id
 	console.log(id)
-	console.log(thisComments)
+	console.log(thisComments.length)
+	if (thisComments.length>0 ) {
+		comments= <CommentSingle comments={thisComments} />
+	} else {
+		comments = "no comments"
+	}
+
 	if (thisYell) {
 		return ( 
 			<div className="className">
 				 <h1> yell : {thisYell.content}</h1>
 				 rating : {thisYell.rating}
 			
-				 <CommentsForm  yell_id={id} />
-				 <CommentSingle comments={thisComments} />
+				
+				 {comments}
+				
 		 </div>
 		  )
 	} else {

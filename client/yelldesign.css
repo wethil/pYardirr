@@ -228,3 +228,46 @@ padding: 10px 23px;
 .comment_ta{
       font-size: 0.8em !important ;
 }
+
+.spread {
+    background: #FFF;
+  border: 0;
+
+  color: #9197A3;
+
+  float: left;
+  height: 30px;
+ font-size: 13px;
+  margin: 0;
+  *outline: 1px #08F;
+  padding: 0;
+  width: 33.33333333333%;
+
+}
+
+.spread:hover {
+    background: #F5F5F5;
+    color: #7D8696;
+}
+
+.SpreadIcon {
+     fill: #ffffff;
+    fill-opacity: 0.5;
+    width:20px;
+    height:20px
+}
+
+.CommentIcon {
+     fill: #ffffff;
+    fill-opacity: 0.5;
+    width:15px;
+    height:15px;
+    margin-top: 5px;
+}
+
+.YellButtonSpan{
+  font-size: 11px !important;
+}
+
+
+

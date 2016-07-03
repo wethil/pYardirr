@@ -1,42 +1,31 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import {PawIcon} from './ButtonSvg.jsx'
 
 
-const renderIfData = ( yell,pawed ) => {
+export const YellPawButton = ( { yellId,pawed } ) => {
 	const paw = (e) => {
 		e.preventDefault()
 		user_id = Meteor.userId();	
 		 type = 'paw' 
-		console.log(` paw yell = ${yell} user= ${user_id} `)
-		Meteor.call('pawYell', yell,user_id, error => {
+		console.log(` paw yell = ${yellId} user= ${user_id} `)
+		Meteor.call('pawYell', yellId,user_id, error => {
 		 if (error) {
 		 	console.log('error',error)
 		 }
-		 Meteor.call('PawRateYell',yell)
+		 Meteor.call('PawRateYell',yellId)
 		});
 
 	}
 
 
   
-  if ( yell ) {
+ 
    return ( 
-   	 <button onClick={paw} ><span className="fa fa-paw"></span> 3 </button>
+   	 <button onClick={paw}> <PawIcon count={10} /> </button>
 			  ) ;
-  } else {
-    return ( <p>No yell</p> ) ;
-  }
-};
-
-export const YellPawButton = ( { yell } ) => (
-  <div>{ renderIfData( yell ) }</div>
-);
-
-
-
-
-
-
+   
+}
 
 
 

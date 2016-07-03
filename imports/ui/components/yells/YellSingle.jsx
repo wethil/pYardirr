@@ -4,12 +4,22 @@ import PubSub from 'pubsub-js'
 import { Meteor } from 'meteor/meteor';
 import {YellPawButton} from '../buttons/YellButtons/YellPawButton.jsx'
 import {YellUnPawButton} from '../buttons/YellButtons/YellUnPawButton.jsx'
+import {SpreadButton} from '../buttons/YellButtons/SpreadButton.jsx'
 import {CommentsOnMain} from '../composers/CommentsOnMain.jsx'
-import {CommentsForm} from '../comments/CommentsForm.jsx'
+import CommentsForm from '../comments/CommentsForm.jsx'
+import {CommentIcon} from '../buttons/YellButtons/ButtonSvg'
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// Check this repo:
+// https://github.com/zilverline/react-tap-event-plugin
+injectTapEventPlugin();
 
 
-const renderIfData = ( yells ) => {
 
+const renderIfData = ( yells) => {
+console.log(yells)
   const alerto = (e)=> {
     yell=  Session.get('yell');
     $("." + yell).removeClass("hidden");
@@ -23,19 +33,24 @@ const renderIfData = ( yells ) => {
      if ( yells && yells.length > 0 ) {
     return yells.map( ( yell ) => {
 
-      user = Meteor.users.findOne({_id:yell.owner})
+   
       currentUser = Meteor.users.findOne({_id:Meteor.userId()});
-      console.log(currentUser)
-      console.log(currentUser.profile.paws)
+    
+      if (yell.original_yell_id) {
+        spreaded =  <Link to={`/yells/${yell.original_yell_id}`}><i className="fa fa-angle-down"></i></Link>
+      } else {
+        spreaded =""
+      }
+
    
       if (currentUser.profile.paws.indexOf(yell._id)>=0) {
-        pawed = <YellUnPawButton yell={yell._id} />
+        pawed = <YellUnPawButton yellId={yell._id} />
       } else {
-        pawed = <YellPawButton yell={yell._id} /> 
+        pawed = <YellPawButton yellId={yell._id} /> 
       }
      
 
-      console.log(`user ${yell._id} paw ${pawed} in `)
+      
    
       var hiddenComments = ` animated fadeIn hidden  commentPad ${yell._id}`
       return (
@@ -43,7 +58,7 @@ const renderIfData = ( yells ) => {
 
     <div className="box text"  key={ yell._id } id={yell._id} >
         <div className="box-header">
-          <h3><a href=""><img src={user.profile.profile_pic} alt="" />{user.username}</a>
+         <h3><a href=""><img src={yell.owner.profile.avatar} alt="" />{yell.owner.username}</a>
             <span>March 21,18:45pm</span>
           </h3>
           <span>
@@ -57,13 +72,13 @@ const renderIfData = ( yells ) => {
         </div>
         <div className="box-content">
           <div className="content">
-            <p className="yellcont" > { yell.content } </p>
+            <p className="yellcont" > {spreaded} { yell.content } </p>
           </div>
         </div>
       
         <div className="box-buttons">
         <div className="row">
-            <button><span className="fa fa-thumbs-up"></span>11 </button>
+           <SpreadButton yell={yell} /> 
             <button  className="comments" onClick={ 
                       () => { 
                       Session.set('yell', yell._id) 
@@ -73,7 +88,7 @@ const renderIfData = ( yells ) => {
                      
                       alerto();
 
-                    }} > <span className="fa fa-comment"></span> 7 </button>
+                    }} > <CommentIcon count={7} />   </button>
                {pawed}
           </div>
         </div>
@@ -109,86 +124,3 @@ export const YellSingle = ( { yells } ) => (
      { renderIfData( yells ) }  
 </div> 
 );
-
-
-
-
-
-
-/*
-
-const renderIfData = ( yells ) => {
-
-  const alerto = (e)=> {
-    yell=  Session.get('yell');
-    $('.active_card').removeClass('active_card');
-      $('#'+yell).addClass('active_card');
-      lat = Session.get('lat');
-      lng = Session.get('lng');
-   
-  }
-
-     if ( yells && yells.length > 0 ) {
-    return yells.map( ( yell ) => {
-      user = Meteor.users.findOne({_id:yell.owner})
-
-      return (
-  <div key={ yell._id } id={yell._id} className="ui fluid card"   >
-        <div className="content">
-         <img className="left rounded floated mini ui image" src={user.profile.profile_pic} /> 
-         <div className="header">
-          {user.username}
-         </div>
-            
-          <div className="description">
-             { yell.content }   lat = {yell.loc.coordinates[0]} long = {yell.loc.coordinates[1]}
-          </div>      
-        </div>
-       <div className="extra content">
-               <span className="right floated">
-                  <YellButtons yell={yell._id}  />
-                  17 likes
-               </span>
-           3 <i className="comment icon"></i> Reply 
-           <button className="ui button" 
-              onClick={ 
-                      () => { 
-                      Session.set('yell', yell._id) 
-                       PubSub.publish( 'location', [yell.loc.coordinates[0],yell.loc.coordinates[1]] );
-                      Session.set('lat',yell.loc.coordinates[0])
-                      Session.set('lng',yell.loc.coordinates[1])
-                      alerto();
-
-                    }}>
-                b
-            </button> <Link to={`/yells/${yell._id}`}>{yell._id}</Link>
-          
-    </div> 
-   </div>       );
-    });
-  } else {
-    return <p>No list items yet!</p>;
-  }
-};
-
-
-
-
-export const YellSingle = ( { yells } ) => (
-
-
-<div className="ui segment">
-  <h3 className="ui block header">
-      Yells at your location 
-    </h3>
-  <div className="ui cards">
-     { renderIfData( yells ) }  
-  </div>
-</div>  
-);
-
-
-
-
-
-*/

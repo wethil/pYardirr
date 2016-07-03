@@ -1,4 +1,4 @@
-import ActSchema from '../ColCommons/ActsSchema.js'
+
 import LocationSchema from '../ColCommons/LocationSchema.js'
 
 
@@ -19,10 +19,7 @@ Groups.attachSchema(
       type: Date,
       denyUpdate: true
     },
-    act : {
-      type : ActSchema,
-      optional: true
-    },
+
     rating : {
         type : Number,
         defaultValue : 0

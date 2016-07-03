@@ -5,13 +5,15 @@ import { Meteor } from 'meteor/meteor';
 
 
 const composer = (props,onData) => {
-	 userId=Meteor.userId();
+	 user_id=props.userId
+	
 	 
-	const subscription = Meteor.subscribe('users')
+	const subscription = Meteor.subscribe('ThisUser',user_id)
 	if (subscription.ready()) {
 		
-		const user = Meteor.users.findOne({_id:userId})
-		
+		const user = Meteor.users.findOne({_id:user_id})
+
+		console.log(user)
 
 		onData(null,{user})
 	}

@@ -1,11 +1,32 @@
 /* CSS declarations go here */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
   body {
     background: #E6E7EA !important;
   }
-  .main.container {
-    margin-top: 5em;
+
+ .ui.grid{
+  margin-top: 0px;
+ }
+  
+  .ui.stackable.two.column.grid{
+   padding-top: 0px; 
+   padding-bottom: 0px;
+    padding-right: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
   }
 
+.five.wide.column{
+      padding-top: 0px !important ;
+    padding-right: 0px !important;
+  background-color: #FAFAFA
+}
+
+.eleven.wide.column.animated.fadeIn{
+    position: absolute;
+    padding: 0px;
+}
   .active_card {
   	background-color: #EFE9E9 !important;
   }
@@ -30,9 +51,36 @@
 }
 
 .melek {
-   max-height: 100%;
-    width: 170px;
+   height: 70vh;
   overflow-y: auto;
-  position: fixed !important ;
+ 
 }
 
+.float-button {
+
+  position: fixed;
+  top: 28px;
+  left: 340px;
+  z-index: 9999;
+}
+
+.heads{
+    max-height: 20vh;
+}
+
+.fab {
+  left :80%;
+  z-index: 999;
+}
+
+.fa-plus {
+  color : white;
+}
+
+.hidden {
+  display:none !important
+}
+
+.dialog {
+  padding-top: 5px !important;
+}

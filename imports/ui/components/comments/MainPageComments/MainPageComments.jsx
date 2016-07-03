@@ -12,7 +12,6 @@ const renderIfData = ( CommentsLoc ) => {
  return ( 
  			<div className="ui stuck" >
 				<YellMap comments={CommentsLoc} lat={lng} lng={lat} />
-				<CommentsOnMain yell_id={yell_id} />
 
 			</div>
   ) ;

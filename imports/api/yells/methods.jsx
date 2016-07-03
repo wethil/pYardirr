@@ -3,16 +3,44 @@ import Yells from './yells.js'
 
 
 Meteor.methods({ 
-    addYell: function(yell,lat,long,user) { 
-        Yells.insert({
-            content : yell,
-            owner:user,
+   addYell: function(lat,lng,plan,desc,date,time,place,owner) { 
+    Yells.insert({
+            plan : plan,
+            desc :desc,
+            place :place,
+            date : date,
+            time : time,
+            ownerId:owner,
             loc: {
                 type: "Point",
-                coordinates : [lat,long]              
+                coordinates : [lat,lng]              
             },        
             created_at : new Date()
+        })
+        
+    },
+    reqJoin:function(userId,yell) {
+        Yells.update({_id:yell}, {$push : {requested : userId }})
+    },
+    cancelJoin: function(userId,yell) {
+         Yells.update({_id:yell}, {$pull : {requested : userId }})
+    } 
+    
+});
+
+Meteor.methods({ 
+    SpreadYell: function(user_id,yell_content,loc,origin_yell_id) { 
+   Yells.insert({
+            content : yell_content,
+            ownerId:user_id,
+            original_yell_id:origin_yell_id,
+            loc: loc,    
+            created_at : new Date()
         }) 
+
+  
+
+
     } 
 });
 
