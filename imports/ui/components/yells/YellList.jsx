@@ -45,6 +45,7 @@ export const YellList = React.createClass({
     this.setState({ drawerContentInput:1, open: true});
   },
   handleCardOpen  ()   {
+
     this.setState({ drawerContentInput:0,  open: true});
    
   },

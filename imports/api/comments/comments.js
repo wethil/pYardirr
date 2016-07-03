@@ -5,7 +5,12 @@ Comments = new Mongo.Collection('comments' ,{
                 transform : function(doc) {
                   doc.owner = Meteor.users.findOne({
                     _id:doc.ownerId
-                  });
+                  },{fields: {
+                              'services':0 , 
+                              'createdAt':0 ,
+                               'profile.paws':0,
+                               'emails' :0
+                         }});
                   return doc
                 }
               });  

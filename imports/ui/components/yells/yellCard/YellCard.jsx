@@ -54,7 +54,36 @@ export const YellCard = React.createClass({
 
 
   render() {
+
+
+  if (this.props.yell.ownerId==Meteor.userId()) {
+    ownership = 1
+   } else {
+    ownership = 0
+   }
+  
+
+      joined = _.includes(this.props.yell.requested, Meteor.userId());
+
+
+      if(ownership==0) {
+        joined
+               ? 
+         button = <FlatButton label="requested" onMouseDown={ ()=> {this.cancelJoin()}  } /> 
+               :
+         button =  button = <FlatButton label="Join" onMouseDown={ ()=> {this.Join()}  } /> 
+
+      } else {
+       this.props.yell.requested&&this.props.yell.requested.length>0
+           ? 
+          button = <FlatButton label="Approve all" onMouseDown={ ()=> {this.Join()}  } /> 
+          :
+          button =""
+      }
+
+ 
     const actionsForJoining = [
+      button,
       <FlatButton
         label="Close"
         primary={true}
@@ -76,29 +105,23 @@ export const YellCard = React.createClass({
   },
 };
 
-      joined = _.includes(this.props.yell.requested, Meteor.userId());
+    
 
 
-  if (joined) {
-     button = <FlatButton label="requested" onMouseDown={ ()=> {this.cancelJoin()}  } />
-   } else {
-     button = <FlatButton label="Join" onMouseDown={ ()=> {this.Join()}  } />
-   }
-
-   if (this.props.yell.ownerId==Meteor.userId()) {
-    ownership = 1
-   } else {
-    ownership = 0
-   }
   
   if (this.props.yell.requested && this.props.yell.requested.length>0) {
-    label = 'joining' + ' (' + this.props.yell.requested.length + ')'
+    joiningLabel = 'joining' + ' (' + this.props.yell.requested.length + ')'
    requests  =  <Requerers requests={this.props.yell.requested} ownership={ownership} />
   } else {
-    label = 'joining'
+    joiningLabel = 'joining'
     requests ="no request"
   }
 
+this.props.yell.comment_quantity >0
+  ?
+  commentsLabel=`comments (${this.props.yell.comment_quantity}) `
+  :
+  commentsLabel ="comments"
     return (
       <div>
        <Dialog
@@ -138,8 +161,8 @@ export const YellCard = React.createClass({
          {this.props.yell.plan}   {ownership}
         </CardText>
         <CardActions>
-         <FlatButton label={label}   onTouchTap={this.joiningDOpen} />
-          <FlatButton label="Comments"  onTouchTap={this.commentDOpen} />
+         <FlatButton label={joiningLabel}   onTouchTap={this.joiningDOpen} />
+          <FlatButton label={commentsLabel} onTouchTap={this.commentDOpen} />
           <FlatButton label="Spread" />
         </CardActions>
       </Card>

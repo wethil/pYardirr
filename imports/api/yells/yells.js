@@ -2,13 +2,18 @@
 import LocationSchema from '../ColCommons/LocationSchema.js'
 
 Yells = new Mongo.Collection('yells' ,{
-  transform : function(doc) {
-    doc.owner = Meteor.users.findOne({
-      _id:doc.ownerId
-    });
-    return doc
-  }
-}); 
+                transform : function(doc) {
+                  doc.owner = Meteor.users.findOne({
+                    _id:doc.ownerId
+                  },{fields: {
+                              'services':0 , 
+                              'createdAt':0 ,
+                               'profile.paws':0,
+                               'emails' :0
+                         }});
+                  return doc
+                }
+              });  
 
 
 

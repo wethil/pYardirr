@@ -28,6 +28,26 @@ Meteor.publishComposite('comments.inYell', function(yell_id) {
     }
 });
 
-Meteor.publish('thisYellComments',function(yell_id) {
-  return Comments.find({yell_id:yell_id})
-})
+
+
+Meteor.publishComposite('thisYellComments', function(yell_id) {
+    return {
+        find: function() {
+            // Find comments for this yell. Note arguments for callback function
+            // being used in query.
+            return Comments.find({yell_id:yell_id})
+            
+        },
+        children: [
+           {
+             find: function(comment) {
+              return  Meteor.users.find({_id: comment.ownerId},{fields: {
+                                    'services':0 , 'createdAt':0
+                                 }});
+            }
+           }
+        ]
+    }
+});
+
+
