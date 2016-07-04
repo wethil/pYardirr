@@ -3,7 +3,7 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
+import {grey400,grey700, darkBlack, lightBlack} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
@@ -79,42 +79,60 @@ export const YellList = React.createClass({
 );
 //  before p content <span style={{color: darkBlack}}>Brunch this weekend?</span><br />
 
-const rightIconMenu = (
-  <IconMenu iconButtonElement={iconButtonElement}>
-    <MenuItem>Reply</MenuItem>
-    <MenuItem>Forward</MenuItem>
-    <MenuItem>Delete</MenuItem>
-  </IconMenu>
-);
+
+
+
+
 
 const fab_style = {
   marginRight: 20,
 };
 
  
+ const currentUser = Meteor.userId();
+
 if (this.props.yells && this.props.yells.length > 0) {
-                                var yells =[]
-                                 this.props.yells.forEach((yell) => {
-                                    yells.push(
-                                      <div key={yell._id}>
-                                             <ListItem    
-                                                          onTouchTap={() => {this.setState({yell:yell, yellOwner:yell.owner }); console.log(this.state.yell); this.handleCardOpen() }}    
-                                                          leftAvatar={<Avatar src={yell.owner.profile.avatar} />}
-                                                          rightIconButton={rightIconMenu}
-                                                          primaryText={yell.owner.username}
-                                                          secondaryText={
-                                                            <p> {yell.plan} </p>
-                                                          }
-                                                          secondaryTextLines={1}
-                                                        />
-                                                            <Divider  inset={true} />
-                                         </div>                   
-                                      );
-                                    
-                                  });
-                              } else {
-                                yells = "No yell" 
+    var yells =[]
+     this.props.yells.forEach((yell) => {
+ currentUser == yell.ownerId ?
+         rightIconMenu =  <IconMenu iconButtonElement={iconButtonElement}>
+              <MenuItem>Reply</MenuItem>
+              <MenuItem>Forward</MenuItem>
+              <MenuItem>Delete</MenuItem>
+            </IconMenu>
+           :
+
+ rightIconMenu =  <IconMenu iconButtonElement={iconButtonElement}>
+              <MenuItem>Reply</MenuItem>
+              <MenuItem>Forward</MenuItem>
+              <MenuItem>join</MenuItem>
+            </IconMenu>
+            
+         content  =   ' ' + moment(yell.date).endOf("day").fromNow();
+
+
+        yells.push(
+          <div key={yell._id}>
+                 <ListItem    
+                              onTouchTap={() => {this.setState({yell:yell, yellOwner:yell.owner }); console.log(this.state.yell); this.handleCardOpen() }}    
+                              leftAvatar={<Avatar src={yell.owner.profile.avatar} />}
+                              rightIconButton={rightIconMenu}
+                              primaryText={yell.plan }
+                              secondaryText={
+                                
+                                <p>  <span style={{color: grey700}}>{yell.owner.username}</span> --
+                                  {content} </p>
                               }
+                              secondaryTextLines={1}
+                            />
+                                <Divider  inset={true} />
+             </div>                   
+          );
+        
+      });
+  } else {
+    yells = "No yell" 
+  }
 
 
 

@@ -118,6 +118,9 @@ export const YellDialogForm = React.createClass({
 
 	render() {
 
+	const minDate = new Date();
+
+
 
 		const styles = {
 		  customWidth: {
@@ -192,7 +195,9 @@ export const YellDialogForm = React.createClass({
 					 <DatePicker 
 					 defaultDate={this.state.date}
 					 onChange={this.handleDateChange}	
-					 textFieldStyle={styles.datePicker} hintText="Date" />
+					 textFieldStyle={styles.datePicker} 
+					 minDate = {minDate}
+					 hintText="Date" />
 				</div>
 				<div className="column">
 					    <TimePicker
