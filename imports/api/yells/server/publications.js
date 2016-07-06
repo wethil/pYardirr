@@ -19,6 +19,11 @@ Meteor.publish("thisUserPaws", function(user_id) {
   return Yells.find({'acts.type':'paw','acts.id':user_id});
 })
 
+Meteor.publish("thisYell", function(yellId) {
+  return Yells.find({_id:yellId});
+})
+
+
 Meteor.publishComposite('yells', function() {
     return {
         find: function() {

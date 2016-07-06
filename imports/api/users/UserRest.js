@@ -48,7 +48,7 @@ Api.addRoute('check',{authRequired:true},{
 	get : function () {
 		
 
-//http call end
+//http cazll end
 
 		
 		return 'asd'

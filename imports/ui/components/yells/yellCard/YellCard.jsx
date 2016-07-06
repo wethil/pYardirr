@@ -151,7 +151,7 @@ this.props.yell.comment_quantity >0
 
       <Card>
         <CardHeader
-          title={this.props.yellOwner.username}
+          title={this.props.yell.owner.username}
           subtitle="Subtitle"
           avatar="http://lorempixel.com/100/100/nature/"
         />

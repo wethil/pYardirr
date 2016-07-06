@@ -22,53 +22,60 @@ export const YellDialogForm = React.createClass({
         desc:'',
         date:now,
         time:'',
-        place:'',
+        place:''
 
 
     };
   },
   componentDidMount() {
-  		 var input = document.getElementById('places');
-	   var autocomplete = new google.maps.places.Autocomplete(input);
-	  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-               var place = autocomplete.getPlace();
-               Session.set('place', place.formatted_address);
-            });
-     
+			var input = document.getElementById('places');
+			var autocomplete = new google.maps.places.Autocomplete(input);
+			google.maps.event.addListener(autocomplete, 'place_changed', function() {
+					var place = autocomplete.getPlace();
+					myLatLng = place.geometry.location
+					var lat = myLatLng.lat();
+					var lng = myLatLng.lng();			
+					Session.set('lat',lat)
+					Session.set('lng',lng)
+
+					Session.set('place_id', place.place_id);
+					Session.set('place', place.formatted_address);
+			});
+
 },
 
 
-  handleSelectChange  (event, index, value) {
-     this.setState({value})
-     if (value==0) {
-     	this.setState({
-     		hiddenClass:"",
-		    selectLabel : 'What you plan to do?',
-	        selectHint	: '#somethinginteresing'     
-     	})
-     	$("#places").attr("placeholder", "Enter a location for that").val("").focus().blur();
+handleSelectChange  (event, index, value) {
+	this.setState({value})
+	if (value==0) {
+			this.setState({
+			hiddenClass:"",
+			selectLabel : 'What you plan to do?',
+			selectHint	: '#somethinginteresing'     
+			})
+		
+		$("#places").attr("placeholder", "Enter a location for that").val("").focus().blur();
 
-     } else {
+	} else {
 
-     	chPlan = _.find(this.props.plans,{'content':value})
-     	if (chPlan.needExtra==false) {
-     		this.setState({extra:'hidden'})
-     	} else {
-     		this.setState({extra:''})
-     	}
+		chPlan = _.find(this.props.plans,{'content':value})
+		if (chPlan.needExtra==false) {
+			this.setState({extra:'hidden'})
+		} else {
+			this.setState({extra:''})
+		}
 
-     	this.setState({
-     		hiddenClass:'hidden',
-	        selectLabel : chPlan.label,
-	        selectHint	: chPlan.hint 
-     })
-     	$("#places").attr("placeholder", 'Where do you want to ' + value + '?').val("").focus().blur();
-     }
+		this.setState({
+		hiddenClass:'hidden',
+		selectLabel : chPlan.label,
+		selectHint	: chPlan.hint 
+		})
+		$("#places").attr("placeholder", 'Where do you want to ' + value + '?').val("").focus().blur();
+	}   
 
-     
-     
+},
   
-  },
+
    handleDescChange (e)  {
         this.setState({
             desc: e.target.value
@@ -77,7 +84,6 @@ export const YellDialogForm = React.createClass({
     },
     handlePlaceChange (e)  {
      var place = $('#places').val();
-     console.log(place)
      
     },
 
@@ -94,16 +100,19 @@ export const YellDialogForm = React.createClass({
        
     },handleSubmit(e){
     	e.preventDefault()
-    	lat = 39.480817
-    	lng =-88.176351
+    	lat = Session.get('lat');
+    	lng = Session.get('lng');
     	plan= this.state.value
     	desc = this.state.desc
-    	date = this.state.date
+    	preDate = this.state.date
     	time = this.state.time
     	place = $('#places').val();
     	owner = Meteor.userId();
-
-    	console.log(`${plan} ${desc} ${date} ${time} ${place} `)
+		hours =moment(time).hours();
+		minute =moment(time).minutes();
+		date=moment(preDate).hours(hours).minutes(minute).format()
+		console.log(date)
+    	console.log(`${plan} ${desc} ${date} ${time} ${place}  lat :${lat} lng: ${lng}  `)
     	
     	   Meteor.call('addYell',lat,lng,plan,desc,date,time,place,owner, error => { 
             if (error) { 
@@ -267,3 +276,4 @@ export const YellDialogForm = React.createClass({
 			</div>
 	</div>
 */            
+
