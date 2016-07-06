@@ -9,14 +9,17 @@ import Dialog from 'material-ui/Dialog';
 import CommentsForm from '../../comments/CommentsForm.jsx'
 import {CommentsOnMain} from '../../composers/CommentsOnMain.jsx'
 
-
-
+import emitter from '../YellEmitter.jsx'
 export const YellCard = React.createClass({
     getInitialState () {
       return  {
         joiningD:false,
         commentsD:false      
     }
+  },
+  componentDidMount(){
+   
+   
   },
 
      Join ()  {
@@ -55,7 +58,8 @@ export const YellCard = React.createClass({
 
   render() {
 
-
+ emitter.addListener('join', this.joiningDOpen);
+  
   if (this.props.yell.ownerId==Meteor.userId()) {
     ownership = 1
    } else {

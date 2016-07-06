@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "fbemitter": "^2.0.2",
     "google-map-react": "^0.12.1",
     "http-proxy": "^1.13.2",
     "leaflet": "^0.7.7",

@@ -19,6 +19,8 @@ import { Meteor } from 'meteor/meteor';
 import _ from 'lodash'
 import RegisterForm from '../accounts/RegisterForm.jsx'
 
+import emitter from './YellEmitter.jsx'
+
 export const YellList = React.createClass({
     getInitialState() {
         yell = this.props.yells[0]._id
@@ -33,9 +35,9 @@ export const YellList = React.createClass({
 
 
     },
-
-
-
+    componentDidMount(){
+       $.get("http://ipinfo.io", function(response) { console.log(response); }, "jsonp");
+    },
 
     handleInputOpen() {
         this.setState({ drawerContentInput: 1, open: true });
@@ -86,18 +88,24 @@ export const YellList = React.createClass({
         currentUser == yell.ownerId 
         ?
         rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>
-                            <MenuItem>Reply</MenuItem>
-                            <MenuItem>Forward</MenuItem>
+                           
+                            <MenuItem>Edit</MenuItem>
                             <MenuItem>Delete</MenuItem>
                         </IconMenu>
          :
         rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>
-                            <MenuItem>Reply</MenuItem>
-                            <MenuItem>Forward</MenuItem>
+                            
+                            
                             <MenuItem
-                              onTouchTap={()=> console.log(yell._id)}
-                              > Join
+                              onTouchTap={()=> {
+                                  this.setState({yell:yell._id  })
+                                  emitter.emit('join')
+                                }
+                              }
+                              > Joining
                             </MenuItem>
+
+                            <MenuItem>Block user</MenuItem>
                        </IconMenu>
 
         content = ` ${moment(yell.date).calendar()} `

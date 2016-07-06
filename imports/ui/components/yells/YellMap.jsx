@@ -2,44 +2,53 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
-const position = [39.480974, -88.175493];
 
-const renderIfData = ( yells ) => {
-  if ( yells && yells.length > 0 ) {
-    return yells.map( ( yell ) => {
-    	var myIcon = L.icon({
-				    iconUrl: yell.owner.profile.avatar,
-				    iconSize: [35, 35],
-				    iconAnchor: [35, 35],
-				    popupAnchor: [-3, -26],
-				    className : "ui circular image"			    
-				});
 
-      return  ( 
-      			  <Marker key={yell._id} icon = {myIcon} position={yell.loc.coordinates}>
-				      <Popup>
-				        <span>{yell.owner.username}<br/>{yell.content}</span>
-				      </Popup>
-				   </Marker>
-        
-            )
-    });
-  } else {
-    return ( <p>No list items yet!</p> ) ;
-  }
-};
 
-export const YellMap = ( { yells } ) => (
-  
-  	<Map center={position} zoom={13}>
- 		  <TileLayer
-      url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    />
-      { renderIfData( yells ) }
-      </Map>
-  
-);
+export const YellMap = React.createClass({
+	  componentDidMount() {
+    this.mapApi = this.refs.map.leafletElement; // <= this is the Leaflet Map object
+  },
+	handleMove(){
+		console.log(`center:${this.mapApi.getCenter()}`)
+		console.log(this.mapApi.getBounds())
+	},
+	render() {
+		const position = [39.480974, -88.175493];
+		return (
+			<Map center={position}
+		  		onMoveend={this.handleMove}
+		  		ref="map"
+		  		 zoom={13}>
+		 		  <TileLayer
+		      url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+		      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		    />
+					   {this.props.yells.map(function(yell){
+			  		var myIcon = L.icon({
+										iconUrl: yell.owner.profile.avatar,
+										iconSize: [35, 35],
+										iconAnchor: [35, 35],
+										popupAnchor: [-3, -26],
+										className : "ui circular image"			    
+									});
+
+			            return  <Marker key={yell._id} icon = {myIcon} position={yell.loc.coordinates}>
+											<Popup>
+												<span>{yell.owner.username}<br/>{yell.content}</span>
+											</Popup>
+										</Marker>;
+			          })}
+
+      	</Map>
+		);
+	}
+});
+
+
+
+
+
 
 
 
