@@ -14,7 +14,7 @@ const composer = (props,onData) =>{
     const yells = Yells.find().fetch()
     
 
-     	console.log(yells)
+     	
  
 
     onData( null , {yells} )

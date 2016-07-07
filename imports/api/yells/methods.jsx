@@ -24,9 +24,23 @@ Meteor.methods({
     },
     cancelJoin: function(userId,yell) {
          Yells.update({_id:yell}, {$pull : {requested : userId }})
-    } 
+    },
+    approveJoin:function(userId,yell) {
+        Yells.update({_id:yell}, {$push : {approved : userId }})
+    },
+    cancelApprove:function(userId,yell) {
+        Yells.update({_id:yell}, {$pull : {approved : userId }})
+    }
     
 });
+
+
+
+
+
+
+
+
 
 Meteor.methods({ 
     SpreadYell: function(user_id,yell_content,loc,origin_yell_id) { 

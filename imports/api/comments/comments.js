@@ -41,7 +41,6 @@ Comments.attachSchema(
       type: LocationSchema,
       optional: true
     }
-    
   })
 );
 

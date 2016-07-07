@@ -21,7 +21,6 @@ const composer = (props,onData) =>{
 
 
 
-     	console.log(yells)
  
 
     onData( null , {yells} )

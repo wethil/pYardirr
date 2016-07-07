@@ -6,8 +6,29 @@ import TextField from 'material-ui/TextField';
 export  default class CommentsForm extends Component{
 	componentWillMount () {
     this.state = {
-      comment: ""
+      comment: "",
+      hint : "Make a comment for this plan",
+      disabled :false
     };
+      	console.log(this.props.ownership)
+			user= Meteor.userId()
+			console.log(this.props.approved)
+		approv=	_.includes(this.props.approved,user)
+		console.log(approv)
+
+		if (this.props.ownership==0) {
+  			approv==true ? 
+
+  			this.setState({
+				hint:"Make a comment for this plan",
+				disabled:false
+			}) :
+
+			this.setState({
+				hint:"You should be approved to comment",
+				disabled:true
+			})
+  		}
   }
 	 handleChange (e)  {
         this.setState({
@@ -49,6 +70,13 @@ export  default class CommentsForm extends Component{
    }
 
 	render() {
+	
+	console.log(this.props.ownership)
+			user= Meteor.userId()
+			console.log(this.props.approved)
+		approv=	_.includes(this.props.approved,user)
+		console.log(approv)
+
 		
 		return (
 			
@@ -57,15 +85,16 @@ export  default class CommentsForm extends Component{
 				 		  value={this.state.comment}
 				 		  onChange={this.handleChange.bind(this)}
 				 		  multiLine={true}
-					      hintText="Make a comment for this plan"
+					      hintText={this.state.hint}
 					      onKeyDown={this.handleSubmit.bind(this)}
 					      floatingLabelFixed={true}
+					      disabled={this.state.disabled}
 					    />
+		
+
 		);
 	}
 }
-
-
 
 
 

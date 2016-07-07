@@ -115,7 +115,10 @@ export const YellCard = React.createClass({
   
   if (this.props.yell.requested && this.props.yell.requested.length>0) {
     joiningLabel = 'joining' + ' (' + this.props.yell.requested.length + ')'
-   requests  =  <Requerers requests={this.props.yell.requested} ownership={ownership} />
+   requests  =  <Requerers requests={this.props.yell.requested} 
+                   ownership={ownership} 
+                   approved={this.props.yell.approved}
+                   yellId={this.props.yell._id} />
   } else {
     joiningLabel = 'joining'
     requests ="no request"
@@ -149,7 +152,11 @@ this.props.yell.comment_quantity >0
                 autoScrollBodyContent={true}
                 className="dialog"
                     >
-              <CommentsForm  yell_id={this.props.yell._id} />
+              <CommentsForm
+              ownership={ownership} 
+               yell_id={this.props.yell._id} 
+                approved={this.props.yell.approved}
+                />
               <CommentsOnMain  yell_id={this.props.yell._id} />
         </Dialog>
 

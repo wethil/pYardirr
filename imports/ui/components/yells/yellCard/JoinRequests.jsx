@@ -5,8 +5,13 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
+import Toggle from 'material-ui/Toggle';
+import Subheader from 'material-ui/Subheader';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
+import _ from 'lodash'
+//composed by Requerers.jsx in composers
+
 const iconButtonElement = (
   <IconButton
     touch={true}
@@ -19,15 +24,43 @@ const iconButtonElement = (
 
 	const rightIconMenu = (
   <IconMenu iconButtonElement={iconButtonElement}>
-    <MenuItem>Reply</MenuItem>
-    <MenuItem>Forward</MenuItem>
-    <MenuItem>Delete</MenuItem>
+    <MenuItem>Approve</MenuItem>
+    <MenuItem>Deny</MenuItem>
+    <MenuItem>Block User</MenuItem>
   </IconMenu>
 );
 
+ const handleToogle =(user) => {
+       if (_.includes(approved, user)==false) {
+          Meteor.call('approveJoin',user,yell, error => { 
+              if (error) { 
+                  console.log('error', error); 
+              } 
+                
+                        
+          });
+       } else {
+             Meteor.call('cancelApprove',user,yell, error => { 
+              if (error) { 
+                  console.log('error', error); 
+              } 
+                
+                        
+          });
+
+       }
+
+
+
+ } 
+
+
  const getListItem = (reqUser,ownership)  =>{
+
+ 
   if (ownership==0) {
         return <ListItem
+                  
                   primaryText={ reqUser.username }
                   leftAvatar={<Avatar src={reqUser.profile.avatar} />}
                   
@@ -38,12 +71,18 @@ const iconButtonElement = (
         return <ListItem
                   primaryText={ reqUser.username }
                   leftAvatar={<Avatar src={reqUser.profile.avatar} />}
-                  rightIconButton={rightIconMenu}
+                  rightToggle={
+                    <Toggle 
+                        toggled={_.includes(approved, reqUser._id)}
+                        onToggle={()=>handleToogle(reqUser._id)}
+                     />}
                   />
         }
 }
 
-const renderIfData = ( reqUsers,ownership ) => {
+const renderIfData = ( reqUsers,ownership,approved,yell ) => {
+
+
 
 
 
@@ -51,12 +90,13 @@ const renderIfData = ( reqUsers,ownership ) => {
   if ( reqUsers && reqUsers.length > 0 ) {
     return reqUsers.map( ( reqUser ) => {
       return  (
-      	 <List>
+      	 
+
       		<div key={ reqUser._id }>
           {getListItem(reqUser,ownership)}	  
 			        <Divider inset={true} />
 			</div> 
-		 </List>	  
+		 	  
 
 
         ) ;
@@ -66,7 +106,20 @@ const renderIfData = ( reqUsers,ownership ) => {
   }
 };
 
-export const JoinRequests = ( { reqUsers,ownership } ) => (
-  <div>{ renderIfData( reqUsers,ownership ) }</div>
+export const JoinRequests = ( { reqUsers,ownership,approved,yell } ) => 
+
+
+  (
+  <List>
+    {
+        ownership==1 ?
+             <Subheader>Approve people who you want</Subheader>
+          :
+           ""
+    }
+
+  { renderIfData( reqUsers,ownership,approved,yell ) }
+
+  </List>
 );
 

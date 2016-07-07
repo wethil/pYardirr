@@ -5,9 +5,11 @@ import {JoinRequests} from '../../yells/yellCard/JoinRequests.jsx'
 
 
 const composer = (props,onData) => {
+	yell=props.yellId
+	approved = props.approved
 	ownership = props.ownership
 	 requests = props.requests
-	 console.log(requests)
+	
 	 reqUsers = []
 
 	requests.forEach((userId) => {
@@ -15,7 +17,7 @@ const composer = (props,onData) => {
 	  	if (subscription.ready()) {
 			
 			const thisUser = Meteor.users.findOne({_id : userId})
-			console.log(thisUser)
+			
 			reqUsers.push(thisUser);
 		
 			
@@ -23,6 +25,6 @@ const composer = (props,onData) => {
 	});
 
 
-onData(null,{reqUsers,ownership})
+onData(null,{reqUsers,ownership,approved,yell})
 }
 export const Requerers = composeWithTracker (composer) (JoinRequests);
