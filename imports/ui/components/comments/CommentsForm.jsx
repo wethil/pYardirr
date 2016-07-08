@@ -71,26 +71,26 @@ export  default class CommentsForm extends Component{
 
 	render() {
 	
-	console.log(this.props.ownership)
-			user= Meteor.userId()
-			console.log(this.props.approved)
-		approv=	_.includes(this.props.approved,user)
-		console.log(approv)
+styles={
+	hint : {
+		fontSize:14
+	}
+}
 
 		
 		return (
 			
 		
-			 <TextField
-				 		  value={this.state.comment}
-				 		  onChange={this.handleChange.bind(this)}
-				 		  multiLine={true}
-					      hintText={this.state.hint}
-					      onKeyDown={this.handleSubmit.bind(this)}
-					      floatingLabelFixed={true}
-					      disabled={this.state.disabled}
-					    />
-		
+			 <TextField		hintStyle={styles.hint}
+							value={this.state.comment}
+							onChange={this.handleChange.bind(this)}
+							multiLine={true}
+							hintText={this.state.hint}
+							onKeyDown={this.handleSubmit.bind(this)}
+							floatingLabelFixed={true}
+							disabled={this.state.disabled}
+						/>
+			
 
 		);
 	}
