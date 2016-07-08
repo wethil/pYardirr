@@ -23,11 +23,11 @@ import emitter from './YellEmitter.jsx'
 
 export const YellList = React.createClass({
     getInitialState() {
-        yell = this.props.yells[0]._id
+        yell = ""
         yellOwner = {}
         return {
             open: false,
-            drawerContentInput: 0,
+            drawerContentInput: 1,
             yell: yell,
             yellOwner: yellOwner,
             yells: this.props.yells

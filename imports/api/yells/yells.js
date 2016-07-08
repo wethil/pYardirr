@@ -39,10 +39,12 @@ Yells.attachSchema(
       optional:true
     },
      date : {
-        type : Date
+        type : Date,
+        defaultValue:new Date()
     },
     time : {
-      type : String
+      type : String,
+      optional:true
     },
     created_at: {
       type: Date,

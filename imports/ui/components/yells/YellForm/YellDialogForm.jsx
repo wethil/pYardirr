@@ -44,20 +44,19 @@ export const YellDialogForm = React.createClass({
 
 },
 
-
+//value 0 came from "custom" section 
 handleSelectChange  (event, index, value) {
 	this.setState({value})
 	if (value==0) {
 			this.setState({
 			hiddenClass:"",
-			selectLabel : 'What you plan to do?',
-			selectHint	: '#somethinginteresing'     
+			selectHint	: 'Description (optional)'     
 			})
 		
 		$("#places").attr("placeholder", "Enter a location for that").val("").focus().blur();
 
 	} else {
-
+		//chPlan = chosen plan
 		chPlan = _.find(this.props.plans,{'content':value})
 		if (chPlan.needExtra==false) {
 			this.setState({extra:'hidden'})
@@ -100,28 +99,45 @@ handleSelectChange  (event, index, value) {
        
     },handleSubmit(e){
     	e.preventDefault()
-    	lat = Session.get('lat');
-    	lng = Session.get('lng');
+    	lat = 33 //Session.get('lat');
+    	lng = 33 //Session.get('lng');
     	plan= this.state.value
     	desc = this.state.desc
-    	preDate = this.state.date
-    	time = this.state.time
-    	place = $('#places').val();
     	owner = Meteor.userId();
-		hours =moment(time).hours();
-		minute =moment(time).minutes();
-		date=moment(preDate).hours(hours).minutes(minute).format()
-		console.log(date)
-    	console.log(`${plan} ${desc} ${date} ${time} ${place}  lat :${lat} lng: ${lng}  `)
-    	
-    	   Meteor.call('addYell',lat,lng,plan,desc,date,time,place,owner, error => { 
-            if (error) { 
-                console.log('error', error); 
-            } 
-             console.log('yell added ' );  
-                      
-        });
+		
+		
+    	console.log(`${plan} ${desc}   lat :${lat} lng: ${lng}  `)
+
+    	if (this.state.extra=="hidden") {
+				Meteor.call('addBasicYell',lat,lng,plan,desc,owner, error => { 
+					if (error) { 
+					console.log('error', error); 
+				} else {
+						console.log('yell added ' )
+					};  
+
+				});
   
+    	} else { 
+    			time = this.state.time
+    			preDate = this.state.date
+    			place = $('#places').val();
+    			hours =moment(time).hours();
+				minute =moment(time).minutes();
+				date=moment(preDate).hours(hours).minutes(minute).format()
+
+    			Meteor.call('addYell',lat,lng,plan,desc,date,time,place,owner, error => { 
+    	              if (error) { 
+    	                  console.log('error', error); 
+    	              } else {
+    	              	
+    					console.log(`${plan} ${desc} ${date} ${time} ${place}  lat :${lat} lng: ${lng}  `)
+    	              	console.log('yell added ' );
+
+    	              }  
+    	                        
+    	          });
+    	    }
 
     },
 
@@ -138,7 +154,7 @@ handleSelectChange  (event, index, value) {
 		  drwPadd : {
 		  	paddingLeft:20
 		  },
-		  locationArea:{
+		  textArea:{
 		  	fontSize:12
 		  },
 		  datePicker:{
@@ -174,8 +190,11 @@ handleSelectChange  (event, index, value) {
 	       
         <div className={this.state.hiddenClass}>
 	        <TextField 
-			      hintText="Write your custom person request"
-			      value={this.state.value}
+			      hintText="Write your plan"
+			      inputStyle={styles.textArea}
+			      multiLine={true}
+			      onChange={this.handleDescChange}
+			      value={this.state.desc}
 			    />
 		</div>	
 			
@@ -194,7 +213,7 @@ handleSelectChange  (event, index, value) {
 			<div>
 				<TextField 
 				 onChange={this.handlePlaceChange}
-				inputStyle={styles.locationArea}
+				inputStyle={styles.textArea}
 				id="places"
 			    />
 			    {this.state.place}

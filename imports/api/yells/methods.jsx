@@ -19,6 +19,19 @@ Meteor.methods({
         })
         
     },
+    addBasicYell:function(lat,lng,plan,desc,owner){
+        Yells.insert({
+            plan : plan,
+            desc :desc,
+            ownerId:owner,
+            loc: {
+                type: "Point",
+                coordinates : [lat,lng]              
+            },        
+            created_at : new Date()
+        })
+        
+    },
     reqJoin:function(userId,yell) {
         Yells.update({_id:yell}, {$push : {requested : userId }})
     },

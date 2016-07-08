@@ -61,7 +61,7 @@ class Index extends Component {
                   
                 
          </div>         
-      	  		<div   className="eleven wide column animated fadeIn">  <YellMapComposer />  </div>
+      	  	 	{/*<div className="eleven wide column animated fadeIn"><YellMapComposer /></div>*/} 
       	  </div>         
         
         );
