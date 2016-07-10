@@ -88,7 +88,17 @@ export const YellList = React.createClass({
         currentUser == yell.ownerId 
         ?
         rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>
-                           <MenuItem>Joining</MenuItem>
+                              <MenuItem
+                              onTouchTap={()=> {
+                                  this.setState({
+                                    yell:yell._id,
+                                    drawerContentInput:0
+                                   })
+                                  emitter.emit('join')
+                                }
+                              }
+                              > Joining
+                            </MenuItem>
                             <MenuItem>Edit</MenuItem>
                             <MenuItem>Delete</MenuItem>
                         </IconMenu>
