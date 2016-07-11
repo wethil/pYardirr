@@ -284,7 +284,7 @@ handleSelectChange  (event,value)  {
 		    width: 256,
 		  },
 		  drwPadd : {
-		  	paddingLeft:20
+		  	paddingLeft:10
 		  },
 		  textArea:{
 		  	fontSize:12
@@ -299,17 +299,15 @@ handleSelectChange  (event,value)  {
 		};
 	plans=this.props.plans
   const stepIndex = this.state.stepIndex;
-  const contentStyle = {margin: '0 16px'};
+
 
 
 		return (
 			 <div style={styles.drwPadd} >
-         <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
-           <div style={contentStyle}>
+
              {this.getStepContent(stepIndex)}
 
-           </div>
-         </div>
+
 
 
 	</div>

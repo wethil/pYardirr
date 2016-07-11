@@ -14,12 +14,12 @@ export const YellCard = React.createClass({
     getInitialState () {
       return  {
         joiningD:false,
-        commentsD:false      
+        commentsD:false
     }
   },
   componentDidMount(){
-   
-   
+
+
   },
 
      Join ()  {
@@ -30,7 +30,7 @@ export const YellCard = React.createClass({
         console.log(error)
       }
     } );
-  }, 
+  },
   cancelJoin()   {
      yell= this.props.yell._id
      userId= Meteor.userId();
@@ -59,33 +59,33 @@ export const YellCard = React.createClass({
   render() {
 
  emitter.addListener('join', this.joiningDOpen);
-  
+
   if (this.props.yell.ownerId==Meteor.userId()) {
     ownership = 1
    } else {
     ownership = 0
    }
-  
+
 
       joined = _.includes(this.props.yell.requested, Meteor.userId());
 
 
       if(ownership==0) {
         joined
-               ? 
-         button = <FlatButton label="requested" onMouseDown={ ()=> {this.cancelJoin()}  } /> 
+               ?
+         button = <FlatButton label="requested" onMouseDown={ ()=> {this.cancelJoin()}  } />
                :
-         button =  button = <FlatButton label="Join" onMouseDown={ ()=> {this.Join()}  } /> 
+         button =  button = <FlatButton label="Join" onMouseDown={ ()=> {this.Join()}  } />
 
       } else {
        this.props.yell.requested&&this.props.yell.requested.length>0
-           ? 
-          button = <FlatButton label="Approve all" onMouseDown={ ()=> {this.Join()}  } /> 
+           ?
+          button = <FlatButton label="Approve all" onMouseDown={ ()=> {this.Join()}  } />
           :
           button =""
       }
 
- 
+
     const actionsForJoining = [
       button,
       <FlatButton
@@ -109,14 +109,14 @@ export const YellCard = React.createClass({
   },
 };
 
-    
 
 
-  
+
+
   if (this.props.yell.requested && this.props.yell.requested.length>0) {
     joiningLabel = 'joining' + ' (' + this.props.yell.requested.length + ')'
-   requests  =  <Requerers requests={this.props.yell.requested} 
-                   ownership={ownership} 
+   requests  =  <Requerers requests={this.props.yell.requested}
+                   ownership={ownership}
                    approved={this.props.yell.approved}
                    yellId={this.props.yell._id} />
   } else {
@@ -126,9 +126,9 @@ export const YellCard = React.createClass({
 
 this.props.yell.comment_quantity >0
   ?
-  commentsLabel=`comments (${this.props.yell.comment_quantity}) `
+    commentsLabel=`comments (${this.props.yell.comment_quantity}) `
   :
-  commentsLabel ="comments"
+    commentsLabel ="comments"
     return (
       <div>
        <Dialog
@@ -153,10 +153,10 @@ this.props.yell.comment_quantity >0
                 className="dialog"
                     >
               <CommentsForm
-              ownership={ownership} 
-               yell_id={this.props.yell._id} 
-                approved={this.props.yell.approved}
-                />
+                  ownership={ownership}
+                  yell_id={this.props.yell._id}
+                  approved={this.props.yell.approved}
+                  />
               <CommentsOnMain  yell_id={this.props.yell._id} />
         </Dialog>
 
@@ -164,24 +164,18 @@ this.props.yell.comment_quantity >0
         <CardHeader
           title={this.props.yell.owner.username}
           subtitle="Subtitle"
-          avatar="http://lorempixel.com/100/100/nature/"
+          avatar="{this.props.yell.owner.profile.avatar}"
         />
 
-        <CardTitle title={this.props.yell.plan} subtitle="Card subtitle" />
+      <CardTitle title={this.props.yell.plan} subtitle={moment(this.props.yell.date).calendar()}/>
         <CardText>
-         {this.props.yell.plan}   {ownership}
+         {this.props.yell.desc}
         </CardText>
         <CardActions>
          <FlatButton label={joiningLabel}   onTouchTap={this.joiningDOpen} />
           <FlatButton label={commentsLabel} onTouchTap={this.commentDOpen} />
-          <FlatButton label="Spread" />
         </CardActions>
       </Card>
-     
-
-          
-
-
 
 </div>
 

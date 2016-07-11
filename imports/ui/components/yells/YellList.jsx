@@ -29,6 +29,7 @@ export const YellList = React.createClass({
         return {
             open: false,
             drawerContentInput: 1,
+            drawerTitle:"",
             yell: yell,
             yellOwner: yellOwner,
             yells: this.props.yells
@@ -41,11 +42,13 @@ export const YellList = React.createClass({
     },
 
     handleInputOpen() {
-        this.setState({ drawerContentInput: 1, open: true });
+        this.setState({ drawerContentInput: 1,
+                        open: true});
     },
     handleCardOpen() {
 
-        this.setState({ drawerContentInput: 0, open: true });
+        this.setState({ drawerContentInput:0,
+                      open: true});
 
     },
     handleDrawerClose(event) {
@@ -93,7 +96,7 @@ export const YellList = React.createClass({
         ?
         rightIconMenu = <IconMenu
                           iconButtonElement={iconButtonElement}
-           >
+                          >
                               <MenuItem
                               onTouchTap={()=> {
                                   this.setState({
@@ -172,8 +175,15 @@ export const YellList = React.createClass({
         {yells}
       </List>
       <Drawer  containerStyle={styles.drawer} width={349} openSecondary={true} open={this.state.open} >
-        <AppBar title="AppBar"
-          
+
+        <AppBar title={
+             this.state.drawerContentInput==1
+             ?
+                "Post new plan"
+              :
+                "Plan"
+             }
+
                 iconElementLeft={
                   <IconButton
                         onMouseDown={()=>this.setState({open:false})}
@@ -181,10 +191,11 @@ export const YellList = React.createClass({
 
                     />
           {
-            this.state.drawerContentInput ==0 ?
-            <YellCardComposer yellId={this.state.yell}  />
+            this.state.drawerContentInput ==0
+            ?
+              <YellCardComposer yellId={this.state.yell}  />
             :
-            <PlansFormComposer/>
+              <PlansFormComposer/>
           }
       </Drawer>
     </div>
