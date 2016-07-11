@@ -10,19 +10,21 @@ Plans.attachSchema(
     },
     hint : {
         type : String
-       
+
     },
     needExtra : {
        type : Boolean
-        
+
     },
     placeConnective : {
-         type : String
+         type : String,
+         optional:true
     },
     timeConnective: {
-        type : String
+        type : String,
+        optional:true
     },
-     
+
      country:{
         type: String
     },
@@ -45,16 +47,16 @@ Plans.attachSchema(
 );
 
 
-Plans.allow({ 
-    insert: function() { 
-        return true; 
-    }, 
-    update: function() { 
-        return true; 
-    }, 
-    remove: function() { 
-        return true; 
-    } 
+Plans.allow({
+    insert: function() {
+        return true;
+    },
+    update: function() {
+        return true;
+    },
+    remove: function() {
+        return true;
+    }
 });
 
 export default Plans;

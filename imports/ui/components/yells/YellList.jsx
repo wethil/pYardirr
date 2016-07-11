@@ -18,7 +18,7 @@ import { PlansFormComposer } from '../composers/plans/PlansFormComposer.jsx'
 import { Meteor } from 'meteor/meteor';
 import _ from 'lodash'
 import RegisterForm from '../accounts/RegisterForm.jsx'
-
+import {YellStepper} from "./YellStepper.jsx"
 import emitter from './YellEmitter.jsx'
 
 export const YellList = React.createClass({
@@ -85,7 +85,7 @@ export const YellList = React.createClass({
     if (this.props.yells && this.props.yells.length > 0) {
       var yells = []
       this.props.yells.forEach((yell) => {
-        currentUser == yell.ownerId 
+        currentUser == yell.ownerId
         ?
         rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>
                               <MenuItem
@@ -103,7 +103,7 @@ export const YellList = React.createClass({
                             <MenuItem>Delete</MenuItem>
                         </IconMenu>
          :
-        rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>                            
+        rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>
                             <MenuItem
                               onTouchTap={()=> {
                                   this.setState({yell:yell._id  })
@@ -120,11 +120,11 @@ export const YellList = React.createClass({
 
         yells.push(
           <div key={yell._id}>
-            <ListItem    
+            <ListItem
                   onTouchTap={() => {this.setState({yell:yell._id  });
-                  console.log(this.state.open); 
+                  console.log(this.state.open);
                   this.setState({ drawerContentInput:0,  open: true})
-                  }}    
+                  }}
                   leftAvatar={<Avatar src={yell.owner.profile.avatar} />}
                   rightIconButton={rightIconMenu}
                   primaryText={yell.plan }
@@ -155,34 +155,38 @@ export const YellList = React.createClass({
     return (
     <div>
       <List>
-        <ListItem onTouchTap={this.handleInputOpen}  
+        <ListItem onTouchTap={this.handleInputOpen}
             children ={<TextField disabled={true} style={{height: 30}}
             hintText="Hint Text"
             />}
             leftAvatar={<Avatar src="images/ok-128.jpg" />}
             //rightIcon={<CommunicationChatBubble />}
-            /> 
+            />
         {registerForm}
         {yells}
       </List>
       <Drawer  containerStyle={styles.drawer} width={349} openSecondary={true} open={this.state.open} >
         <AppBar title="AppBar" />
-        {
-          this.state.drawerContentInput ==0 ?
-          <YellCardComposer yellId={this.state.yell}  />
-          :
-          <PlansFormComposer/> 
-        }
+          {
+            this.state.drawerContentInput ==0 ?
+            <YellCardComposer yellId={this.state.yell}  />
+            :
+            <PlansFormComposer/>
+          }
       </Drawer>
     </div>
     );
-
-
-
   }
 });
+/*
+{
+  this.state.drawerContentInput ==0 ?
+  <YellCardComposer yellId={this.state.yell}  />
+  :
+  <PlansFormComposer/>
+}
 
-
+*/
 
 
 /*
@@ -191,7 +195,7 @@ export const YellList = React.createClass({
  time=moment(format).calendar()
  res=moment(source).fromNow()
 
-  
+
   rawClock ="Mon Jul 04 2016 17:21:45 GMT+0300 (EEST)"
  hours =moment(rawClock).hours();
 minute =moment(rawClock).minutes();
@@ -199,9 +203,9 @@ minute =moment(rawClock).minutes();
  last = moment(source).hours(hours).minutes(minute).calendar();
 moment(source).minutes(minute);
 
-document.getElementById("demo").innerHTML = format 
-  document.getElementById("dem").innerHTML = res 
-  document.getElementById("de").innerHTML = hours 
- document.getElementById("d").innerHTML = minute 
-  document.getElementById("last").innerHTML = last 
+document.getElementById("demo").innerHTML = format
+  document.getElementById("dem").innerHTML = res
+  document.getElementById("de").innerHTML = hours
+ document.getElementById("d").innerHTML = minute
+  document.getElementById("last").innerHTML = last
 */
