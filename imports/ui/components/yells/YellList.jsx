@@ -20,6 +20,7 @@ import _ from 'lodash'
 import RegisterForm from '../accounts/RegisterForm.jsx'
 import {YellStepper} from "./YellStepper.jsx"
 import emitter from './YellEmitter.jsx'
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 export const YellList = React.createClass({
     getInitialState() {
@@ -46,6 +47,9 @@ export const YellList = React.createClass({
 
         this.setState({ drawerContentInput: 0, open: true });
 
+    },
+    handleDrawerClose(event) {
+      this.setState({open:false})
     },
 
 
@@ -87,7 +91,9 @@ export const YellList = React.createClass({
       this.props.yells.forEach((yell) => {
         currentUser == yell.ownerId
         ?
-        rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>
+        rightIconMenu = <IconMenu
+                          iconButtonElement={iconButtonElement}
+           >
                               <MenuItem
                               onTouchTap={()=> {
                                   this.setState({
@@ -99,7 +105,7 @@ export const YellList = React.createClass({
                               }
                               > Joining
                             </MenuItem>
-                            <MenuItem>Edit</MenuItem>
+
                             <MenuItem>Delete</MenuItem>
                         </IconMenu>
          :
@@ -151,7 +157,7 @@ export const YellList = React.createClass({
     if (!Meteor.userId()) {
        registerForm = <RegisterForm />
     }
-
+     emitter.addListener('close', this.handleDrawerClose);
     return (
     <div>
       <List>
@@ -166,7 +172,14 @@ export const YellList = React.createClass({
         {yells}
       </List>
       <Drawer  containerStyle={styles.drawer} width={349} openSecondary={true} open={this.state.open} >
-        <AppBar title="AppBar" />
+        <AppBar title="AppBar"
+          
+                iconElementLeft={
+                  <IconButton
+                        onMouseDown={()=>this.setState({open:false})}
+                  ><NavigationClose /></IconButton>}
+
+                    />
           {
             this.state.drawerContentInput ==0 ?
             <YellCardComposer yellId={this.state.yell}  />
@@ -178,34 +191,3 @@ export const YellList = React.createClass({
     );
   }
 });
-/*
-{
-  this.state.drawerContentInput ==0 ?
-  <YellCardComposer yellId={this.state.yell}  />
-  :
-  <PlansFormComposer/>
-}
-
-*/
-
-
-/*
- source = "2016-07-05T21:00:00.000Z"
- format =moment(source).calendar();
- time=moment(format).calendar()
- res=moment(source).fromNow()
-
-
-  rawClock ="Mon Jul 04 2016 17:21:45 GMT+0300 (EEST)"
- hours =moment(rawClock).hours();
-minute =moment(rawClock).minutes();
-
- last = moment(source).hours(hours).minutes(minute).calendar();
-moment(source).minutes(minute);
-
-document.getElementById("demo").innerHTML = format
-  document.getElementById("dem").innerHTML = res
-  document.getElementById("de").innerHTML = hours
- document.getElementById("d").innerHTML = minute
-  document.getElementById("last").innerHTML = last
-*/

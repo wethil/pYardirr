@@ -13,6 +13,7 @@ import {
   Stepper,
   StepButton,
 } from 'material-ui/Stepper';
+import emitter from '../YellEmitter.jsx'
 
 
 export const YellDialogForm = React.createClass({
@@ -159,7 +160,8 @@ handleSelectChange  (event,value)  {
 	if (value==0) {
 			this.setState({
 			hiddenClass:"",
-			selectHint	: 'Description (optional)'
+      selectLabel:'Write any of your need',
+			selectHint	: '#somethingcool'
 			})
 
 		$("#places").attr("placeholder", "Enter a location for that").val("").focus().blur();
@@ -214,15 +216,30 @@ handleSelectChange  (event,value)  {
     	plan= this.state.value
     	desc = this.state.desc
     	owner = Meteor.userId();
+        emitter.emit('close')
     	if (this.state.extra=="hidden") {
-				Meteor.call('addBasicYell',lat,lng,plan,desc,owner, error => {
-					if (error) {
-					console.log('error', error);
-				} else {
-						console.log('yell added ' )
-					};
+    				Meteor.call('addBasicYell',lat,lng,plan,desc,owner, error => {
+    					if (error) {
+    					console.log('error', error);
+    				} else {
+            						console.log('yell added ' )
+                        this.setState({
+                          stepIndex:0,
+                          hiddenClass : 'hidden',
+                          selectLabel : 'What you will do with that people?',
+                          selectHint	: '#somethinginteresing',
+                          api : 0,
+                          value : '',
+                          extra : '',
+                          desc:'',
+                          date:now,
+                          time:'',
+                          place:''
+                        })
 
-				});
+    					      };
+
+    				});
 
     	} else {
     			time = this.state.time
@@ -231,13 +248,26 @@ handleSelectChange  (event,value)  {
     			hours =moment(time).hours();
 				minute =moment(time).minutes();
 				date=moment(preDate).hours(hours).minutes(minute).format()
+
     			Meteor.call('addYell',lat,lng,plan,desc,date,time,place,owner, error => {
     	              if (error) {
     	                  console.log('error', error);
     	              } else {
 
-    					console.log(`${plan} ${desc} ${date} ${time} ${place}  lat :${lat} lng: ${lng}  `)
-    	              	console.log('yell added ' );
+          				        this.setState({
+                            stepIndex:0,
+                            hiddenClass : 'hidden',
+                            selectLabel : 'What you will do with that people?',
+                            selectHint	: '#somethinginteresing',
+                            api : 0,
+                            value : '',
+                            extra : '',
+                            desc:'',
+                            date:now,
+                            time:'',
+                            place:''
+                          })
+
 
     	              }
 
