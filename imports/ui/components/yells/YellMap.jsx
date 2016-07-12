@@ -8,6 +8,9 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 export const YellMap = React.createClass({
 	  componentDidMount() {
     this.mapApi = this.refs.map.leafletElement; // <= this is the Leaflet Map object
+		this.state = {
+			zoom:13
+		}
   },
 	handleMove(){
 		console.log(`center:${this.mapApi.getCenter()}`)
@@ -19,7 +22,7 @@ export const YellMap = React.createClass({
 			<Map center={position}
 		  		onMoveend={this.handleMove}
 		  		ref="map"
-		  		 zoom={13}>
+		  		 zoom={this.state.zoom} //13  >
 		 		  <TileLayer
 		      url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 		      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -30,7 +33,7 @@ export const YellMap = React.createClass({
 										iconSize: [35, 35],
 										iconAnchor: [35, 35],
 										popupAnchor: [-3, -26],
-										className : "ui circular image"			    
+										className : "ui circular image"
 									});
 
 			            return  <Marker key={yell._id} icon = {myIcon} position={yell.loc.coordinates}>
@@ -72,25 +75,25 @@ export  const YellMap  = React.createClass({
 				center : [39.479989,-88.175418],
 				lat : 39.479989,
 				lng : -88.175418
-						
+
 		};
 	},
-	
+
 
 	componentWillMount() {
-    
+
  PubSub.subscribe( 'location',  ( msg, data) =>{
         console.log(msg)
         console.log(data)
-        
+
          this.setState({center:data})
           this.setState({lat:data[0]})
           this.setState({lng:data [1]})
-        
+
 
     });
 },
-	
+
 	render() {
 		  var rows = [];
 		center = this.state.center
@@ -98,18 +101,18 @@ export  const YellMap  = React.createClass({
 		lng = this.state.lng
 	// this.props.comments.forEach(function(comment) {
       //rows.push(<div className="place" key={comment._id} lat={comment.loc.coordinates[0]} lng={comment.loc.coordinates[1]}>Comment</div>);
-      
+
     //});
 		return (
 			 <div style={{width: '100%', height: '100vh'}} >
 			 			 <GoogleMap  bootstrapURLKeys={{
 												    key: 'AIzaSyBMIojtxSm1FTXsbv_DzEqjWSCtqPpnnjo',
-												    language: 'en'  }} 
+												    language: 'en'  }}
 									center={center} zoom={13}  >
-								<div className="place" lat={lat} lng={lng}>Yeelllll</div>	
-							  
+								<div className="place" lat={lat} lng={lng}>Yeelllll</div>
+
 			      </GoogleMap>
-			     
+
 			 </div>
 		);
 	}
@@ -121,4 +124,3 @@ export  const YellMap  = React.createClass({
 //35.119013, 33.930188
 
 //35.117632, 33.928123
-

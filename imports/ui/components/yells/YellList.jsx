@@ -37,9 +37,7 @@ export const YellList = React.createClass({
 
 
     },
-    componentDidMount(){
-       $.get("http://ipinfo.io", function(response) { console.log(response); }, "jsonp");
-    },
+  
 
     handleInputOpen() {
         this.setState({ drawerContentInput: 1,

@@ -8,12 +8,14 @@ import {YellList} from './YellList.jsx'
 
 const composer = (props,onData) =>{
 
-	
+
   const subscription = Meteor.subscribe('yells')
 
   if (subscription.ready()) {
-    const yells = Yells.find().fetch()
-    
+		console.log(props.parameter);
+
+    const yells = Yells.find({ownerId:props.parameter}).fetch()
+
        yells.forEach(function (yell) {
        	user_id =yell.ownerId
     	Meteor.subscribe("ThisUser",user_id)
@@ -21,12 +23,10 @@ const composer = (props,onData) =>{
 
 
 
- 
+
 
     onData( null , {yells} )
   }
 }
 
 export const YellWrapper = composeWithTracker (composer) (YellList)
-
-

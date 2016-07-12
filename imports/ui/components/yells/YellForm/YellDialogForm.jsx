@@ -31,7 +31,10 @@ export const YellDialogForm = React.createClass({
         desc:'',
         date:now,
         time:'',
-        place:''
+        place:'',
+        firstStep:"",
+        secondStep:"hidden"
+
 
 
     };
@@ -53,108 +56,14 @@ export const YellDialogForm = React.createClass({
 
 },
 
-  handleNext  ()  {
-    if (this.state.stepIndex < 2) {
-      this.setState({stepIndex: this.state.stepIndex + 1});
-    }
-  },
   handlePrev ()  {
-    if (this.state.stepIndex > 0) {
-      this.setState({stepIndex: this.state.stepIndex - 1});
-    }
-  },
-  getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return (
-          <Menu
-
-              onChange={this.handleSelectChange}
-              >
-                 <MenuItem
-                 value={0}
-                 primaryText="Custom"
-                   />
-               {plans.map(function(plan) {
-                     return <MenuItem key={plan._id} value={plan.content} primaryText={plan.content} />;
-                   })}
-             </Menu>
-        );
-      case 1:
-        return (
-          <div>
-                <div className={this.state.hiddenClass}>
-        	        <TextField
-        			      hintText="Write your plan"
-        			      inputStyle={{	fontSize:12}}
-        			      multiLine={true}
-        			      onChange={this.handleDescChange}
-        			      value={this.state.desc}
-        			    />
-        		</div>
-
-        			<div className="className">
-        				 <TextField
-        				 		  value={this.state.desc}
-        				 		  onChange={this.handleDescChange}
-        				 		  multiLine={true}
-        					      hintText={`e.g.: ${this.state.selectHint}`}
-        					      floatingLabelText={this.state.selectLabel}
-        					      floatingLabelFixed={true}
-        					    />
-        			</div>
-
-        		<div className={this.state.extra}>
-        			<div>
-        				<TextField
-        				 onChange={this.handlePlaceChange}
-        				inputStyle={{fontSize:12}}
-        				id="places"
-        			    />
-        			    {this.state.place}
-        			</div>
-        			<div className="ui two column grid ">
-        				<div className="column">
-        					 <DatePicker
-        					 defaultDate={this.state.date}
-        					 onChange={this.handleDateChange}
-        					 textFieldStyle={{	width :141}}
-        					 minDate = { new Date()}
-        					 hintText="Date" />
-        				</div>
-        				<div className="column">
-        					    <TimePicker
-        					    onChange={this.handleTimeChange}
-        					     textFieldStyle={	{width:98}}
-        					      format="24hr"
-        					      hintText="Time"
-        					    />
-        				</div>
-        			</div>
-        		</div>
-        			<div className="">
-                <FlatButton
-                  label="Back"
-                  disabled={stepIndex === 0}
-                  onTouchTap={this.handlePrev}
-
-                />
-        				 <RaisedButton
-        				 onMouseDown={this.handleSubmit}
-        				  label="Primary" primary={true}/>
-        			</div>
-
-            </div>);
-      case 2:
-        return 'This is the bit I really care about!';
-      default:
-        return 'You\'re a long way from home sonny jim!';
-    }
+  this.setState({ firstStep:"", secondStep:"hidden" })
   },
 
 
 //value 0 came from "custom" section
 handleSelectChange  (event,value)  {
+
   console.log(value);
 	this.setState({value})
 	if (value==0) {
@@ -183,7 +92,7 @@ handleSelectChange  (event,value)  {
 		})
 		$("#places").attr("placeholder", 'Where do you want to ' + value + '?').val("").focus().blur();
 	}
-  this.handleNext()
+  this.setState({ firstStep:"hidden", secondStep:"" })
 },
 
 
@@ -211,8 +120,8 @@ handleSelectChange  (event,value)  {
 
     },handleSubmit(e){
     	e.preventDefault()
-    	lat = 33 //Session.get('lat');
-    	lng = 33 //Session.get('lng');
+    	lat = Session.get('lat');
+    	lng = Session.get('lng');
     	plan= this.state.value
     	desc = this.state.desc
     	owner = Meteor.userId();
@@ -265,7 +174,9 @@ handleSelectChange  (event,value)  {
                             desc:'',
                             date:now,
                             time:'',
-                            place:''
+                            place:'',
+                            firstStep:"",
+                            secondStep:"hidden"
                           })
 
 
@@ -304,13 +215,81 @@ handleSelectChange  (event,value)  {
 
 		return (
 			 <div style={styles.drwPadd} >
+         <div className={this.state.firstStep}>
+             <Menu
+                  onChange={this.handleSelectChange}
+                  listStyle={{cursor:'pointer'}}>
+                    <MenuItem
+                    value={0}
+                    primaryText="Custom"
+                      />
+                  {plans.map(function(plan) {
+                        return <MenuItem key={plan._id} value={plan.content} primaryText={plan.content} />;
+                      })}
+                </Menu>
+          </div>
+        <div className={this.state.secondStep}>
+                <div className={this.state.hiddenClass}>
+                  <TextField
+                    hintText="Write your plan"
+                    inputStyle={{	fontSize:12}}
+                    multiLine={true}
+                    onChange={this.handleDescChange}
+                    value={this.state.desc}
+                  />
+            </div>
 
-             {this.getStepContent(stepIndex)}
+              <div className="className">
+                 <TextField
+                      value={this.state.desc}
+                      onChange={this.handleDescChange}
+                      multiLine={true}
+                        hintText={`e.g.: ${this.state.selectHint}`}
+                        floatingLabelText={this.state.selectLabel}
+                        floatingLabelFixed={true}
+                      />
+              </div>
 
+            <div className={this.state.extra}>
+              <div>
+                <TextField //location autocomplete
+                 onChange={this.handlePlaceChange}
+                inputStyle={{fontSize:12}}
+                id="places"
+                  />
+                  {this.state.place}
+              </div>
+              <div className="ui two column grid ">
+                <div className="column">
+                   <DatePicker
+                   defaultDate={this.state.date}
+                   onChange={this.handleDateChange}
+                   textFieldStyle={{	width :141}}
+                   minDate = { new Date()}
+                   hintText="Date" />
+                </div>
+                <div className="column">
+                      <TimePicker
+                      onChange={this.handleTimeChange}
+                       textFieldStyle={	{width:98}}
+                        format="24hr"
+                        hintText="Time"
+                      />
+                </div>
+              </div>
+            </div>
+              <div className="">
+                <FlatButton
+                  label="Back"
+                  onTouchTap={this.handlePrev}
 
-
-
-	</div>
+                />
+                 <RaisedButton
+                 onMouseDown={this.handleSubmit}
+                  label="Primary" primary={true}/>
+              </div>
+          </div>
+        </div>
 		);
 	}
 });
