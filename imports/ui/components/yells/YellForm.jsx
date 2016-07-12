@@ -5,9 +5,9 @@ import {YellWrapper} from './YellWrapper'
 
 
 class YellForm extends Component {
-    
-  
-    
+
+
+
     getlocation(e) {
         e.preventDefault();
         if (navigator.geolocation) {
@@ -28,7 +28,7 @@ class YellForm extends Component {
                          This will return the HTTP response object that looks something like this:
                          {
                            content: "String of content...",
-                           data: Array[100], <-- Our actual data lives here. 
+                           data: Array[100], <-- Our actual data lives here.
                            headers: {  Object containing HTTP response headers }
                            statusCode: 200
                          }
@@ -48,43 +48,43 @@ class YellForm extends Component {
          var long =  -88.175493 // Session.get('long')
          var user = Meteor.userId();
 
-        
-                  
+
+
         //long lat
-       
-        Meteor.call('addYell', yell,lat,long,user, error => { 
-            if (error) { 
-                console.log('error', error); 
-            } 
-             console.log('yell added ' );  
+
+        Meteor.call('addYell', yell,lat,long,user, error => {
+            if (error) {
+                console.log('error', error);
+            }
+             console.log('yell added ' );
             this.refs.mYell.value="";
-                      
+
         });
-        
+
     }
-    
- 
-    
+
+
+
     render() {
         return (
             <div>
-               
 
-            
-            
+
+
+
             <button className="ui button" onClick={this.getlocation} > location </button>
-           
-                  
-                   <form className="yellForm" onSubmit={this.addYell.bind(this)} > 
+
+
+                   <form className="yellForm" onSubmit={this.addYell.bind(this)} >
                         <input
                             type="text"
                             ref="mYell"
                             placeholder="yell something!"
                         />
                 </form>
-           </div> 
+           </div>
         );
-    }  
+    }
 }
 
 export default YellForm;

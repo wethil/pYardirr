@@ -2,22 +2,15 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { Match } from 'meteor/check'
-
+import emitter from './YellEmitter.jsx'
 
 
 
 export const YellMap = React.createClass({
 	getInitialState() {
-		check= Match.test(this.props.loc, String);
-		if (check==true){
-			exactLoc=this.props.loc.split(",")
-
-		} else {
-			exactLoc=this.props.loc
-		}
 		return {
-			zoom:7,
-			position : exactLoc
+			zoom:2,
+			position : [23.07973, 11.60156]
 		}
 	},
 	  componentDidMount() {
@@ -29,6 +22,15 @@ export const YellMap = React.createClass({
 		console.log(this.mapApi.getBounds())
 	},
 	render() {
+
+	 emitter.addListener('nearby', (zoom,loc) => {
+				  console.log(zoom);
+					console.log(loc);
+					this.setState({
+						zoom:zoom,
+						position:loc
+					})
+				});
 
 		 position = this.state.position
 		console.log(position);
