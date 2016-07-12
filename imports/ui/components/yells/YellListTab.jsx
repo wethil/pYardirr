@@ -6,7 +6,7 @@ import emitter from './YellEmitter.jsx'
 const YellListTab = React.createClass({
 
   activeRecents () {
-    console.log('recents');
+    emitter.emit('changeLoc', 2,[23.07973, 11.60156]);
   },
 
   activeNearby () {
@@ -16,10 +16,23 @@ const YellListTab = React.createClass({
             console.log(position.coords.longitude);
             newLoc = [position.coords.latitude,position.coords.longitude]
             zoom=13
-          emitter.emit('nearby', 13,newLoc);
+          emitter.emit('changeLoc', 13,newLoc);
+
+
           }.bind(this))
     } else {
-        console.log('error on location');
+      loca= $.getJSON('http://ipinfo.io', function(data){
+              console.log(data)
+              preLoc=data.loc.split(",")
+              lat=  parseFloat(preLoc[0])
+              lng = parseFloat(preLoc[1])
+              exactLoc=[lat,lng]
+               console.log(exactLoc)
+               emitter.emit('changeLoc',13,exactLoc)
+
+            }.bind(this)
+          )
+
     }
     console.log('nearby');
   },

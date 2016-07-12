@@ -23,7 +23,7 @@ export const YellMap = React.createClass({
 	},
 	render() {
 
-	 emitter.addListener('nearby', (zoom,loc) => {
+	 emitter.addListener('changeLoc', (zoom,loc) => {
 				  console.log(zoom);
 					console.log(loc);
 					this.setState({

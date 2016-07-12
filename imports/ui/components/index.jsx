@@ -31,16 +31,6 @@ const Index = React.createClass ({
 
 componentDidMount (){
 
-loca= $.getJSON('http://ipinfo.io', function(data){
-        console.log(data)
-        preLoc=data.loc.split(",")
-        lat=  parseFloat(preLoc[0])
-        lng = parseFloat(preLoc[1])
-        exactLoc=[lat,lng]
-         console.log(exactLoc)
-      this.setState({firstLoc:exactLoc})
-      }.bind(this)
-    )
 
 
 },
@@ -55,7 +45,7 @@ loca= $.getJSON('http://ipinfo.io', function(data){
     render() {
 
 
-    
+
 
       const fab_style = {
        left: '80%',
