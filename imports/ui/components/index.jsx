@@ -13,12 +13,34 @@ class Index extends Component {
   constructor (props){
     super(props);
     this.state ={
-        parameter :"starting"
+        parameter :"starting",
+        loc:""
     }
   }
+
   componentDidMount(){
-     $.get("http://ipinfo.io", function(response) { console.log(response); }, "jsonp");
-  }
+
+
+  this.serverRequest= $.getJSON('http://ipinfo.io', function(data){
+       console.log(data)
+       this.setState({loc:data.loc})
+
+     }.bind(this)
+   )
+
+/*  $.get("http://ipinfo.io", function(response) {
+
+        this.getLoc(response.loc);
+       }, "jsonp"); */
+}
+
+componentWillMount (){
+  console.log(this.state.loc);
+}
+
+
+
+
   activeRecents () {
     this.setState({parameter:"8ks9vgqJPTtHSGaje"})
   }
@@ -34,7 +56,7 @@ class Index extends Component {
 
 //<YellForm /> in three wide column
     render() {
-
+ console.log(this.state.loc);
     const tab_style = {
        backgroundColor: '#3f51b5'
       };
@@ -82,7 +104,11 @@ class Index extends Component {
 
 
         </div>
-        <div className="eleven wide column animated fadeIn"><YellMapComposer /></div>
+        <div className="eleven wide column animated fadeIn">
+
+              <YellMapComposer loc={this.state.loc} />
+
+          </div>
       </div>
 
       );

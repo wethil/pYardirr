@@ -1,28 +1,42 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Match } from 'meteor/check'
 
 
 
 
 export const YellMap = React.createClass({
+	getInitialState() {
+		check= Match.test(this.props.loc, String);
+		if (check==true){
+			exactLoc=this.props.loc.split(",")
+
+		} else {
+			exactLoc=this.props.loc
+		}
+		return {
+			zoom:7,
+			position : exactLoc
+		}
+	},
 	  componentDidMount() {
     this.mapApi = this.refs.map.leafletElement; // <= this is the Leaflet Map object
-		this.state = {
-			zoom:13
-		}
+
   },
 	handleMove(){
 		console.log(`center:${this.mapApi.getCenter()}`)
 		console.log(this.mapApi.getBounds())
 	},
 	render() {
-		const position = [39.480974, -88.175493];
+
+		 position = this.state.position
+		console.log(position);
 		return (
 			<Map center={position}
 		  		onMoveend={this.handleMove}
 		  		ref="map"
-		  		 zoom={this.state.zoom} //13  >
+		  		 zoom={this.state.zoom} >
 		 		  <TileLayer
 		      url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 		      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
