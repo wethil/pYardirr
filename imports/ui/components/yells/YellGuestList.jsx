@@ -21,7 +21,7 @@ import RegisterForm from '../accounts/RegisterForm.jsx'
 import emitter from './YellEmitter.jsx'
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
-export const YellList = React.createClass({
+export const YellGuestList = React.createClass({
     getInitialState() {
         yell = ""
         yellOwner = {}
@@ -63,18 +63,6 @@ export const YellList = React.createClass({
         }
     }
 
-    const iconButtonElement = (
-        <IconButton
-            touch={true}
-            tooltip="more"
-            tooltipPosition="bottom-left"
-        >
-        <MoreVertIcon color={grey400} />
-        </IconButton>
-    );
-    //  before p content <span style={{color: darkBlack}}>Brunch this weekend?</span><br />
-
-
 
 
 
@@ -84,43 +72,9 @@ export const YellList = React.createClass({
     };
 
 
-    const currentUser = Meteor.userId();
-
     if (this.props.yells && this.props.yells.length > 0) {
       var yells = []
       this.props.yells.forEach((yell) => {
-        currentUser == yell.ownerId
-        ?
-        rightIconMenu = <IconMenu
-                          iconButtonElement={iconButtonElement}
-                          >
-                              <MenuItem
-                              onTouchTap={()=> {
-                                  this.setState({
-                                    yell:yell._id,
-                                    drawerContentInput:0
-                                   })
-                                  emitter.emit('join')
-                                }
-                              }
-                              > Joining
-                            </MenuItem>
-
-                            <MenuItem>Delete</MenuItem>
-                        </IconMenu>
-         :
-        rightIconMenu = <IconMenu iconButtonElement={iconButtonElement}>
-                            <MenuItem
-                              onTouchTap={()=> {
-                                  this.setState({yell:yell._id  })
-                                  emitter.emit('join')
-                                }
-                              }
-                              > Joining
-                            </MenuItem>
-                            <MenuItem>Block user</MenuItem>
-                       </IconMenu>
-
         content = ` ${moment(yell.date).calendar()} `
 
 
@@ -132,7 +86,6 @@ export const YellList = React.createClass({
                   this.setState({ drawerContentInput:0,  open: true})
                   }}
                   leftAvatar={<Avatar src={yell.owner.profile.avatar} />}
-                  rightIconButton={rightIconMenu}
                   primaryText={yell.plan }
                   secondaryText={
 
@@ -150,50 +103,27 @@ export const YellList = React.createClass({
        yells = "No yell"
     }
 
-
-
-
-    let registerForm;
-    if (!Meteor.userId()) {
-       registerForm = <RegisterForm />
-    }
      emitter.addListener('close', this.handleDrawerClose);
     return (
     <div>
       <List>
-        <ListItem onTouchTap={this.handleInputOpen}
+        <ListItem
             children ={<TextField disabled={true} style={{height: 30}}
             hintText="Hint Text"
             />}
             leftAvatar={<Avatar src="images/ok-128.jpg" />}
             //rightIcon={<CommunicationChatBubble />}
             />
-        {registerForm}
         {yells}
       </List>
       <Drawer  containerStyle={styles.drawer} width={349} openSecondary={true} open={this.state.open} >
 
-        <AppBar title={
-             this.state.drawerContentInput==1
-             ?
-                "Post new plan"
-              :
-                "Plan"
-             }
-
+        <AppBar title="Plan"
                 iconElementLeft={
                   <IconButton
                         onMouseDown={()=>this.setState({open:false})}
-                  ><NavigationClose /></IconButton>}
-
-                    />
-          {
-            this.state.drawerContentInput ==0
-            ?
+                  ><NavigationClose /></IconButton>} />
               <YellCardComposer yellId={this.state.yell}  />
-            :
-              <PlansFormComposer/>
-          }
       </Drawer>
     </div>
     );

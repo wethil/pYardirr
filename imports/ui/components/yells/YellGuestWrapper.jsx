@@ -2,7 +2,7 @@ import React from 'react';
 import { composeWithTracker } from 'react-komposer'
 import Yells  from'../../../api/yells/yells.js'
 import { Meteor } from 'meteor/meteor';
-import {YellList} from './YellList.jsx'
+import {YellGuestList} from './YellGuestList.jsx'
 
 
 
@@ -10,17 +10,13 @@ const composer = (props,onData) =>{
 queryType=props.queryType
 locationParameter = props.locationParameter
 
-  const subscription = Meteor.subscribe('yells',queryType,locationParameter)
+  const subscription = Meteor.subscribe('yellG')
 
   if (subscription.ready()) {
     const yells = Yells.find().fetch()
 
-       yells.forEach(function (yell) {
-       	user_id =yell.ownerId
-    	Meteor.subscribe("ThisUser",user_id)
-    });
 
-
+    console.log(yells);
 
 
 
@@ -28,4 +24,4 @@ locationParameter = props.locationParameter
   }
 }
 
-export const YellWrapper = composeWithTracker (composer) (YellList)
+export const YellGuestWrapper = composeWithTracker (composer) (YellGuestList)

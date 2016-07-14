@@ -7,20 +7,16 @@ import {YellMap} from '../yells//YellMap.jsx'
 
 
 const composer = (props,onData) =>{
- loc=props.loc
- console.log('location from index');
- console.log(loc);
+	queryType=props.queryType
+	locationParameter = props.locationParameter
 
-  const subscription = Meteor.subscribe('yells')
+  const subscription = Meteor.subscribe('yells',queryType,locationParameter)
 
   if (subscription.ready()) {
     const yells = Yells.find().fetch()
 
 
-
-
-
-    onData( null , {yells,loc} )
+    onData( null , {yells} )
   }
 }
 

@@ -7,6 +7,9 @@ const YellListTab = React.createClass({
 
   activeRecents () {
     emitter.emit('changeLoc', 2,[23.07973, 11.60156]);
+    locationParameter=false
+    //0 is queryType
+    emitter.emit('changeQuery',locationParameter,0)
   },
 
   activeNearby () {
@@ -14,9 +17,12 @@ const YellListTab = React.createClass({
           navigator.geolocation.getCurrentPosition(function (position) {
             console.log(position.coords.latitude);
             console.log(position.coords.longitude);
-            newLoc = [position.coords.latitude,position.coords.longitude]
+           newLoc = [position.coords.latitude,position.coords.longitude]
             zoom=13
-          emitter.emit('changeLoc', 13,newLoc);
+          
+            //0 is query type
+           emitter.emit('changeQuery',newLoc,1) //change composers queries
+          emitter.emit('changeLoc', 12,newLoc);
 
 
           }.bind(this))
@@ -28,12 +34,16 @@ const YellListTab = React.createClass({
               lng = parseFloat(preLoc[1])
               exactLoc=[lat,lng]
                console.log(exactLoc)
+
+               //1 is queerytype
+               emitter.emit('changeQuery',exactLoc,1) //change composers queries
                emitter.emit('changeLoc',13,exactLoc)
 
             }.bind(this)
           )
 
     }
+
     console.log('nearby');
   },
 

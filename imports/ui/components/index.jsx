@@ -1,22 +1,23 @@
 import React, {Component} from 'react';;
 import { Meteor } from 'meteor/meteor';
 import {YellMapComposer} from './composers/YellMapComposer.jsx'
+import {YellGuestWrapper} from './yells/YellGuestWrapper.jsx'
 import {YellWrapper} from './yells/YellWrapper.jsx'
 import { YellMap } from './yells/YellMap.jsx'
 import YellListTab from './yells/YellListTab.jsx'
 import Paper from 'material-ui/Paper';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import emitter from './yells/YellEmitter.jsx'
 import _ from 'lodash'
 const Index = React.createClass ({
   getInitialState (){
 
     return {
-        parameter :"starting",
-        zoom:3,
+        locationParameter : false,
         firstLoc:"",
         loc:[23.07973, 11.60156],
-        active:0
+        queryType:0
 
     }
   },
@@ -43,7 +44,12 @@ componentDidMount (){
 
 //<YellForm /> in three wide column
     render() {
-
+      emitter.addListener('changeQuery', (locationParameter,queryType) => {
+             this.setState({
+               locationParameter:locationParameter,
+               queryType:queryType
+             })
+           });
 
 
 
@@ -51,13 +57,17 @@ componentDidMount (){
        left: '80%',
        zIndex : '9999'
       };
-  /*
+
 
      if (Meteor.userId()) {
-      userCard = <UserCardComposer userId={Meteor.userId()} />
+      yellList =     <YellWrapper
+                    queryType={this.state.queryType}
+                    locationParameter={this.state.locationParameter} />
      } else {
-      userCard = "no user"
-     }*/
+      yellList =  <YellGuestWrapper
+                    queryType={this.state.queryType}
+                    locationParameter={this.state.locationParameter} />
+     }
 
       return (
 
@@ -66,7 +76,7 @@ componentDidMount (){
         <div className="five wide column">
             <YellListTab />
         <div className="melek">
-          <YellWrapper parameter={this.state.parameter} />
+          {yellList}
         </div>
         <FloatingActionButton  className="fab"  >
           <ContentAdd />
@@ -76,7 +86,10 @@ componentDidMount (){
         </div>
         <div className="eleven wide column animated fadeIn">
 
-              <YellMapComposer loc={this.state.loc} zoom={this.state.zoom} />
+        {/*      <YellMapComposer
+                queryType={this.state.queryType}
+                locationParameter={this.state.locationParameter}
+                    />*/}
 
           </div>
       </div>

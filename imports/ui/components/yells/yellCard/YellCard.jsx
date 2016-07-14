@@ -163,7 +163,7 @@ this.props.yell.comment_quantity >0
       <Card>
         <CardHeader
           title={this.props.yell.owner.username}
-          subtitle="Subtitle"
+          subtitle={ 'created at ' + moment(this.props.yell.created_at).startOf('hour').fromNow()}
           avatar="{this.props.yell.owner.profile.avatar}"
         />
 

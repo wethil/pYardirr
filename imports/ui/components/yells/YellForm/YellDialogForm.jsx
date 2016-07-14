@@ -14,6 +14,7 @@ import {
   StepButton,
 } from 'material-ui/Stepper';
 import emitter from '../YellEmitter.jsx'
+import Chance from 'chance'
 
 
 export const YellDialogForm = React.createClass({
@@ -33,7 +34,9 @@ export const YellDialogForm = React.createClass({
         time:'',
         place:'',
         firstStep:"",
-        secondStep:"hidden"
+        secondStep:"hidden",
+        genLocLat:"",
+        genLocLng:""
 
 
 
@@ -49,10 +52,14 @@ export const YellDialogForm = React.createClass({
 					var lng = myLatLng.lng();
 					Session.set('lat',lat)
 					Session.set('lng',lng)
-
 					Session.set('place_id', place.place_id);
 					Session.set('place', place.formatted_address);
+
+
 			});
+
+},
+componentWillMount(){
 
 },
 
@@ -63,6 +70,15 @@ export const YellDialogForm = React.createClass({
 
 //value 0 came from "custom" section
 handleSelectChange  (event,value)  {
+  var chance = new Chance();
+      randomLoc=  chance.coordinates().split(",")
+      console.log(randomLoc);
+      lat=  parseFloat(randomLoc[0])
+      lng = parseFloat(randomLoc[1])
+      this.setState({
+        genLocLat:lat,
+        genLocLng:lng
+      })
 
   console.log(value);
 	this.setState({value})
@@ -120,13 +136,17 @@ handleSelectChange  (event,value)  {
 
     },handleSubmit(e){
     	e.preventDefault()
-    	lat = Session.get('lat');
-    	lng = Session.get('lng');
+
     	plan= this.state.value
     	desc = this.state.desc
     	owner = Meteor.userId();
         emitter.emit('close')
     	if (this.state.extra=="hidden") {
+        lat = this.state.genLocLat
+        lng =this.state.genLocLat
+            console.log(lat);
+            console.log(lng);
+
     				Meteor.call('addBasicYell',lat,lng,plan,desc,owner, error => {
     					if (error) {
     					console.log('error', error);
@@ -143,7 +163,9 @@ handleSelectChange  (event,value)  {
                           desc:'',
                           date:now,
                           time:'',
-                          place:''
+                          place:'',
+                          firstStep:"",
+                          secondStep:"hidden"
                         })
 
     					      };
@@ -151,6 +173,8 @@ handleSelectChange  (event,value)  {
     				});
 
     	} else {
+        lat = Session.get('lat');
+      	lng = Session.get('lng');
     			time = this.state.time
     			preDate = this.state.date
     			place = $('#places').val();
@@ -188,6 +212,8 @@ handleSelectChange  (event,value)  {
     },
 
 	render() {
+    console.log(this.state.genLocLat);
+    console.log(this.state.genLocLng);
 
 
 		const styles = {
@@ -205,7 +231,11 @@ handleSelectChange  (event,value)  {
 		  },
 		  timePicker:{
 		  	width:98
-		  }
+		  },
+      labelStyle:{
+        fontSize:11,
+        margin:1
+      }
 
 		};
 	plans=this.props.plans
@@ -248,6 +278,7 @@ handleSelectChange  (event,value)  {
                         floatingLabelText={this.state.selectLabel}
                         floatingLabelFixed={true}
                       />
+                    { this.state.extra=='hidden'? <p style={styles.labelStyle} > *Will occur on map randomly </p> : ""  }
               </div>
 
             <div className={this.state.extra}>
@@ -257,7 +288,7 @@ handleSelectChange  (event,value)  {
                 inputStyle={{fontSize:12}}
                 id="places"
                   />
-                  {this.state.place}
+                <p style={styles.labelStyle}> *Selected place will occur on map </p>
               </div>
               <div className="ui two column grid ">
                 <div className="column">

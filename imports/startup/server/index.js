@@ -18,6 +18,6 @@ Meteor.publish('currentUser', function(user_id){
 
 Meteor.startup(function() {
 //for index
-// Yells._ensureIndex({ "loc.coordinates": "2dsphere" })
-Yells._ensureIndex({'loc.coordinates':'2dsphere'});  
+
+Yells._ensureIndex({'loc':'2dsphere'});  
 });
