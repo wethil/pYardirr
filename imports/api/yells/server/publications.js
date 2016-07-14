@@ -2,12 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import '../yells.js'
 import Api from '../../rest.js'
 
-Meteor.publish("users", function () {
-  return Meteor.users.find({fields: {
-        'username':1,
-       'profile.profile_pic':1
-     }});
-});
+
 
 
 
@@ -58,24 +53,3 @@ Meteor.publish("thisUserPaws", function(user_id) {
 Meteor.publish("thisYell", function(yellId) {
   return Yells.find({_id:yellId});
 })
-
-
-
-Meteor.publishComposite('yellG', {
-    find: function() {
-        // Find top ten highest scoring posts
-        return Yell.find();
-    },
-    children: [
-        {
-            find: function(yell) {
-                // Find post author. Even though we only want to return
-                // one record here, we use "find" instead of "findOne"
-                // since this function should return a cursor.
-                return Meteor.users.find(
-                    { _id: yell.ownerId },
-                    { limit: 1, fields: { profile: 1 } });
-            }
-        }
-    ]
-});

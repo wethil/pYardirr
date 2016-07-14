@@ -17,7 +17,7 @@ import { YellCardComposer } from '../composers/yellCard/YellCardComposer.jsx'
 import { PlansFormComposer } from '../composers/plans/PlansFormComposer.jsx'
 import { Meteor } from 'meteor/meteor';
 import _ from 'lodash'
-import RegisterForm from '../accounts/RegisterForm.jsx'
+
 import emitter from './YellEmitter.jsx'
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
@@ -153,10 +153,6 @@ export const YellList = React.createClass({
 
 
 
-    let registerForm;
-    if (!Meteor.userId()) {
-       registerForm = <RegisterForm />
-    }
      emitter.addListener('close', this.handleDrawerClose);
     return (
     <div>
@@ -168,7 +164,7 @@ export const YellList = React.createClass({
             leftAvatar={<Avatar src="images/ok-128.jpg" />}
             //rightIcon={<CommunicationChatBubble />}
             />
-        {registerForm}
+
         {yells}
       </List>
       <Drawer  containerStyle={styles.drawer} width={349} openSecondary={true} open={this.state.open} >

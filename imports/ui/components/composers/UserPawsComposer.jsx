@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { composeWithTracker } from 'react-komposer'
 import {UserPaws} from '../accounts/UserPaws.jsx'
@@ -10,9 +11,9 @@ const composer = (props,onData) => {
 	//console.log('y_id = ' + yellId)
 	const subscription = Meteor.subscribe('thisUserPaws',user_id)
 	if (subscription.ready()) {
-		
+
 		const yells = Yells.find({'acts.type':'paw','acts.id':user_id}).fetch()
-	
+
 		onData(null,{yells})
 	}
 }
@@ -20,3 +21,4 @@ const composer = (props,onData) => {
 export const UserPawsComposer = composeWithTracker (composer) (YellSingle);
 
 
+*/

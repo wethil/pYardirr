@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
@@ -133,10 +134,10 @@ export  const YellMap  = React.createClass({
 		);
 	}
 })
-*/
 
 //35.116167, 33.933192
 
 //35.119013, 33.930188
 
 //35.117632, 33.928123
+*/

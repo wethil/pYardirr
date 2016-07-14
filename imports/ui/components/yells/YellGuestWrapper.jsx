@@ -10,7 +10,7 @@ const composer = (props,onData) =>{
 queryType=props.queryType
 locationParameter = props.locationParameter
 
-  const subscription = Meteor.subscribe('yellG')
+const subscription = Meteor.subscribe('yells',queryType,locationParameter)
 
   if (subscription.ready()) {
     const yells = Yells.find().fetch()

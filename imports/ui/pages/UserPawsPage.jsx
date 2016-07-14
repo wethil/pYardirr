@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import {UserPawsComposer} from '../components/composers/UserPawsComposer.jsx'
 import {MapComposer} from '../components/composers/MapComposer.jsx'
@@ -12,10 +13,11 @@ export const UserPawsPage = React.createClass({
 					</div>
 					<div className="six wide column">
 						<MapComposer />
-					</div>	
-					
-				</div>	
+					</div>
+
+				</div>
 			</div>
 		);
 	}
 });
+*/

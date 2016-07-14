@@ -1,3 +1,4 @@
+/*
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import { Meteor } from 'meteor/meteor';
@@ -32,7 +33,7 @@ class YellForm extends Component {
                            headers: {  Object containing HTTP response headers }
                            statusCode: 200
                          }
-                        */
+                        
                     }
                 });
             });
@@ -88,3 +89,4 @@ class YellForm extends Component {
 }
 
 export default YellForm;
+*/

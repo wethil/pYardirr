@@ -64,9 +64,10 @@ componentDidMount (){
                     queryType={this.state.queryType}
                     locationParameter={this.state.locationParameter} />
      } else {
-      yellList =  <YellGuestWrapper
+      yellList = <YellGuestWrapper
                     queryType={this.state.queryType}
-                    locationParameter={this.state.locationParameter} />
+                    locationParameter={this.state.locationParameter}
+                     /> 
      }
 
       return (

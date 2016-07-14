@@ -20,6 +20,8 @@ locationParameter = props.locationParameter
     	Meteor.subscribe("ThisUser",user_id)
     });
 
+    console.log(yells);
+
 
 
 
