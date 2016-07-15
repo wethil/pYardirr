@@ -14,6 +14,7 @@ export  const Documentation = React.createClass({
                  </ul>
 
             <ul>
+             <li className="className">paws/fetch?userId=    user id ile get yaptığın zaman yelleri veriyor. yeller ile beraber yell sahiplerinin şimdiki profil fotoları ve username leri geliyor. </li>
             <li>!! normal çekersen yeniden eskiye göre, sonuna &mod=trend eklersen ratingi en yüksekten düşük olana göre çekiyor.</li>
             <li>/api/yells/new json request olacak. ctrl-m yapınca gelen konsolda json örneği var </li>
             <li>/api/yell/fetch?lat=&lng=&max=</li>

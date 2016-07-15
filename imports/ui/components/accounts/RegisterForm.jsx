@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-export default class RegisterForm extends Component {
+import TrackerReact from 'meteor/ultimatejs:tracker-react';
+import LoginForm from './LoginForm.jsx'
+export default class RegisterForm extends TrackerReact(Component) {
 
 	handleRegister(e) {
 		e.preventDefault()
@@ -15,45 +17,59 @@ export default class RegisterForm extends Component {
                 profile: {
                     firstName: 'Fatih',
                     lastName: 'Dogru',
-                    profile_pic : 'http://semantic-ui.com/images/avatar/large/stevie.jpg'
+                    avatar : 'http://semantic-ui.com/images/avatar/large/stevie.jpg',
+                    paws : []
                     
 
                 },
                 email: email
             
+            },function(res,error){
+            	if (error) {
+            		console.log(error)
+            	}
             }
         );
 
 	}
 	render() {
-		return (
-			<div className="className">
-					<form className="form" onSubmit={this.handleRegister.bind(this)} >
-						<input className="username"
-							type="text"
-							ref="username"
-							placeholder="username"
-						/>
-						<input className="input"
-							type="text"
-							ref="email"
-							placeholder="email"
-						/>
-				
-						<input className="input"
-							type="text"
-							ref="password"
-							placeholder="pass"
-						/>
-
-					<input className="className" 
-						type="submit" value="register"
-
-					/>
-				
+		return ( <div className="className">
+			<LoginForm />
+		
+					<form className="ui form" onSubmit={this.handleRegister.bind(this)} >
+					
+						<div className="field">	
+							<input className="username"
+								type="text"
+								ref="username"
+								placeholder="username"
+							/>
+						</div>
+						
+						<div className="field">	
+							<input className="input"
+								type="text"
+								ref="email"
+								placeholder="email"
+							/>
+						</div>
+						
+						<div className="field">		
+							<input className="input"
+								type="text"
+								ref="password"
+								placeholder="pass"
+							/>
+						</div>
+						<div className="field">			
+								<input className="className" 
+									type="submit" value="register"
+							/>
+						</div>
+						
 					</form>	
-			</div>		
-			
+				
+			</div>
 		);
 	}
 }

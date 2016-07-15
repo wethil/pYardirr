@@ -1,9 +1,19 @@
 import React from 'react';
-import { Navigation } from '../components/navigation.jsx';
+//import Navigation  from '../components/navigation.jsx';
+
+import { ToolBarComposer } from '../components/composers/ToolBarComposer.jsx'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 export const App = ({children}) => (
+  <MuiThemeProvider muiTheme={getMuiTheme()}>
     <div>
-        <Navigation />
-        {children}
+      
+        <div className="ui grid">
+        	
+      	  {children}
+       </div> 
     </div>
+   </MuiThemeProvider> 
 )

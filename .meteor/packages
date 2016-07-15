@@ -19,7 +19,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 aldeed:collection2
 meteortoys:allthings
-ultimatejs:tracker-react@=1.0.0
+ultimatejs:tracker-react
 ostrio:meteor-root
 session
 nimble:restivus
@@ -29,3 +29,5 @@ semantic:ui-css
 accounts-password
 natestrauser:animate-css
 dburles:collection-helpers
+fortawesome:fontawesome
+momentjs:moment

@@ -17,7 +17,11 @@ Api.addRoute('signin',{autRequired:false},{
 	}
 		//http call for login
 	
+<<<<<<< HEAD
    response= HTTP.call( 'POST', 'localhost:3000/api/login', {
+=======
+   response= HTTP.call( 'POST', 'http://192.168.1.4:3000/api/login', {
+>>>>>>> 8034a3cc9391e8badd239aec0e27cdd4ded7d4cf
 				  data: {
 				   [key] : value,
 				   password :  this.bodyParams.password
@@ -48,7 +52,7 @@ Api.addRoute('check',{authRequired:true},{
 	get : function () {
 		
 
-//http call end
+//http cazll end
 
 		
 		return 'asd'

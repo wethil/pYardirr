@@ -1,7 +1,19 @@
-import ActSchema from '../ColCommons/ActsSchema.js'
+
 import LocationSchema from '../ColCommons/LocationSchema.js'
 
-export default Comments = new Mongo.Collection('comments'); 
+Comments = new Mongo.Collection('comments' ,{
+                transform : function(doc) {
+                  doc.owner = Meteor.users.findOne({
+                    _id:doc.ownerId
+                  },{fields: {
+                              'services':0 , 
+                              'createdAt':0 ,
+                               'profile.paws':0,
+                               'emails' :0
+                         }});
+                  return doc
+                }
+              });  
 
 Comments.attachSchema(
     new SimpleSchema({
@@ -17,19 +29,11 @@ Comments.attachSchema(
       type: Date,
       denyUpdate: true
     },
-    act : {
-      type : ActSchema,
-      optional: true
-    },
     rating : {
         type : Number,
         defaultValue : 0
     },
-    owner : {
-         type : String,
-         defaultValue : "yellfi"
-    },
-     owner_username: {
+    ownerId : {
          type : String,
          defaultValue : "yellfi"
     },
@@ -37,7 +41,6 @@ Comments.attachSchema(
       type: LocationSchema,
       optional: true
     }
-    
   })
 );
 
@@ -56,3 +59,6 @@ Comments.allow({
         return true; 
     } 
 });
+
+
+export default Comments

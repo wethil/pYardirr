@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import Comments from './comments.js'
 
 Meteor.methods({
-	addComment : function (comment_content,yell_id,lat,long) {
+	addComment : function (comment_content,yell_id,lat,long,ownerId) {
 		Comments.insert({
 			content: comment_content,
 			  loc: {
@@ -10,7 +10,8 @@ Meteor.methods({
                 coordinates : [lat,long]              
             },    
 			yell_id: yell_id,
-			created_at : new Date()
+			created_at : new Date(),
+			ownerId :ownerId
 		})
 		
 	}

@@ -5,16 +5,20 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "google-map-react": "^0.12.1",
+    "fbemitter": "^2.0.2",
     "http-proxy": "^1.13.2",
+    "leaflet": "^0.7.7",
+    "material-ui": "^0.15.0",
     "meteor-node-stubs": "~0.2.0",
-    "pubsub-js": "^1.5.3",
-    "react": "^15.0.1",
+    "react": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.0.2",
     "react-autosize-textarea": "^0.3.1",
-    "react-dom": "^15.0.1",
+    "react-dom": "^15.1.0",
+    "react-geosuggest": "^1.24.1",
     "react-keydown": "^1.6.1",
     "react-komposer": "^1.8.0",
-    "react-router": "^2.3.0"
+    "react-leaflet": "^0.11.7",
+    "react-router": "^2.3.0",
+    "react-tap-event-plugin": "^1.0.0"
   }
 }

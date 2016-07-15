@@ -1,6 +1,9 @@
 import React from 'react';
 import { composeWithTracker } from 'react-komposer'
 import {CommentButtons} from '../../buttons/CommentButtons.jsx'
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Avatar from 'material-ui/Avatar';
 
 
 const renderIfData = ( thisComments ) => {
@@ -8,27 +11,19 @@ const renderIfData = ( thisComments ) => {
     return thisComments.map( ( comment ) => {
     	  
       return  (
-
+      	<div key={comment._id}>
+				  <ListItem
+			          leftAvatar={<Avatar src={comment.owner.profile.avatar} />}
+			          primaryText={comment.owner.username}
+			          secondaryText={
+			            <p>
+			              { comment.content } 
+			            </p>
+			          }
+			        />
+			    <Divider  inset={true} />
+        </div>
  
-	  <div className="comment" key={ comment._id }>
-	    <a className="avatar">
-	      <img src="http://res.cloudinary.com/dxqgycps0/image/upload/v1463959927/12928129_10204497450075221_1101189815433514913_n_lpejaq.jpg"/>
-	    </a>
-	    <div className="content" >
-	      <a className="author">Matt</a>
-	      <div className="metadata">
-	        <span className="date">Today at 5:42PM</span>
-	      </div>
-	      <div className="text">
-	       { comment.content } 
-	      </div>
-	      <div className="actions">
-	        <a className="reply">Reply</a>
-	      </div>
-	    </div>
-	  </div>
-	
-
          ) ;
     });
   } else {
@@ -38,10 +33,12 @@ const renderIfData = ( thisComments ) => {
 
 export const CommentsMainSingle = ( { thisComments } ) => (
  
-  	 <div className="ui  comments" >
-  	 { renderIfData( thisComments ) }
-  	 </div>
+  	 
+  	<List> { renderIfData( thisComments ) } </List>
+  	
   	
   
 );
+
+
 
