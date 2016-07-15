@@ -17,7 +17,7 @@ Api.addRoute('signin',{autRequired:false},{
 	}
 		//http call for login
 	
-   response= HTTP.call( 'POST', 'http://192.168.1.4:4000/api/login', {
+   response= HTTP.call( 'POST', 'localhost:3000/api/login', {
 				  data: {
 				   [key] : value,
 				   password :  this.bodyParams.password
