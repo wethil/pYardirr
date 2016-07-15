@@ -17,7 +17,10 @@ const subscription = Meteor.subscribe('yells',queryType,locationParameter)
 
 
     console.log(yells);
-
+      yells.forEach(function (yell) {
+       	user_id =yell.ownerId
+    	Meteor.subscribe("ThisUser",user_id)
+    });
 
 
     onData( null , {yells} )

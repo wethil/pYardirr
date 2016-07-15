@@ -11,8 +11,69 @@ const YellListTab = React.createClass({
     //0 is queryType
     emitter.emit('changeQuery',locationParameter,0)
   },
+activeNearby () {
+ 
+      loca= $.getJSON('http://ipinfo.io', function(data){
+              console.log(data)
+              preLoc=data.loc.split(",")
+              lat=  parseFloat(preLoc[0])
+              lng = parseFloat(preLoc[1])
+              exactLoc=[lat,lng]
+               console.log(exactLoc)
 
-  activeNearby () {
+               //1 is queerytype
+               emitter.emit('changeQuery',exactLoc,1) //change composers queries
+               emitter.emit('changeLoc',13,exactLoc)
+
+            }.bind(this)
+          )
+
+    
+
+    console.log('nearby');
+  },
+
+  
+
+
+  activeApproved () {
+    console.log('approved')
+    emitter.emit('changeQuery',"",3);
+  },
+
+
+  render: function() {
+    const tab_style = {
+       backgroundColor: '#3f51b5'
+      };
+    return (
+      <div className="heads">
+          <LeftNavHead />
+          <Tabs>
+            <Tab  style={tab_style}
+                  onActive={this.activeRecents}
+                  label="RECENTS"
+                  />
+            <Tab  style={tab_style}
+                  onActive={this.activeNearby}
+                  label="NEARBY"
+                  />
+            <Tab style={tab_style}
+                  label="APPROVED"
+                  onActive={this.activeApproved}
+                  />
+          </Tabs>
+      </div>
+    );
+  }
+
+});
+
+ export default YellListTab;
+
+
+/*
+activeNearby () {
     if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (position) {
             console.log(position.coords.latitude);
@@ -48,36 +109,4 @@ const YellListTab = React.createClass({
   },
 
 
-  activeApproved () {
-    console.log('approved');
-  },
-
-
-  render: function() {
-    const tab_style = {
-       backgroundColor: '#3f51b5'
-      };
-    return (
-      <div className="heads">
-          <LeftNavHead />
-          <Tabs>
-            <Tab  style={tab_style}
-                  onActive={this.activeRecents}
-                  label="RECENTS"
-                  />
-            <Tab  style={tab_style}
-                  onActive={this.activeNearby}
-                  label="NEARBY"
-                  />
-            <Tab style={tab_style}
-                  label="APPROVED"
-                  onActive={this.activeApproved}
-                  />
-          </Tabs>
-      </div>
-    );
-  }
-
-});
-
- export default YellListTab;
+  */

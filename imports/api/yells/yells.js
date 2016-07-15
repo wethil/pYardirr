@@ -8,7 +8,6 @@ Yells = new Mongo.Collection('yells' ,{
                   },{fields: {
                               'services':0 ,
                               'createdAt':0 ,
-                               'profile.paws':0,
                                'emails' :0
                          }});
                   return doc
@@ -72,11 +71,11 @@ Yells.attachSchema(
     },
     requested : {
       type: [String],
-      optional :true
+      defaultValue:[]
     },
     approved : {
       type:[String],
-      optional: true
+      defaultValue:[]
     },
     visible :{
       type:Number,

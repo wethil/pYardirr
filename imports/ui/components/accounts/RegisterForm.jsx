@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import LoginForm from './LoginForm.jsx'
+import emitter from '../yells/YellEmitter.jsx'
 export default class RegisterForm extends TrackerReact(Component) {
 
 	handleRegister(e) {
@@ -27,6 +28,8 @@ export default class RegisterForm extends TrackerReact(Component) {
             },function(res,error){
             	if (error) {
             		console.log(error)
+            	} else {
+            		emitter.emit('userLogin')
             	}
             }
         );
@@ -35,7 +38,7 @@ export default class RegisterForm extends TrackerReact(Component) {
 	render() {
 		return ( <div className="className">
 			<LoginForm />
-		
+		<h3 className="ui header">or register </h3>
 					<form className="ui form" onSubmit={this.handleRegister.bind(this)} >
 					
 						<div className="field">	

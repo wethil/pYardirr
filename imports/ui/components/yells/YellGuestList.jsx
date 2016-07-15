@@ -13,7 +13,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
-import { YellCardComposer } from '../composers/yellCard/YellCardComposer.jsx'
+import { YellCardComposerGuest } from '../composers/yellCard/YellCardComposerGuest.jsx'
 import { PlansFormComposer } from '../composers/plans/PlansFormComposer.jsx'
 import { Meteor } from 'meteor/meteor';
 import _ from 'lodash'
@@ -51,9 +51,19 @@ export const YellGuestList = React.createClass({
     handleDrawerClose(event) {
       this.setState({open:false})
     },
+    handleListItemTouch (yell){
+      console.log(yell)
+                  this.setState({yell:yell });
+                  console.log(this.state.open);
+                  this.setState({ drawerContentInput:0,  open: true})
+                  
+    },
 
 
   render() {
+
+    
+
     const styles = {
       drawer: {
         zIndex: 2
@@ -81,7 +91,9 @@ export const YellGuestList = React.createClass({
         yells.push(
           <div key={yell._id}>
             <ListItem
-                  onTouchTap={() => {this.setState({yell:yell._id  });
+                  onTouchTap={() => {
+                    console.log(yell._id)
+                    this.setState({yell:yell._id  });
                   console.log(this.state.open);
                   this.setState({ drawerContentInput:0,  open: true})
                   }}
@@ -107,13 +119,6 @@ export const YellGuestList = React.createClass({
     return (
     <div>
       <List>
-        <ListItem
-            children ={<TextField disabled={true} style={{height: 30}}
-            hintText="Hint Text"
-            />}
-            leftAvatar={<Avatar src="images/ok-128.jpg" />}
-            //rightIcon={<CommunicationChatBubble />}
-            />
         {yells}
       </List>
       <Drawer  containerStyle={styles.drawer} width={349} openSecondary={true} open={this.state.open} >
@@ -123,7 +128,9 @@ export const YellGuestList = React.createClass({
                   <IconButton
                         onMouseDown={()=>this.setState({open:false})}
                   ><NavigationClose /></IconButton>} />
-              <YellCardComposer yellId={this.state.yell}  />
+              {/*
+              <YellCardComposerGuest yellId={this.state.yell}  />*/}
+            {"register or login for see this plan"}
       </Drawer>
     </div>
     );

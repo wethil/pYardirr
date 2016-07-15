@@ -9,8 +9,13 @@ import {YellList} from './YellList.jsx'
 const composer = (props,onData) =>{
 queryType=props.queryType
 locationParameter = props.locationParameter
+if (queryType==3){
+  userId=Meteor.userId();
+} else {
+  userId =""
+}
 
-  const subscription = Meteor.subscribe('yells',queryType,locationParameter)
+  const subscription = Meteor.subscribe('yells',queryType,locationParameter,userId)
 
   if (subscription.ready()) {
     const yells = Yells.find().fetch()

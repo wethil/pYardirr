@@ -13,7 +13,7 @@ Meteor.publish("ThisUser", function (userId) {
      }});
 });
 
-Meteor.publish("yells",function(queryType,locationParameter){
+Meteor.publish("yells",function(queryType,locationParameter,userId){
   switch (queryType) {
     case 0:
           return Yells.find()
@@ -36,6 +36,10 @@ Meteor.publish("yells",function(queryType,locationParameter){
             console.log('nearby worked');
             console.log(yells);
         break;
+        case 3: 
+          return Yells.find({
+            approved:{$in:[userId]}
+          })
     default:
          return  Yells.find()
   }

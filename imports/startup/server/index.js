@@ -19,3 +19,8 @@ Meteor.startup(function() {
 
 Yells._ensureIndex({'loc':'2dsphere'});
 });
+
+
+Meteor.publish("users", function () {
+  return Meteor.users.find();
+});

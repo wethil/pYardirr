@@ -81,7 +81,7 @@ handleSelectChange  (event,value)  {
       })
 
   console.log(value);
-	this.setState({value})
+
 	if (value==0) {
 			this.setState({
 			hiddenClass:"",
@@ -95,6 +95,7 @@ handleSelectChange  (event,value)  {
 		//chPlan = chosen plan
 		chPlan = _.find(this.props.plans,{'content':value})
     console.log(chPlan);
+      this.setState({value})
 		if (chPlan.needExtra==false) {
 			this.setState({extra:'hidden'})
 		} else {
@@ -129,6 +130,13 @@ handleSelectChange  (event,value)  {
         });
 
     },
+    handleValueChange (e) {
+        this.setState({
+          value:e.target.value
+        })
+    },
+
+
      handleTimeChange (e,time)  {
         this.setState({
             time: time
@@ -264,8 +272,8 @@ handleSelectChange  (event,value)  {
                     hintText="Write your plan"
                     inputStyle={{	fontSize:12}}
                     multiLine={true}
-                    onChange={this.handleDescChange}
-                    value={this.state.desc}
+                    onChange={this.handleValueChange}
+                    value={this.state.value}
                   />
             </div>
 
@@ -317,7 +325,7 @@ handleSelectChange  (event,value)  {
                 />
                  <RaisedButton
                  onMouseDown={this.handleSubmit}
-                  label="Primary" primary={true}/>
+                  label="Post" primary={true}/>
               </div>
           </div>
         </div>

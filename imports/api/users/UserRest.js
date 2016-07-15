@@ -1,3 +1,4 @@
+/*
 import Api from '../rest.js'
 import { Meteor } from 'meteor/meteor';
 
@@ -57,4 +58,4 @@ Api.addRoute('check',{authRequired:true},{
 		
 		return 'asd'
 	}
-})
+})*/
