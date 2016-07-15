@@ -12,7 +12,20 @@ const YellListTab = React.createClass({
     emitter.emit('changeQuery',locationParameter,0)
   },
 activeNearby () {
- 
+    if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+           newLoc = [position.coords.latitude,position.coords.longitude]
+            zoom=13
+          
+            //0 is query type
+           emitter.emit('changeQuery',newLoc,1) //change composers queries
+          emitter.emit('changeLoc', 12,newLoc);
+
+
+          }.bind(this))
+    } else {
       loca= $.getJSON('http://ipinfo.io', function(data){
               console.log(data)
               preLoc=data.loc.split(",")
@@ -28,7 +41,7 @@ activeNearby () {
             }.bind(this)
           )
 
-    
+    }
 
     console.log('nearby');
   },
