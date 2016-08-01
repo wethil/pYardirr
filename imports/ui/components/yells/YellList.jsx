@@ -167,7 +167,7 @@ export const YellList = React.createClass({
 
         {yells}
       </List>
-      <Drawer  containerStyle={styles.drawer} width={349} openSecondary={true} open={this.state.open} >
+      <Drawer  containerStyle={styles.drawer} width={276} openSecondary={true} open={this.state.open} >
 
         <AppBar title={
              this.state.drawerContentInput==1

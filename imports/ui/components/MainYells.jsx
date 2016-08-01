@@ -10,16 +10,10 @@ export const MainYells = React.createClass({
 	  	} else{
 	  		user =false
 	  	}
-
     return {
         user : user
-       
-
     }
   },
-
-
-
 	render() {
 
 		  emitter.addListener('userLogin', () => {
@@ -28,8 +22,6 @@ export const MainYells = React.createClass({
         
              })
            });
-
-
 
 			if (this.state.user) {
 				content =  <YellWrapper
@@ -44,8 +36,6 @@ export const MainYells = React.createClass({
                     locationParameter={this.props.locationParameter} />
                     </div>
 					}
-
-
 
 		return (
 			<div>

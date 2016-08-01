@@ -1,7 +1,4 @@
-
-import LocationSchema from '../ColCommons/LocationSchema.js'
-
-Yells = new Mongo.Collection('yells' ,{
+Items = new Mongo.Collection('items' ,{
                 transform : function(doc) {
                   doc.owner = Meteor.users.findOne({
                     _id:doc.ownerId
@@ -16,56 +13,30 @@ Yells = new Mongo.Collection('yells' ,{
 
 
 
-
-
-
-Yells.attachSchema(
+Items.attachSchema(
     new SimpleSchema({
     loc: {
       type: LocationSchema,
      optional: true
     },
-    plan: {
+    itemType: {
       type: String,
-      defaultValue : "I am boored"
+      defaultValue : "Milkshake"
     },
-    desc :{
+    itemDesc :{
       type : String,
       optional : true
     },
-    place : {
-      type:String,
+    itemTags : {
+      type:[String],
       optional:true
     },
-     date : {
-        type : Date,
-        defaultValue:new Date()
+    
+    itemPhoto:{
+    	type:String,
+    	optional:true
     },
-    time : {
-      type : String,
-      optional:true
-    },
-    created_at: {
-      type: Date,
-      denyUpdate: true
-    },
-    rating : {
-        type : Number,
-        defaultValue : 0
-    },
-    comment_quantity : {
-       type : Number,
-        defaultValue : 0
-    },
-    ownerId : {
-         type : String,
-         defaultValue : "yellfi"
-    },
-    original_yell_id:{
-      type:String,
-      optional:true
-    },
-    requested : {
+     requested : {
       type: [String],
       defaultValue:[]
     },
@@ -73,17 +44,28 @@ Yells.attachSchema(
       type:[String],
       defaultValue:[]
     },
-    visible :{
-      type:Number,
-      defaultValue:1
+    ownerId : {
+         type : String,
+         defaultValue : "yellfi"
+    },
+	created_at: {
+      type: Date,
+      denyUpdate: true
+    },
+    quantity : {
+        type : Number,
+        defaultValue : 1
+    },
+    comment_quantity : {
+       type : Number,
+        defaultValue : 0
     }
-
   })
 );
 
 
 
-Yells.allow({
+Items.allow({
     insert: function() {
         return true;
     },
@@ -95,4 +77,4 @@ Yells.allow({
     }
 });
 
-export default Yells;
+export default Items;

@@ -8,11 +8,6 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import {
-  Step,
-  Stepper,
-  StepButton,
-} from 'material-ui/Stepper';
 import emitter from '../YellEmitter.jsx'
 import Chance from 'chance'
 
@@ -21,7 +16,6 @@ export const YellDialogForm = React.createClass({
   getInitialState () {
   	now = new Date()
     return  {
-        stepIndex: 0,
         openOnFocus : true,
         hiddenClass : 'hidden',
         selectLabel : 'What you will do with that people?',
